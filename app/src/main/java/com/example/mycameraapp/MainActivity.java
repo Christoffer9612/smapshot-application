@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public void CameraButton(View view) {
 
         index++;
-        String file = directory + index + "jpg";
+        String file = directory + index + ".jpg";
         File newFile = new File(file);
         try {
             newFile.createNewFile();
