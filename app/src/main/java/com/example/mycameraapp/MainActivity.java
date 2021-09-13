@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     public static int index = 0;
     public final String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/";
 
+    private Accelerometer accelerometer;
+    private Gyroscope gyroscope;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,60 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
 
+        accelerometer = new Accelerometer(this);
+        gyroscope = new Gyroscope(this);
+
+      /*  accelerometer.setListener(new Accelerometer.Listener() {
+            @Override
+            public void onTranslation(float tx, float ty, float tz) {
+                if(tx>1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.RED);
+                }
+                else if(tx < -1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
+                }
+            }
+        });
+*/
+        gyroscope.setListener(new Gyroscope.Listener() {
+            @Override
+            public void onRotation(float rx, float ry, float rz) {
+                if(rz > 1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.GREEN);
+                }
+                else if(rz < -1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
+                }
+                if(ry > 1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                }
+                else if(ry < -1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+                }
+                if(rx > 1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
+                }
+                else if(rx < -1.0f) {
+                    getWindow().getDecorView().setBackgroundColor(Color.RED);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        accelerometer.register();
+        gyroscope.register();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        accelerometer.unregister();
+        gyroscope.unregister();
     }
 
     public void CameraButton(View view) {
