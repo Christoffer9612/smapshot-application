@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.View;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         accelerometer = new Accelerometer(this);
         gyroscope = new Gyroscope(this);
 
+
       /*  accelerometer.setListener(new Accelerometer.Listener() {
             @Override
             public void onTranslation(float tx, float ty, float tz) {
@@ -58,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
         gyroscope.setListener(new Gyroscope.Listener() {
             @Override
             public void onRotation(float rx, float ry, float rz) {
+
+
+                TextView mTextView = (TextView) findViewById(R.id.textView);
+                mTextView.setText("gyro rx rad/sec:" + rx);
+
+                TextView mTextView1 = (TextView) findViewById(R.id.textView1);
+                mTextView1.setText("gyro ry rad/sec" + ry);
+
+                TextView mTextView2 = (TextView) findViewById(R.id.textView2);
+                mTextView2.setText("gyro rz rad/sec" + rz);
+
                 if(rz > 1.0f) {
                     getWindow().getDecorView().setBackgroundColor(Color.GREEN);
                 }
@@ -68,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     getWindow().getDecorView().setBackgroundColor(Color.WHITE);
                 }
                 else if(ry < -1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+                    getWindow().getDecorView().setBackgroundColor(Color.GRAY);
                 }
                 if(rx > 1.0f) {
                     getWindow().getDecorView().setBackgroundColor(Color.BLUE);
