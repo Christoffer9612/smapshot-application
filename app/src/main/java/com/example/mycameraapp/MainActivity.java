@@ -7,6 +7,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.SensorListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,8 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private Gyroscope gyroscope;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         accelerometer = new Accelerometer(this);
         gyroscope = new Gyroscope(this);
+
+
 
 
       /*  accelerometer.setListener(new Accelerometer.Listener() {
