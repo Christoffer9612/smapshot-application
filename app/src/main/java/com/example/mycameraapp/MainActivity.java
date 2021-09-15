@@ -1,140 +1,80 @@
 package com.example.mycameraapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.hardware.SensorListener;
-import android.net.Uri;
+import android.hardware.Sensor;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
-import android.provider.MediaStore;
-import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
 
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
-
-public class MainActivity extends AppCompatActivity {
-
-    public static int index = 0;
-    public final String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/";
-
-    private Accelerometer accelerometer;
-    private Gyroscope gyroscope;
-
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build() );
-
-        accelerometer = new Accelerometer(this);
-        gyroscope = new Gyroscope(this);
-
-
-
-
-      /*  accelerometer.setListener(new Accelerometer.Listener() {
-            @Override
-            public void onTranslation(float tx, float ty, float tz) {
-                if(tx>1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.RED);
-                }
-                else if(tx < -1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-                }
-            }
-        });
-*/
-        gyroscope.setListener(new Gyroscope.Listener() {
-            @Override
-            public void onRotation(float rx, float ry, float rz) {
-
-
-                TextView mTextView = (TextView) findViewById(R.id.textView);
-                mTextView.setText("gyro rx rad/sec:" + rx);
-
-                TextView mTextView1 = (TextView) findViewById(R.id.textView1);
-                mTextView1.setText("gyro ry rad/sec" + ry);
-
-                TextView mTextView2 = (TextView) findViewById(R.id.textView2);
-                mTextView2.setText("gyro rz rad/sec" + rz);
-
-                if(rz > 1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.GREEN);
-                }
-                else if(rz < -1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
-                }
-                if(ry > 1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-                }
-                else if(ry < -1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.GRAY);
-                }
-                if(rx > 1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-                }
-                else if(rx < -1.0f) {
-                    getWindow().getDecorView().setBackgroundColor(Color.RED);
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        accelerometer.register();
-        gyroscope.register();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        accelerometer.unregister();
-        gyroscope.unregister();
-    }
-
-    public void CameraButton(View view) {
-
-        index++;
-        String file = directory + index + ".jpg";
-        File newFile = new File(file);
-        try {
-            newFile.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+public class MainActivity extends AppCompatActivity
+{
+    private TextView textViewToDisplayRotation;
+    private float[] acc = new float[3];
+    private float[] mags = new float[3];
+    private float[] values = new float[3];
+    SensorManager sManager;
+    private SensorEventListener mySensorEventListener = new SensorEventListener()
+    {
+        public void onAccuracyChanged(Sensor sensor, int accuracy)
+        {
         }
 
-        Uri outputFileUri = Uri.fromFile(newFile);
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        public void onSensorChanged(SensorEvent event)
+        {
+            switch (event.sensor.getType())
+            {
+                case Sensor.TYPE_MAGNETIC_FIELD:
+                    mags = event.values.clone();
+                    break;
+                case Sensor.TYPE_ACCELEROMETER:
+                    acc = event.values.clone();
+                    break;
+            }
 
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-        startActivity(cameraIntent);
+            if (mags != null && acc != null)
+            {
+                float[] gravity = new float[9];
+                float[] magnetic = new float[9];
+                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);
+                float[] outGravity = new float[9];
+                SensorManager.remapCoordinateSystem(gravity,
+                        SensorManager.AXIS_X,
+                        SensorManager.AXIS_Z,
+                        outGravity);
+                SensorManager.getOrientation(outGravity, values);
 
+                float azimuth = Math.round(values[0] * 57.2957795f);
+                float pitch = Math.round(values[1] * 57.2957795f);
+                float roll = Math.round(values[2] * 57.2957795f);
+                textViewToDisplayRotation.setText("azimuth = " + azimuth + "\npitch = " + pitch + "\nroll = " + roll);
+                mags = null;
+                acc = null;
+            }
+        }
+    };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        textViewToDisplayRotation = findViewById(R.id.textViewToDisplayRotation);
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        sManager.registerListener(mySensorEventListener,
+                sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        sManager.registerListener(mySensorEventListener,
+                sManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
 }
