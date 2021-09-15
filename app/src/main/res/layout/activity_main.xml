@@ -12,7 +12,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="229dp"
+        android:layout_marginTop="150dp"
         android:onClick="CameraButton"
-        android:text="Take photo" />
+        android:text="Take photo"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/textViewToDisplayRotation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="40sp" />
+
 </RelativeLayout>
