@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         File newFile = new File(file);
         try {
             newFile.createNewFile();
+            openPostPicture(); //Jump to next Activity, where we want to display values from the captured photo
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,9 +111,12 @@ public class MainActivity extends AppCompatActivity
 
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
         startActivity(cameraIntent);
-
     }
 
+    public void openPostPicture() {
+        Intent intent = new Intent(this, PostPicture.class);
+        startActivity(intent);
+    }
 
 
 
