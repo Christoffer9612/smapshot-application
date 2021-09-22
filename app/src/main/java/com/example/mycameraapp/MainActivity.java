@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity
     private float[] mags = new float[3];
     private float[] values = new float[3];
     SensorManager sManager;
+
+    private float camera_azimuth;
+    private float camera_pitch;
+    private float camera_roll;
+
+    private TextView txt; //Text to be updated with the values of az, ro, tilt
+    public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
+
     private SensorEventListener mySensorEventListener = new SensorEventListener()
     {
         public void onAccuracyChanged(Sensor sensor, int accuracy)
@@ -72,6 +80,9 @@ public class MainActivity extends AppCompatActivity
                 float pitch = Math.round(values[1] * 57.2957795f);
                 float roll = Math.round(values[2] * 57.2957795f);
                 textViewToDisplayRotation.setText("azimuth = " + azimuth + "\npitch = " + pitch + "\nroll = " + roll);
+                camera_azimuth = azimuth; //storing values to attributes
+                camera_pitch = pitch; //storing values to attributes
+                camera_roll = roll; //storing values to attributes
                 mags = null;
                 acc = null;
             }
@@ -85,7 +96,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         textViewToDisplayRotation = findViewById(R.id.textViewToDisplayRotation);
-
+        txt = findViewById(R.id.txt); //Finding the textView in activity_main.xml
+        txt.setText(sb); //Setting textView to StringBuffer's values
 
         ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
@@ -95,6 +107,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void CameraButton(View view) {
+        sb.setLength(0);
+        sb.append("azimuth= " + camera_azimuth + ", pitch= " + camera_pitch + ", roll= " + camera_roll);
+        //Updates StringBuffer to angles when pressing "TAKE PHOTO" button
+        txt.setText(sb);
 
         index++;
         String file = directory + index + ".jpg";
@@ -117,7 +133,6 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostPicture.class);
         startActivity(intent);
     }
-
 
 
 
