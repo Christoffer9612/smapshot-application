@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
     private float[] acc = new float[3];
     private float[] mags = new float[3];
     private float[] values = new float[3];
-    SensorManager sManager;
+    SensorManager sManager; //SensorManager lets you access the device's sensors
 
     private float camera_azimuth;
     private float camera_pitch;
@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity
     private TextView txt; //Text to be updated with the values of az, ro, tilt
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
 
-    private SensorEventListener mySensorEventListener = new SensorEventListener()
+    private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
+
+
     {
         public void onAccuracyChanged(Sensor sensor, int accuracy)
         {
@@ -68,13 +70,15 @@ public class MainActivity extends AppCompatActivity
             {
                 float[] gravity = new float[9];
                 float[] magnetic = new float[9];
-                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);
+                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);  //Computes the inclination matrix I as well as the rotation matrix R - getRotationMatrix
                 float[] outGravity = new float[9];
                 SensorManager.remapCoordinateSystem(gravity,
                         SensorManager.AXIS_X,
                         SensorManager.AXIS_Z,
-                        outGravity);
-                SensorManager.getOrientation(outGravity, values);
+                        outGravity); //Rotates the supplied rotation matrix so it is expressed in a different coordinate system - remapCoordinateSystem
+
+                SensorManager.getOrientation(outGravity, values); //Compute the devise orientation based on the rotation matrix
+
 
                 float azimuth = Math.round(values[0] * 57.2957795f);
                 float pitch = Math.round(values[1] * 57.2957795f);
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         txt.setText(sb);
 
         index++;
-        String file = directory + index + ".jpg";
+        String file = directory + index + ".jpg"; //creates file with directory name + increasing index
         File newFile = new File(file);
         try {
             newFile.createNewFile();
