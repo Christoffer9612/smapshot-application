@@ -22,10 +22,17 @@ import android.view.View;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     private float camera_roll;
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
+    private TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
 
     private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
@@ -103,12 +111,47 @@ public class MainActivity extends AppCompatActivity
         txt = findViewById(R.id.txt); //Finding the textView in activity_main.xml
         txt.setText(sb); //Setting textView to StringBuffer's values
 
+        json1 = findViewById(R.id.json1);
+        json2 = findViewById(R.id.json2);
+        json3 = findViewById(R.id.json3);
+        String test = loadJSONFromAsset();
+
+        JSONObject jsonObj = null;
+        try {
+            jsonObj = new JSONObject(test);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (jsonObj.has("azimuth")) {
+            StringBuilder aKey = new StringBuilder();
+            aKey.append("azimuth from json: " + jsonObj.optString("azimuth"));
+            json1.setText(aKey); //Searching in json-file, finding the value of the key "azimuth"
+        }
+
+
         ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
 
     }
+
+    public String loadJSONFromAsset() { //Returns JSON string
+        String json = null;
+        try {
+            InputStream is = getAssets().open("test.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
 
     public void CameraButton(View view) {
         sb.setLength(0);
@@ -151,4 +194,5 @@ public class MainActivity extends AppCompatActivity
                 sManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
+
 }
