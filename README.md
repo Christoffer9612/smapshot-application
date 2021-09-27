@@ -7,6 +7,9 @@ This project focus on creating a mobile application prototype with the feature o
 * [Android Studio Bumblebee 2021.1.1 Canary 12](https://developer.android.com/studio/preview/index.html)
   * Android Studio gradle: JDK 11. Can be found in: File -> Settings
 
+## Android Studio Tutorials/help
+* Can't move elements -> solution [here](https://stackoverflow.com/questions/54366352/cant-move-any-elements-in-android-studio-for-relativelayout).
+
 ## Authors
 * Christoffer Karlsson
 * Alfred Hirschfeld
