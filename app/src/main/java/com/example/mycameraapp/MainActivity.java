@@ -46,16 +46,13 @@ public class MainActivity extends AppCompatActivity
     private float[] values = new float[3];
     SensorManager sManager; //SensorManager lets you access the device's sensors
 
-    private float camera_azimuth;
-    private float camera_pitch;
-    private float camera_roll;
+    private float camera_azimuth, camera_tilt, camera_roll;
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
     private TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
 
     private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
-
 
     {
         public void onAccuracyChanged(Sensor sensor, int accuracy)
@@ -89,11 +86,11 @@ public class MainActivity extends AppCompatActivity
 
 
                 float azimuth = Math.round(values[0] * 57.2957795f);
-                float pitch = Math.round(values[1] * 57.2957795f);
+                float tilt = Math.round(values[1] * 57.2957795f);
                 float roll = Math.round(values[2] * 57.2957795f);
-                textViewToDisplayRotation.setText("azimuth = " + azimuth + "\npitch = " + pitch + "\nroll = " + roll);
+                textViewToDisplayRotation.setText("azimuth = " + azimuth + "\ntilt = " + tilt + "\nroll = " + roll);
                 camera_azimuth = azimuth; //storing values to attributes
-                camera_pitch = pitch; //storing values to attributes
+                camera_tilt = tilt; //storing values to attributes
                 camera_roll = roll; //storing values to attributes
                 mags = null;
                 acc = null;
@@ -114,6 +111,7 @@ public class MainActivity extends AppCompatActivity
         json1 = findViewById(R.id.json1);
         json2 = findViewById(R.id.json2);
         json3 = findViewById(R.id.json3);
+
         String test = loadJSONFromAsset();
 
         JSONObject jsonObj = null;
@@ -122,12 +120,10 @@ public class MainActivity extends AppCompatActivity
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (jsonObj.has("azimuth")) {
-            StringBuilder aKey = new StringBuilder();
-            aKey.append("azimuth from json: " + jsonObj.optString("azimuth"));
-            json1.setText(aKey); //Searching in json-file, finding the value of the key "azimuth"
-        }
 
+        json1.setText(findValue(jsonObj, "azimuth"));
+        json2.setText(findValue(jsonObj, "tilt"));
+        json3.setText(findValue(jsonObj, "roll"));
 
         ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
@@ -152,10 +148,19 @@ public class MainActivity extends AppCompatActivity
         return json;
     }
 
+    public StringBuilder findValue(JSONObject obj, String key) {
+        StringBuilder value = new StringBuilder();
+        if (obj.has(key)){
+            value.append(key + " from json: " + obj.optString(key));
+        } else {
+            value.append("No json key found!");
+        }
+        return value;
+    }
 
-    public void CameraButton(View view) {
+    public void cameraButton(View view) {
         sb.setLength(0);
-        sb.append("azimuth= " + camera_azimuth + ", pitch= " + camera_pitch + ", roll= " + camera_roll);
+        sb.append("azimuth= " + camera_azimuth + ", tilt= " + camera_tilt + ", roll= " + camera_roll);
         //Updates StringBuffer to angles when pressing "TAKE PHOTO" button
         txt.setText(sb);
 
@@ -180,8 +185,6 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostPicture.class);
         startActivity(intent);
     }
-
-
 
     @Override
     protected void onResume()
