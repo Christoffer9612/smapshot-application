@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity
     private float camera_azimuth, camera_tilt, camera_roll;
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
-    private TextView json1, json2, json3; //Displaying json-values from json-file
+    public static TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
+    public static JSONObject jsonObj = null;
 
     private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
 
@@ -114,7 +115,6 @@ public class MainActivity extends AppCompatActivity
 
         String test = loadJSONFromAsset();
 
-        JSONObject jsonObj = null;
         try {
             jsonObj = new JSONObject(test);
         } catch (JSONException e) {
