@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
 public class PostPicture extends MainActivity { //AppCompatActivity makes it run smoother, for now MainActivity. Change in future?
     private Button button;
     private TextView txt2;
@@ -22,11 +24,23 @@ public class PostPicture extends MainActivity { //AppCompatActivity makes it run
         txt2.setText(sb);
 
         json1 = findViewById(R.id.json1);
-        json1.setText(findValue(jsonObj, "azimuth"));
+        try {
+            json1.setText(findValue(jsonObj, "azimuth"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         json2 = findViewById(R.id.json2);
-        json2.setText(findValue(jsonObj, "tilt"));
+        try {
+            json2.setText(findValue(jsonObj, "tilt"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         json3 = findViewById(R.id.json3);
-        json3.setText(findValue(jsonObj, "roll"));
+        try {
+            json3.setText(findValue(jsonObj, "roll"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

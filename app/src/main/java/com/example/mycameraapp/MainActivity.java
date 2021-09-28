@@ -121,9 +121,21 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        json1.setText(findValue(jsonObj, "azimuth"));
-        json2.setText(findValue(jsonObj, "tilt"));
-        json3.setText(findValue(jsonObj, "roll"));
+        try {
+            json1.setText(findValue(jsonObj, "azimuth"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            json2.setText(findValue(jsonObj, "tilt"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            json3.setText(findValue(jsonObj, "roll"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
@@ -148,10 +160,12 @@ public class MainActivity extends AppCompatActivity
         return json;
     }
 
-    public StringBuilder findValue(JSONObject obj, String key) {
+    public StringBuilder findValue(JSONObject obj, String key)
+            throws JSONException {
         StringBuilder value = new StringBuilder();
-        if (obj.has(key)){
-            value.append(key + " from json: " + obj.optString(key));
+        JSONObject json_pose = obj.getJSONObject("pose");
+        if (json_pose.has(key)){
+            value.append(key + " from json: " + json_pose.optString(key));
         } else {
             value.append("No json key found!");
         }
