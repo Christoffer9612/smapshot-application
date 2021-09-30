@@ -73,6 +73,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="192dp"
-        android:text="Custom Cam" />
+        android:text="Custom Cam"
+        android:onClick="openCustomCam"/>
 
 </RelativeLayout>

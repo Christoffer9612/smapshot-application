@@ -217,6 +217,11 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void openCustomCam(View view) {
+        Intent intent = new Intent(this, CustomCamera.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onResume()
     {
