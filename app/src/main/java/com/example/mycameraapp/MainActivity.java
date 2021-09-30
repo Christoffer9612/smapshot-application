@@ -1,11 +1,13 @@
 package com.example.mycameraapp;
 
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     public static TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
     public static JSONObject jsonObj = null;
+    public Button button;
 
     private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
 
@@ -106,12 +109,24 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         textViewToDisplayRotation = findViewById(R.id.textViewToDisplayRotation);
+
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
+
         txt = findViewById(R.id.txt); //Finding the textView in activity_main.xml
         txt.setText(sb); //Setting textView to StringBuffer's values
+        txt.setTypeface(type);
+
+        button = findViewById(R.id.button);
+        button.setTypeface(type);
+
+        textViewToDisplayRotation.setTypeface(type);
 
         json1 = findViewById(R.id.json1);
+        json1.setTypeface(type);
         json2 = findViewById(R.id.json2);
+        json2.setTypeface(type);
         json3 = findViewById(R.id.json3);
+        json3.setTypeface(type);
 
         String test = loadJSONFromAsset();
 
