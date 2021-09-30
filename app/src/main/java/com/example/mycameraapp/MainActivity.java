@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
     public static TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
     public static JSONObject jsonObj = null;
-    public Button button;
+    public Button button, button2;
 
     private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
 
@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity
 
         button = findViewById(R.id.button);
         button.setTypeface(type);
+        button2 = findViewById(R.id.button2);
+        button2.setTypeface(type);
 
         textViewToDisplayRotation.setTypeface(type);
 
