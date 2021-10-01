@@ -18,12 +18,10 @@ This project focus on creating a mobile application prototype with the feature o
 - [X] Able to capture and store photos with Custom Camera API
 - [X] Displaying json-values from json-file, mimicking metadata from Smapshot
 
-## Help
-* Can't move elements in UI (```acitivty.xml``` files) -> solution [here](https://stackoverflow.com/questions/54366352/cant-move-any-elements-in-android-studio-for-relativelayout).
-
 ## Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
+* Can't move elements in UI (```acitivty.xml``` files) -> solution [here](https://stackoverflow.com/questions/54366352/cant-move-any-elements-in-android-studio-for-relativelayout).
 
 ## Debugging
 To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
