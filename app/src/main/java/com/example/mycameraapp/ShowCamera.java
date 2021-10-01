@@ -51,6 +51,13 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
         }
         //Setting photo size to biggest available
         params.setPictureSize(photoSize.width, photoSize.height);
+
+        //Autofocus for camera when photographing
+        if (params.getSupportedFocusModes().contains(
+                Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        }
+
         camera.setParameters(params);
 
         try {
