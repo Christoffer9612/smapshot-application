@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     Camera camera;
@@ -23,13 +24,16 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int width, int height) {
-
-    }
-
-    @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
         Camera.Parameters params = camera.getParameters();
+
+        //Setting resolution size of photos taken
+        List<Camera.Size> sizes = params.getSupportedPictureSizes();
+        Camera.Size mSize = null;
+
+        for (Camera.Size size : sizes) {
+            mSize = size;
+        }
 
         //Change orientation of camera
         if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
@@ -41,7 +45,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             camera.setDisplayOrientation(0);
             params.setRotation(0);
         }
-
+        params.setPictureSize(mSize.width, mSize.height);
         camera.setParameters(params);
         try {
             camera.setPreviewDisplay(holder);
@@ -52,8 +56,14 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
+    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int width, int height) {
 
+    }
+
+    @Override
+    public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
+        camera.stopPreview();
+        camera.release();
     }
 }
 
