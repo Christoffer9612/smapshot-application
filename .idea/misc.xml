@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
+        <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
+        <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/layout/activity_camera.xml" value="0.4" />
         <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/layout/activity_post_picture.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/alfre/Desktop/smapshot-application/app/src/main/res/layout/custom_camera.xml" value="0.24010416666666667" />

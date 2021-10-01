@@ -23,10 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCameraApp">
         <activity
-            android:name=".CustomCamera"
+            android:name=".CameraActivity"
             android:exported="true" />
         <activity
-            android:name=".PostPicture"
+            android:name=".PostPicActivity"
             android:exported="true" />
         <activity android:name=".MainActivity">
             <intent-filter>

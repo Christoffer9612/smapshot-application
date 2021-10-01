@@ -2,7 +2,6 @@ package com.example.mycameraapp;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -22,7 +21,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CustomCamera extends MainActivity {
+public class CameraActivity extends MainActivity {
     private Camera camera;
     private FrameLayout frameLayout;
     private ShowCamera showCamera;
@@ -36,18 +35,12 @@ public class CustomCamera extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.custom_camera);
+        setContentView(R.layout.activity_camera);
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
         btnCapture = (Button) findViewById(R.id.btnCapture);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         realTimeParams = (TextView) findViewById(R.id.realTimeParams);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
-
-        realTimeParams.setTypeface(type);
-        btnGoBack.setTypeface(type);
-        btnCapture.setTypeface(type);
 
         realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -145,6 +138,7 @@ public class CustomCamera extends MainActivity {
     public void takePhoto(View view) {
         if (camera != null) {
             camera.takePicture(null, null, mPictureCallback);
+            openPostPicture(); //Jump to next Activity, where we want to display values from the captured photo
         }
     }
 
@@ -164,6 +158,11 @@ public class CustomCamera extends MainActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    public void openPostPicture() {
+        Intent intent = new Intent(this, PostPicActivity.class);
+        startActivity(intent);
     }
 
 }
