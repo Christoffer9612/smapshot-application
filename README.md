@@ -17,6 +17,7 @@ This project focus on creating a mobile application prototype with the feature o
 - [X] Displaying sensor values (tilt, roll, azimuth)
 - [X] Able to capture and store photos with Custom Camera API
 - [X] Displaying json-values from json-file, mimicking metadata from Smapshot
+- [X] Able to store azimuth, tilt and roll from new photo and display
 
 ## Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
@@ -27,3 +28,7 @@ This project focus on creating a mobile application prototype with the feature o
 To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
 
 ```Log.d("tag", "message");```
+
+## Android Studio Links
+* [How to set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
+* [How to pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
