@@ -1,56 +1,38 @@
 package com.example.mycameraapp;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
-import android.hardware.Sensor;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.View;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
     public static int index = 0;
     public final String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/";
-
-
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
     public static TextView json1, json2, json3; //Displaying json-values from json-file
     public static StringBuffer sb = new StringBuffer("Before"); //static so only one instance is shared
     public static JSONObject jsonObj = null;
     public Button button, button2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,7 +50,8 @@ public class MainActivity extends AppCompatActivity
         button.setTypeface(type);
         button2 = findViewById(R.id.button2);
         button2.setTypeface(type);
-
+        button2.setBackgroundColor(Color.parseColor("#E2E2E2"));
+        button2.setTextColor(Color.parseColor("#444444"));
 
 
         json1 = findViewById(R.id.json1);

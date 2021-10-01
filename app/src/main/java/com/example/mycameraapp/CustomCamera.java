@@ -1,6 +1,8 @@
 package com.example.mycameraapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -21,27 +23,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CustomCamera extends MainActivity {
-    Camera camera;
-    FrameLayout frameLayout;
-    ShowCamera showCamera;
-    private Button btnGoBack;
-    String currentPhotoPath;
-
+    private Camera camera;
+    private FrameLayout frameLayout;
+    private ShowCamera showCamera;
+    private Button btnGoBack, btnCapture;
+    private String currentPhotoPath;
     private TextView realTimeParams;
-    private float[] acc = new float[3];
-    private float[] mags = new float[3];
-    private float[] values = new float[3];
-    SensorManager sManager;
+    private SensorManager sManager;
 
+    private float[] acc, mags, values = new float[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_camera);
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
+        btnCapture = (Button) findViewById(R.id.btnCapture);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         realTimeParams = (TextView) findViewById(R.id.realTimeParams);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
+
+        realTimeParams.setTypeface(type);
+        btnGoBack.setTypeface(type);
+        btnCapture.setTypeface(type);
+
+        realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
+
+        btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
+        btnGoBack.setTextColor(Color.parseColor("#444444"));
+        btnCapture.setBackgroundColor(Color.parseColor("#E2E2E2"));
+        btnCapture.setTextColor(Color.parseColor("#444444"));
 
         //Open camera
         camera = Camera.open();
@@ -50,8 +63,7 @@ public class CustomCamera extends MainActivity {
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         sManager.registerListener(mySensorEventListener,
                 sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -61,16 +73,12 @@ public class CustomCamera extends MainActivity {
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    private SensorEventListener mySensorEventListener = new SensorEventListener()
-    {
-        public void onAccuracyChanged(Sensor sensor, int accuracy)
-        {
+    private SensorEventListener mySensorEventListener = new SensorEventListener() {
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
 
-        public void onSensorChanged(SensorEvent event)
-        {
-            switch (event.sensor.getType())
-            {
+        public void onSensorChanged(SensorEvent event) {
+            switch (event.sensor.getType()) {
                 case Sensor.TYPE_MAGNETIC_FIELD:
                     mags = event.values.clone();
                     break;
@@ -79,8 +87,7 @@ public class CustomCamera extends MainActivity {
                     break;
             }
 
-            if (mags != null && acc != null)
-            {
+            if (mags != null && acc != null) {
                 float[] gravity = new float[9];
                 float[] magnetic = new float[9];
                 SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);
