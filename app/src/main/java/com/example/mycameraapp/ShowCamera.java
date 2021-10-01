@@ -3,6 +3,7 @@ package com.example.mycameraapp;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Camera;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -20,20 +21,23 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
         this.camera = camera;
         holder = getHolder();
         holder.addCallback(this);
-
     }
 
+    /*Displays camera in realtime*/
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
         Camera.Parameters params = camera.getParameters();
 
-        //Setting resolution size of photos taken
-        List<Camera.Size> sizes = params.getSupportedPictureSizes();
-        Camera.Size mSize = null;
+        List<Camera.Size> sizes = params.getSupportedPictureSizes(); //List with different resolution sizes available on Android phone
+        Camera.Size photoSize = null;
 
         for (Camera.Size size : sizes) {
-            mSize = size;
+            Log.i("RESOLUTION", "Available resolution: "+size.width+" "+size.height);
+            //photoSize = size;
         }
+
+        photoSize  = sizes.get(0); //Storing biggest resolution size values (width & height)
+        Log.d("Resolution set to", "" + photoSize.width + "w: " + photoSize.height + "h");
 
         //Change orientation of camera
         if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
@@ -45,8 +49,10 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             camera.setDisplayOrientation(0);
             params.setRotation(0);
         }
-        params.setPictureSize(mSize.width, mSize.height);
+        //Setting photo size to biggest available
+        params.setPictureSize(photoSize.width, photoSize.height);
         camera.setParameters(params);
+
         try {
             camera.setPreviewDisplay(holder);
             camera.startPreview();

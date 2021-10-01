@@ -50,7 +50,7 @@ public class CustomCamera extends MainActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
+
             if (pictureFile == null) {
                 return;
             } else {
