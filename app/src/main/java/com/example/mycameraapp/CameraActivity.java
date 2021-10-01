@@ -29,6 +29,10 @@ public class CameraActivity extends MainActivity {
     private String currentPhotoPath;
     private TextView realTimeParams;
     private SensorManager sManager;
+    public static float azimuthValue, tiltValue, rollValue;
+
+    //Storing data to pass from one Activity to another
+    Bundle bundle = new Bundle();
 
     private float[] acc, mags, values = new float[3];
 
@@ -36,6 +40,7 @@ public class CameraActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
         btnCapture = (Button) findViewById(R.id.btnCapture);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
@@ -95,6 +100,9 @@ public class CameraActivity extends MainActivity {
                 float pitch = values[1] * 57.2957795f;
                 float roll = values[2] * 57.2957795f;
                 realTimeParams.setText("azimuth = " + azimuth + "\npitch = " + pitch + "\nroll = " + roll);
+                azimuthValue = azimuth; //Store values when taking photo
+                tiltValue = pitch; //Store values when taking photo
+                rollValue = roll; //Store values when taking photo
                 mags = null;
                 acc = null;
             }
@@ -138,7 +146,11 @@ public class CameraActivity extends MainActivity {
     public void takePhoto(View view) {
         if (camera != null) {
             camera.takePicture(null, null, mPictureCallback);
-            openPostPicture(); //Jump to next Activity, where we want to display values from the captured photo
+            //Add your data to bundle
+            bundle.putFloat("azimuth", azimuthValue);
+            bundle.putFloat("tilt", tiltValue);
+            bundle.putFloat("roll", rollValue);
+            openPostPicture(); //Jump to next Activity, displaying values from the captured photo
         }
     }
 
@@ -162,6 +174,10 @@ public class CameraActivity extends MainActivity {
 
     public void openPostPicture() {
         Intent intent = new Intent(this, PostPicActivity.class);
+
+        //Add the bundle to the intent
+        intent.putExtras(bundle);
+
         startActivity(intent);
     }
 

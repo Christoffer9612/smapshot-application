@@ -1,7 +1,6 @@
 package com.example.mycameraapp;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
     public static TextView azimuth, tilt, roll; //Displaying json-values from json-file
-    public static StringBuffer sb = new StringBuffer("Text from MainActivity"); //static so only one instance is shared
     public static JSONObject jsonObj = null;
     public Button btnTakePhoto, btnLoadJSON;
 
@@ -33,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        txt = findViewById(R.id.txt); //Finding the textView in activity_main.xml
-        txt.setText(sb); //Setting textView to StringBuffer's values
-        txt.setTextColor(Color.parseColor("#444444"));
 
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
         btnTakePhoto.setBackgroundColor(Color.parseColor("#E2E2E2"));
