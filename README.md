@@ -24,3 +24,8 @@ This project focus on creating a mobile application prototype with the feature o
 ## Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
+
+## Debugging
+To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
+
+```Log.d("tag", "message");```
