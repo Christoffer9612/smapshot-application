@@ -42,13 +42,7 @@ public class MainActivity extends AppCompatActivity
     public static int index = 0;
     public final String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Camera/";
 
-    private TextView textViewToDisplayRotation;
-    private float[] acc = new float[3];
-    private float[] mags = new float[3];
-    private float[] values = new float[3];
-    SensorManager sManager; //SensorManager lets you access the device's sensors
 
-    private float camera_azimuth, camera_tilt, camera_roll;
 
     private TextView txt; //Text to be updated with the values of az, ro, tilt
     public static TextView json1, json2, json3; //Displaying json-values from json-file
@@ -56,59 +50,13 @@ public class MainActivity extends AppCompatActivity
     public static JSONObject jsonObj = null;
     public Button button, button2;
 
-    private SensorEventListener mySensorEventListener = new SensorEventListener() //Used for receiving notifications from the SensorManager when there is new sensor data.
 
-    {
-        public void onAccuracyChanged(Sensor sensor, int accuracy)
-        {
-        }
-
-        public void onSensorChanged(SensorEvent event)
-        {
-            switch (event.sensor.getType())
-            {
-                case Sensor.TYPE_MAGNETIC_FIELD:
-                    mags = event.values.clone();
-                    break;
-                case Sensor.TYPE_ACCELEROMETER:
-                    acc = event.values.clone();
-                    break;
-            }
-
-            if (mags != null && acc != null)
-            {
-                float[] gravity = new float[9];
-                float[] magnetic = new float[9];
-                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);  //Computes the inclination matrix I as well as the rotation matrix R - getRotationMatrix
-                float[] outGravity = new float[9];
-                SensorManager.remapCoordinateSystem(gravity,
-                        SensorManager.AXIS_X,
-                        SensorManager.AXIS_Z,
-                        outGravity); //Rotates the supplied rotation matrix so it is expressed in a different coordinate system - remapCoordinateSystem
-
-                SensorManager.getOrientation(outGravity, values); //Compute the devise orientation based on the rotation matrix
-
-
-                float azimuth = Math.round(values[0] * 57.2957795f);
-                float tilt = Math.round(values[1] * 57.2957795f);
-                float roll = Math.round(values[2] * 57.2957795f);
-                textViewToDisplayRotation.setText("azimuth = " + azimuth + "\ntilt = " + tilt + "\nroll = " + roll);
-                camera_azimuth = azimuth; //storing values to attributes
-                camera_tilt = tilt; //storing values to attributes
-                camera_roll = roll; //storing values to attributes
-                mags = null;
-                acc = null;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        textViewToDisplayRotation = findViewById(R.id.textViewToDisplayRotation);
 
         Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Montserrat-Regular.ttf");
 
@@ -121,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         button2 = findViewById(R.id.button2);
         button2.setTypeface(type);
 
-        textViewToDisplayRotation.setTypeface(type);
+
 
         json1 = findViewById(R.id.json1);
         json1.setTypeface(type);
@@ -190,8 +138,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void cameraButton(View view) {
-        sb.setLength(0);
-        sb.append("azimuth= " + camera_azimuth + ", tilt= " + camera_tilt + ", roll= " + camera_roll);
+        //sb.setLength(0);
+        //sb.append("azimuth= " + camera_azimuth + ", tilt= " + camera_tilt + ", roll= " + camera_roll);
         //Updates StringBuffer to angles when pressing "TAKE PHOTO" button
         txt.setText(sb);
 
@@ -220,18 +168,6 @@ public class MainActivity extends AppCompatActivity
     public void openCustomCam(View view) {
         Intent intent = new Intent(this, CustomCamera.class);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        sManager.registerListener(mySensorEventListener,
-                sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL);
-        sManager.registerListener(mySensorEventListener,
-                sManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
-                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
 }
