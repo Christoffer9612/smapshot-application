@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Smapshot</string>
+    <string name="app_name"><font size="28" fgcolor='#444444'><b>Smapshot</b></font></string>
+    <string name="take_photo"><font size="28" fgcolor='#444444'><b>Take photo</b></font></string>
+    <string name="photo_captured"><font size="28" fgcolor='#444444'><b>Photo captured</b></font></string>
 </resources>

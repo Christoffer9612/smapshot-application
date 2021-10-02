@@ -25,12 +25,12 @@
         <activity
             android:name=".CameraActivity"
             android:exported="true"
-            android:label="Take photo"
+            android:label="@string/take_photo"
             android:theme="@style/Theme.SmapshotRed"/>
         <activity
             android:name=".PostPicActivity"
             android:exported="true"
-            android:label="Photo captured"/>
+            android:label="@string/photo_captured"/>
         <activity
             android:name=".MainActivity">
             <intent-filter>

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnLoadJSON.setTextColor(Color.parseColor("#444444"));
 
         azimuth = findViewById(R.id.azimuth);
-        azimuth.setTextColor(Color.parseColor("#444444"));
+        azimuth.setTextColor(Color.parseColor("#444444"))   ;
         tilt = findViewById(R.id.tilt);
         tilt.setTextColor(Color.parseColor("#444444"));
         roll = findViewById(R.id.roll);
