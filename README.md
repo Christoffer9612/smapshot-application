@@ -32,3 +32,4 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 ## Android Studio Links
 * [How to set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
 * [How to pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
+* [Guide for creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
