@@ -2,6 +2,7 @@ package com.example.mycameraapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -41,6 +42,8 @@ public class CameraActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
+
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
         btnCapture = (Button) findViewById(R.id.btnCapture);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
@@ -48,11 +51,15 @@ public class CameraActivity extends MainActivity {
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
+        realTimeParams.setTypeface(montserrat_medium);
 
         btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnGoBack.setTextColor(Color.parseColor("#444444"));
+        btnGoBack.setTypeface(montserrat_medium);
+
         btnCapture.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnCapture.setTextColor(Color.parseColor("#444444"));
+        btnCapture.setTypeface(montserrat_medium);
 
         //Open camera
         camera = Camera.open();

@@ -1,6 +1,7 @@
 package com.example.mycameraapp;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,20 +33,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
+
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
         btnTakePhoto.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnTakePhoto.setTextColor(Color.parseColor("#444444"));
+        btnTakePhoto.setTypeface(montserrat_medium);
 
         btnLoadJSON = findViewById(R.id.loadJson);
         btnLoadJSON.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnLoadJSON.setTextColor(Color.parseColor("#444444"));
+        btnLoadJSON.setTypeface(montserrat_medium);
 
         azimuth = findViewById(R.id.azimuth);
-        azimuth.setTextColor(Color.parseColor("#444444"))   ;
+        azimuth.setTextColor(Color.parseColor("#444444"));
+        azimuth.setTypeface(montserrat_medium);
+
         tilt = findViewById(R.id.tilt);
         tilt.setTextColor(Color.parseColor("#444444"));
+        tilt.setTypeface(montserrat_medium);
+
         roll = findViewById(R.id.roll);
         roll.setTextColor(Color.parseColor("#444444"));
+        roll.setTypeface(montserrat_medium);
 
         String test = loadJSONFromAsset();
 
