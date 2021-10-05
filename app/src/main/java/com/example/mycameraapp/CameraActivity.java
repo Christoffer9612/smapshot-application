@@ -106,7 +106,7 @@ public class CameraActivity extends MainActivity {
                 float azimuth = values[0] * 57.2957795f;
                 float pitch = values[1] * 57.2957795f;
                 float roll = values[2] * 57.2957795f;
-                realTimeParams.setText("azimuth = " + azimuth + "\npitch = " + pitch + "\nroll = " + roll);
+                realTimeParams.setText("azimuth = " + azimuth + "\ntilt = " + pitch + "\nroll = " + roll);
                 azimuthValue = azimuth; //Store values when taking photo
                 tiltValue = pitch; //Store values when taking photo
                 rollValue = roll; //Store values when taking photo
