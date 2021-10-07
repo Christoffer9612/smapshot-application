@@ -103,9 +103,9 @@ public class CameraActivity extends MainActivity {
                         outGravity);
                 SensorManager.getOrientation(outGravity, values);
 
-                float azimuth = values[0] * 57.2957795f;
-                float pitch = values[1] * 57.2957795f;
-                float roll = values[2] * 57.2957795f;
+                float azimuth = Math.round(Math.toDegrees(values[0]));
+                float pitch = Math.round(Math.toDegrees(values[1]));
+                float roll = Math.round(Math.toDegrees(values[2]));
                 realTimeParams.setText("azimuth = " + azimuth + "\ntilt = " + pitch + "\nroll = " + roll);
                 azimuthValue = azimuth; //Store values when taking photo
                 tiltValue = pitch; //Store values when taking photo
