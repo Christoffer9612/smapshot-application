@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     public String loadJSONFromAsset() { //Returns JSON string
         String json = null;
         try {
-            InputStream is = getAssets().open("test.json");
+            InputStream is = getAssets().open("master_thesis_smapshot_1_bw.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
