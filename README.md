@@ -13,10 +13,12 @@ This project focus on creating a mobile application prototype with the feature o
 * Christoffer Karlsson
 * Alfred Hirschfeld
 
+Link to [Scrum Board](https://miro.com/app/board/o9J_lxMVwzM=/).
+
 ## Current functionality
 - [X] Displaying sensor values (tilt, roll, azimuth)
 - [X] Able to capture and store photos with Custom Camera API
-- [X] Displaying json-values from json-file, mimicking metadata from Smapshot
+- [X] Displaying json-values from json-file, mimicking metadata from Smapshot beta (georeferenced photo)
 - [X] Able to store azimuth, tilt and roll from new photo and display
 
 ## Known issues
