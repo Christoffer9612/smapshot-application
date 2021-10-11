@@ -3,6 +3,7 @@ package com.example.mycameraapp;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -93,7 +94,14 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder value = new StringBuilder();
         JSONObject json_pose = obj.getJSONObject("pose");
         if (json_pose.has(key)){
-            value.append(key + " from json: " + json_pose.optString(key));
+            String angle_string = json_pose.optString(key);
+            double d = Double.parseDouble(angle_string);
+            int angle_int = (int) d;
+            angle_int = angle_int % 360;
+            angle_int = (angle_int + 360) % 360;
+            angle_string = String.valueOf(angle_int);
+            value.append(key + " from json: " + angle_string);
+
         } else {
             value.append("No json key found!");
         }

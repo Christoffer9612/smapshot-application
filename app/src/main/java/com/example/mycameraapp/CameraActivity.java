@@ -93,19 +93,36 @@ public class CameraActivity extends MainActivity {
             }
 
             if (mags != null && acc != null) {
-                float[] gravity = new float[9];
-                float[] magnetic = new float[9];
-                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags);
-                float[] outGravity = new float[9];
+                float[] gravity = new float[9]; //the rotation matrix to be transformed
+                float[] magnetic = new float[9]; //the inclination matrix
+                SensorManager.getRotationMatrix(gravity, magnetic, acc, mags); //computes the rotation matrix (gravity)
+                float[] outGravity = new float[9]; //the transformed rotation matrix.
+
+                //Rotates the supplied rotation matrix (gravity) so it is expressed in a different coordinate system (out gravity)
                 SensorManager.remapCoordinateSystem(gravity,
                         SensorManager.AXIS_X,
                         SensorManager.AXIS_Z,
                         outGravity);
+
+                //Computes the device's orientation based on the rotation matrix
                 SensorManager.getOrientation(outGravity, values);
 
                 float azimuth = Math.round(Math.toDegrees(values[0]));
+
+                //normalise angles 0 - 360 degrees
+                azimuth = azimuth % 360;
+                azimuth = (azimuth + 360) % 360;
+
                 float pitch = Math.round(Math.toDegrees(values[1]));
+
+                pitch = pitch % 360;
+                pitch = (pitch + 360) % 360;
+
                 float roll = Math.round(Math.toDegrees(values[2]));
+
+                roll = roll % 360;
+                roll = (roll + 360) % 360;
+
                 realTimeParams.setText("azimuth = " + azimuth + "\ntilt = " + pitch + "\nroll = " + roll);
                 azimuthValue = azimuth; //Store values when taking photo
                 tiltValue = pitch; //Store values when taking photo
