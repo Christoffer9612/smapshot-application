@@ -20,6 +20,8 @@ Link to [Scrum Board](https://miro.com/app/board/o9J_lxMVwzM=/).
 - [X] Able to capture and store photos with Custom Camera API
 - [X] Displaying json-values from json-file, mimicking metadata from Smapshot beta (georeferenced photo)
 - [X] Able to store azimuth, tilt and roll from new photo and display
+- [X] Normalizing angles from json-file and from the sensor values (0-360 degrees)
+- [X] Display the mean accuracy of the retaken photograph in percentage
 
 ## Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
@@ -36,3 +38,4 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [How to pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
 * [Guide for creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
 * [DESIGN - How to change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
+* [How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
