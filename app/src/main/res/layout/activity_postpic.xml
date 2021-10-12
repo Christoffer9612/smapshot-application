@@ -22,7 +22,7 @@
         android:layout_height="81dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="437dp"
+        android:layout_marginTop="550dp"
         android:onClick="openMainActivity"
         android:text="Go back"
         tools:ignore="MissingConstraints" />
@@ -55,6 +55,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="609dp"
         android:text="JSON placeholder 3"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/percentage_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6570dp"
+        android:layout_marginBottom="248dp"
+        android:text="percentage_error"
         android:textSize="15dp" />
 
     <TextView
