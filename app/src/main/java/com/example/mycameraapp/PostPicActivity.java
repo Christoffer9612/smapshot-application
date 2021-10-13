@@ -131,16 +131,16 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         float roll_float = (float) d3;
 
         float_error = Math.abs(azimuth_float - az);
-        float_error = azimuth_float - float_error;
-        float_error = (float_error/azimuth_float) * 100;
+        float_error = float_error/360;
+        float_error = (float) (((float) (1.0 - float_error)) * 100.0);
 
         float_error1 = Math.abs(tilt_float - ti);
-        float_error1 = tilt_float - float_error1;
-        float_error1 = (float_error1/tilt_float) * 100;
+        float_error1 = float_error1/360;
+        float_error1 = (float) (((float) (1.0 - float_error1)) * 100.0);
 
         float_error2 = Math.abs(roll_float - ro);
-        float_error2 = roll_float - float_error2;
-        float_error2 = (float_error2/roll_float) * 100;
+        float_error2 = float_error2/360;
+        float_error2 = (float) (((float) (1.0 - float_error2)) * 100.0);
 
 
         float_error = (float_error + float_error1 + float_error2)/3;
