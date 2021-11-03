@@ -39,3 +39,6 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [Guide for creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
 * [DESIGN - How to change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
 * [How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
+* [How to show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
+* [Transparency in image](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
+* [Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
