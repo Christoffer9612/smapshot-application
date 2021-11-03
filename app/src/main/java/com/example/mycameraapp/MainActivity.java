@@ -1,10 +1,11 @@
 package com.example.mycameraapp;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -23,10 +24,10 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txt; //Text to be updated with the values of az, ro, tilt
     public static TextView azimuth, tilt, roll; //Displaying json-values from json-file
     public static JSONObject jsonObj = null;
-    public Button btnTakePhoto, btnLoadJSON;
+    public Button btnTakePhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
+    private ImageView thumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,15 +37,25 @@ public class MainActivity extends AppCompatActivity {
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
+        thumbnail = (ImageView) findViewById(R.id.thumbnail);
+        thumbnail.setImageResource(R.drawable.thumbnail);
+        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque
+        
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
-        btnTakePhoto.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnTakePhoto.setTextColor(Color.parseColor("#444444"));
-        btnTakePhoto.setTypeface(montserrat_medium);
+        setButton(btnTakePhoto);
 
         btnLoadJSON = findViewById(R.id.loadJson);
-        btnLoadJSON.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnLoadJSON.setTextColor(Color.parseColor("#444444"));
-        btnLoadJSON.setTypeface(montserrat_medium);
+        setButton(btnLoadJSON);
+
+        btnTutorial = findViewById(R.id.btnTutorial);
+        setButton(btnTutorial);
+
+        btnProfile = findViewById(R.id.btnProfile);
+        setButton(btnProfile);
+
+        btnSmapshot = findViewById(R.id.btnSmapshot);
+        setButton(btnSmapshot);
+
 
         azimuth = findViewById(R.id.azimuth);
         azimuth.setTextColor(Color.parseColor("#444444"));
@@ -119,4 +130,10 @@ public class MainActivity extends AppCompatActivity {
         roll.setText(findValue(jsonObj, "roll"));
     }
 
+    public void setButton(Button button) {
+        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
+        button.setTypeface(montserrat_medium);
+        button.setTextColor(Color.parseColor("#444444"));
+        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
+    }
 }
