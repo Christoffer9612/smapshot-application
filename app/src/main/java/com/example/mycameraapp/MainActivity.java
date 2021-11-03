@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         thumbnail = (ImageView) findViewById(R.id.thumbnail);
         thumbnail.setImageResource(R.drawable.thumbnail);
         thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque
-        
+
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
         setButton(btnTakePhoto);
 
