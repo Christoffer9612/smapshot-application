@@ -17,6 +17,16 @@
         android:textSize="15dp" />
 
     <TextView
+        android:id="@+id/intro"
+        android:layout_width="394dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="138dp"
+        android:text="Welcome, find old photos to re-capture in order to get started!"
+        android:textSize="18dp" />
+
+    <TextView
         android:id="@+id/tilt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

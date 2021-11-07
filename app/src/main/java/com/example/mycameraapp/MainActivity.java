@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView azimuth, tilt, roll; //Displaying json-values from json-file
+    public static TextView azimuth, tilt, roll, intro; //Displaying json-values from json-file
     public static JSONObject jsonObj = null;
     public Button btnTakePhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         roll = findViewById(R.id.roll);
         roll.setTextColor(Color.parseColor("#444444"));
         roll.setTypeface(montserrat_medium);
+
+        intro = findViewById(R.id.intro);
+        intro.setGravity(Gravity.CENTER);
 
         String test = loadJSONFromAsset();
 
