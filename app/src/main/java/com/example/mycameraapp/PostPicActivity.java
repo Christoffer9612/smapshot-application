@@ -13,7 +13,7 @@ import org.json.JSONException;
 
 public class PostPicActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack;
-    private TextView newAzimuth, newTilt, newRoll, success, percentage_error;
+    private TextView newAzimuth, newTilt, newRoll, success, percentage_error, percentage_error2, percentage_error3;
     public int error;
 
     @Override
@@ -80,13 +80,32 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         percentage_error = findViewById(R.id.percentage_error);
         percentage_error.setTextColor(Color.parseColor("#444444"));
 
+        percentage_error2 = findViewById(R.id.percentage_error2);
+        percentage_error2.setTextColor(Color.parseColor("#444444"));
+
+        percentage_error3 = findViewById(R.id.percentage_error3);
+        percentage_error3.setTextColor(Color.parseColor("#444444"));
 
         try {
-            percentage_error.setText("Accuracy: " + percentage_error(az, ti, ro) + "%");
+            percentage_error.setText("Azimuth Accuracy: " + percentage_error(az, ti, ro, "azimuth") + "%");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        try {
+            percentage_error2.setText("Tilt Accuracy: " + percentage_error(az, ti, ro, "tilt") + "%");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            percentage_error3.setText("Roll Accuracy: " + percentage_error(az, ti, ro, "roll") + "%");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         percentage_error.setTypeface(montserrat_medium);
+        percentage_error2.setTypeface(montserrat_medium);
+        percentage_error3.setTypeface(montserrat_medium);
+
 
         btnGoBack = (Button) findViewById(R.id.button);
         btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
@@ -102,7 +121,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         });
     }
 
-    public float percentage_error(float az, float ti, float ro) throws JSONException {
+    public float percentage_error(float az, float ti, float ro, String orientation) throws JSONException {
 
         float float_error;
         float float_error1;
@@ -115,6 +134,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         String string_azimuth = parts[3];
         double d = Double.parseDouble(string_azimuth);
         float azimuth_float = (float) d;
+
 
         StringBuilder test3 = findValue(jsonObj, "tilt");
         String test4 = test3.toString();
@@ -134,6 +154,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         float_error = float_error/360;
         float_error = (float) (((float) (1.0 - float_error)) * 100.0);
 
+
         float_error1 = Math.abs(tilt_float - ti);
         float_error1 = float_error1/360;
         float_error1 = (float) (((float) (1.0 - float_error1)) * 100.0);
@@ -143,9 +164,18 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         float_error2 = (float) (((float) (1.0 - float_error2)) * 100.0);
 
 
-        float_error = (float_error + float_error1 + float_error2)/3;
-        return Math.round(float_error);
+        if(orientation.equals("azimuth")) {
+            return Math.round(float_error);
+        } else if (orientation.equals("tilt")) {
+            return Math.round(float_error1);
+        } else if (orientation.equals("roll")) {
+            return Math.round(float_error2);
+        }
+
+
+        return float_error;
     }
+
 
     public void openMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);

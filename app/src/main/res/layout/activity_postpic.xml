@@ -7,6 +7,32 @@
     tools:context=".PostPicActivity">
 
     <TextView
+        android:id="@+id/percentage_error3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="670dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginRight="126dp"
+        android:layout_marginBottom="214dp"
+        android:text="percentage_error3"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/percentage_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6570dp"
+        android:layout_marginBottom="279dp"
+        android:text="percentage_error"
+        android:textSize="15dp" />
+
+    <TextView
         android:id="@+id/success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,14 +84,18 @@
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/percentage_error"
+        android:id="@+id/percentage_error2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="6570dp"
-        android:layout_marginBottom="248dp"
-        android:text="percentage_error"
+        android:layout_marginTop="670dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginRight="129dp"
+        android:layout_marginBottom="242dp"
+        android:text="percentage_error2"
         android:textSize="15dp" />
 
     <TextView

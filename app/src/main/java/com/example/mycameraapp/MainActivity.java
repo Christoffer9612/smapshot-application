@@ -25,7 +25,10 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView azimuth, tilt, roll, intro; //Displaying json-values from json-file
+    public static TextView azimuth;
+    public static TextView tilt;
+    public static TextView roll;
+    public static TextView intro; //Displaying json-values from json-file
     public static JSONObject jsonObj = null;
     public Button btnTakePhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
