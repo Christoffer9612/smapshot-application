@@ -128,6 +128,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openTutorial(View view) {
+        Intent intent = new Intent(this, Tutorial.class);
+        startActivity(intent);
+    }
+
     public void getJSONValues(View view) throws JSONException {
         azimuth.setText(findValue(jsonObj, "azimuth"));
         tilt.setText(findValue(jsonObj, "tilt"));

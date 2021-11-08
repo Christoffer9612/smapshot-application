@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mycameraapp">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.hardware.Camera"
-        android:required="true"/>
+    <uses-permission
+        android:name="android.hardware.Camera"
+        android:required="true" />
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
@@ -23,16 +23,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmapshotBlue">
         <activity
+            android:name=".Tutorial"
+            android:exported="true"
+            android:label="@string/tutorial"
+            android:theme="@style/Theme.SmapshotRed"/>
+        <activity
             android:name=".CameraActivity"
             android:exported="true"
             android:label="@string/take_photo"
-            android:theme="@style/Theme.SmapshotRed"/>
+            android:theme="@style/Theme.SmapshotRed" />
         <activity
             android:name=".PostPicActivity"
             android:exported="true"
-            android:label="@string/photo_captured"/>
-        <activity
-            android:name=".MainActivity">
+            android:label="@string/photo_captured" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

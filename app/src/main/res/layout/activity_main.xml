@@ -78,7 +78,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="305dp"
-        android:onClick="getJSONValues"
+        android:onClick="openTutorial"
         android:text="How to use"
         android:textSize="18sp" />
 
