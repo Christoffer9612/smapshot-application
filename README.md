@@ -42,3 +42,4 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [How to show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
 * [Transparency in image](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
 * [Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
+* [Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
