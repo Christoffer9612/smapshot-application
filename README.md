@@ -43,3 +43,4 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [Transparency in image](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
 * [Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
 * [Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
+* [Aspect ratio for Custom Camera](https://stackoverflow.com/questions/17804309/android-camera-preview-wrong-aspect-ratio)
