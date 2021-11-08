@@ -6,11 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Tutorial">
 
-    <ImageView
-        android:id="@+id/testPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="524dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="10dp" />
+    <TextView
+        android:id="@+id/intro"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="227dp"
+        android:text="1. Find old photograph you wish to re-capture \n \n
+2. Navigate to the location of the old photograph \n \n
+3. Re-take the old photograph by taking a new photo  \n \n
+4. Submit your new photo to Smapshot"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
