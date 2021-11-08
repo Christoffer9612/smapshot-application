@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".CameraActivity">
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="629dp"
+        android:layout_height="630dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -17,6 +18,14 @@
         android:layout_marginLeft="0dp">
 
     </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/testPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="524dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="10dp" />
 
     <TextView
         android:id="@+id/realTimeParams"
@@ -50,5 +59,17 @@
         android:layout_marginBottom="9dp"
         android:onClick="takePhoto"
         android:text="Capture" />
+
+    <Button
+        android:id="@+id/btnTransparency"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginLeft="121dp"
+        android:layout_marginBottom="26dp"
+        android:onClick="enableTransparency"
+        android:text="T" />
 
 </RelativeLayout>

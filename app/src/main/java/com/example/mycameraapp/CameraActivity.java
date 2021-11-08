@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,11 +27,13 @@ public class CameraActivity extends MainActivity {
     private Camera camera;
     private FrameLayout frameLayout;
     private ShowCamera showCamera;
-    private Button btnGoBack, btnCapture;
+    private Button btnGoBack, btnCapture, btnTransparency;
     private String currentPhotoPath;
     private TextView realTimeParams;
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
+    private ImageView testPhoto;
+    private boolean toggled = false;
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -46,6 +49,7 @@ public class CameraActivity extends MainActivity {
 
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
         btnCapture = (Button) findViewById(R.id.btnCapture);
+        btnTransparency = (Button) findViewById(R.id.btnTransparency);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         realTimeParams = (TextView) findViewById(R.id.realTimeParams);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -60,6 +64,8 @@ public class CameraActivity extends MainActivity {
         btnCapture.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnCapture.setTextColor(Color.parseColor("#444444"));
         btnCapture.setTypeface(montserrat_medium);
+
+        testPhoto = (ImageView) findViewById(R.id.testPhoto);
 
         //Open camera
         camera = Camera.open();
@@ -175,6 +181,17 @@ public class CameraActivity extends MainActivity {
             bundle.putFloat("tilt", tiltValue);
             bundle.putFloat("roll", rollValue);
             openPostPicture(); //Jump to next Activity, displaying values from the captured photo
+        }
+    }
+
+    public void enableTransparency(View view) {
+        testPhoto.setImageResource(R.drawable.st_roch_test);
+        if (toggled == false) {
+            testPhoto.setAlpha(150); //0 is fully transparent, 255 is fully opaque
+            toggled = true;
+        } else {
+            testPhoto.setAlpha(0);
+            toggled = false;
         }
     }
 
