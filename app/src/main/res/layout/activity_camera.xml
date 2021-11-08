@@ -36,40 +36,51 @@
 
     <Button
         android:id="@+id/btnGoBack"
-        android:layout_width="154dp"
-        android:layout_height="68dp"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="12dp"
         android:onClick="mainMenu"
         android:text="Go back" />
 
     <Button
         android:id="@+id/btnCapture"
-        android:layout_width="154dp"
-        android:layout_height="68dp"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="11dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="12dp"
         android:onClick="takePhoto"
         android:text="Capture" />
 
-    <Button
-        android:id="@+id/btnTransparency"
-        android:layout_width="61dp"
+    <TextView
+        android:id="@+id/transparency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="138dp"
+        android:layout_marginLeft="138dp"
+        android:layout_marginBottom="52dp"
+        android:text="0 %" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="153dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="121dp"
-        android:layout_marginLeft="121dp"
-        android:layout_marginBottom="26dp"
-        android:onClick="enableTransparency"
-        android:text="T" />
+        android:layout_marginBottom="33dp"
+        android:max="100"
+        android:progress="0" />
 
 </RelativeLayout>
