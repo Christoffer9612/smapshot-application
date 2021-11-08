@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             angle_int = angle_int % 360;
             angle_int = (angle_int + 360) % 360;
             angle_string = String.valueOf(angle_int);
-            value.append(key + " from json: " + angle_string);
+            value.append(key + " from old_photo: " + angle_string);
 
         } else {
             value.append("No json key found!");

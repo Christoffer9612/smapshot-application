@@ -111,7 +111,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         StringBuilder test = findValue(jsonObj, "azimuth");
         String test2 = test.toString();
-        String[] parts = test2.split(" ");
+        String[] parts = test2.split(" "); // Probably issue when changing string, fix?
         String string_azimuth = parts[3];
         double d = Double.parseDouble(string_azimuth);
         float azimuth_float = (float) d;
