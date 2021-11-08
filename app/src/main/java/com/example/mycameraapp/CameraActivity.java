@@ -2,6 +2,7 @@ package com.example.mycameraapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.hardware.Sensor;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,13 +29,12 @@ public class CameraActivity extends MainActivity {
     private Camera camera;
     private FrameLayout frameLayout;
     private ShowCamera showCamera;
-    private Button btnGoBack, btnCapture, btnTransparency;
+    private Button btnGoBack, btnCapture;
     private String currentPhotoPath;
-    private TextView realTimeParams;
+    private TextView realTimeParams, transparency;
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView testPhoto;
-    private boolean toggled = false;
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -45,11 +46,20 @@ public class CameraActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        // set a change listener on the SeekBar
+        SeekBar seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+
+        int progress = seekBar.getProgress();
+        transparency = findViewById(R.id.transparency);
+        transparency.setText(progress + " %");
+
+        testPhoto = (ImageView) findViewById(R.id.testPhoto);
+
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
         btnGoBack = (Button) findViewById(R.id.btnGoBack);
         btnCapture = (Button) findViewById(R.id.btnCapture);
-        btnTransparency = (Button) findViewById(R.id.btnTransparency);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         realTimeParams = (TextView) findViewById(R.id.realTimeParams);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -67,11 +77,35 @@ public class CameraActivity extends MainActivity {
 
         testPhoto = (ImageView) findViewById(R.id.testPhoto);
 
+        seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
+        seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
+
         //Open camera
         camera = Camera.open();
         showCamera = new ShowCamera(this, camera);
         frameLayout.addView(showCamera);
     }
+
+    SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            // updated continuously as the user slides the thumb
+            transparency.setText(progress + " %");
+            testPhoto.setImageResource(R.drawable.st_roch_test);
+            testPhoto.setAlpha(progress * (int) 2.55);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // called when the user first touches the SeekBar
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            // called after the user finishes moving the SeekBar
+        }
+    };
 
     @Override
     protected void onResume() {
@@ -181,17 +215,6 @@ public class CameraActivity extends MainActivity {
             bundle.putFloat("tilt", tiltValue);
             bundle.putFloat("roll", rollValue);
             openPostPicture(); //Jump to next Activity, displaying values from the captured photo
-        }
-    }
-
-    public void enableTransparency(View view) {
-        testPhoto.setImageResource(R.drawable.st_roch_test);
-        if (toggled == false) {
-            testPhoto.setAlpha(150); //0 is fully transparent, 255 is fully opaque
-            toggled = true;
-        } else {
-            testPhoto.setAlpha(0);
-            toggled = false;
         }
     }
 
