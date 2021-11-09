@@ -13,6 +13,7 @@ This project focus on creating a mobile application prototype with the feature o
 * Christoffer Karlsson
 * Alfred Hirschfeld
 
+## Scrum Board
 Link to [Scrum Board](https://miro.com/app/board/o9J_lxMVwzM=/).
 
 ## Current functionality
@@ -44,3 +45,7 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
 * [Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
 * [Aspect ratio for Custom Camera](https://stackoverflow.com/questions/17804309/android-camera-preview-wrong-aspect-ratio)
+
+## Challenges
+* Aspect ratio of different Android cameras and resolution of photos (width, height). Motorola G8 vs. Xiaomi Mi 9T
+* Research about tilt (pitch).
