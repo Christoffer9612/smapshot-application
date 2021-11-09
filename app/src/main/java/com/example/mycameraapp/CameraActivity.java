@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.hardware.Camera;
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -147,7 +148,14 @@ public class CameraActivity extends MainActivity {
                 //Computes the device's orientation based on the rotation matrix
                 SensorManager.getOrientation(outGravity, values);
 
-                float azimuth = Math.round(Math.toDegrees(values[0]));
+                //altitude":439.4052680295758,"latitude":46.78072409011031,"longitude":6.647818728206765
+
+
+                //compensating for magnetic declination
+                GeomagneticField geoField = new GeomagneticField(46.78072409011031f, 6.647818728206765f, 439.4052680295758f, System.currentTimeMillis());
+                float declination = geoField.getDeclination();
+                
+                float azimuth = Math.round(Math.toDegrees(values[0]) + declination);
 
                 //normalise angles 0 - 360 degrees
                 azimuth = azimuth % 360;
