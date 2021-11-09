@@ -126,6 +126,17 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
+    public float sbToFloat(JSONObject obj, String key) throws JSONException {
+        StringBuilder sb = findValue(obj, key);
+        String s= sb.toString();
+        String[] parts = s.split(" ");
+        String string_key = parts[3];
+        double d = Double.parseDouble(string_key);
+        float float_key = (float) d;
+
+        return float_key;
+    }
+
     public void openCustomCam(View view) {
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
