@@ -1,12 +1,12 @@
 # Smapshot Mobile Application
-This master's thesis project focus on creating a mobile application with the feature of being able to retake historical photographs in order to compare the past with the present. A part of developing a mobile application, this thesis work also includes carrying out a design process and geospatial research. In other words, this consists of following three topics:
+This master's thesis project focus on creating a mobile application with the feature of being able to retake historical photographs in order to compare the past with the present. A part from developing the mobile application, this thesis work also includes carrying out a design process and geospatial research. In other words, this consists of following three topics:
 - Mobile application development
 - Geospatial research
 - Design process
 
 See Smapshot's website [here](https://smapshot.heig-vd.ch/).
 
-## Configuration
+## Configuration environment
 
 * Java 15
 * [Android Studio Bumblebee 2021.1.1 Canary 12](https://developer.android.com/studio/preview/index.html)
@@ -24,14 +24,16 @@ See Smapshot's website [here](https://smapshot.heig-vd.ch/).
 * Alfred Hirschfeld - master thesis student
 
 ## Agile workflow
-- [X] Iteration 1 - lofi mockup prototype, basic mobile app, config.
-- [ ] Iteration 2 - hifi design, extended functionality in mobile app
-- [ ] Iteration 3
+
+### Design Process
+- [X] Iteration 1 - lofi mockup prototype, basic mobile app, config and set up.
+- [ ] Iteration 2 - hifi design, extended functionality in mobile app.
+- [ ] Iteration 3 - TBA
 
 ### Scrum board
 Link to [scrum board](https://miro.com/app/board/o9J_lxMVwzM=/), working in weekly sprints.
 
-## Current functionality included
+## Current functionality
 - [X] Able to **capture** and **store** photos with Custom Camera API
 - [X] **Displaying** sensor values when opening camera: tilt, roll and azimuth
 - [X] Fetching json-values from json-file, mimicking metadata from Smapshot beta (georeferenced photo)
@@ -56,7 +58,7 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [DESIGN - Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
 * [DESIGN - Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
 
-## Current issues to tackle
+## Issues
 * Aspect ratio of different Android cameras and resolution of photos (width, height). E.g: **Motorola G8 vs. Xiaomi Mi 9T**
 * Research about tilt (pitch) from Smapshot (reverse?). E.g: 4 degrees = 356 degrees. 
 * Refactor and document code?
