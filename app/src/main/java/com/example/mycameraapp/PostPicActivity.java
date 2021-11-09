@@ -127,36 +127,11 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         float float_error1;
         float float_error2;
 
-        /*
-        StringBuilder test = findValue(jsonObj, "azimuth");
-        String test2 = test.toString();
-        String[] parts = test2.split(" "); // Probably issue when changing string, fix?
-        String string_azimuth = parts[3];
-        double d = Double.parseDouble(string_azimuth);
-        float azimuth_float = (float) d;
-        */
-        float azimuth_float = sbToFloat(jsonObj, "azimuth");
+        float azimuth_float = sbToFloatAngles(jsonObj, "azimuth");
+        float tilt_float = sbToFloatAngles(jsonObj, "tilt");
+        float roll_float = sbToFloatAngles(jsonObj, "roll");
 
-        /*
-        StringBuilder test3 = findValue(jsonObj, "tilt");
-        String test4 = test3.toString();
-        String[] parts1 = test4.split(" ");
-        String string_tilt = parts1[3];
-        double d1 = Double.parseDouble(string_tilt);
-        float tilt_float = (float) d1;
-        */
-        float tilt_float = sbToFloat(jsonObj, "tilt");
-
-        /*
-        StringBuilder test5 = findValue(jsonObj, "roll");
-        String test6 = test5.toString();
-        String[] parts2 = test6.split(" ");
-        String string_roll = parts2[3];
-        double d3 = Double.parseDouble(string_roll);
-        float roll_float = (float) d3;
-        */
-        float roll_float = sbToFloat(jsonObj, "roll");
-
+        //calculate the errors for each angle
         float_error = Math.abs(azimuth_float - az);
         float_error = float_error/360;
         float_error = (float) (((float) (1.0 - float_error)) * 100.0);

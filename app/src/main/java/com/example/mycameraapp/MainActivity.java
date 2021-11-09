@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         return json;
     }
 
+    //use when finding the orientation angles from JSON-file, normalise the angles (0-360 degrees)
     public StringBuilder findValue(JSONObject obj, String key)
             throws JSONException {
         StringBuilder value = new StringBuilder();
@@ -126,9 +128,38 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
-    public float sbToFloat(JSONObject obj, String key) throws JSONException {
+    //use when finding the coordinates from JSON-file
+    public StringBuilder findCoordinates(JSONObject obj, String key)
+            throws JSONException {
+        StringBuilder value = new StringBuilder();
+        JSONObject json_pose = obj.getJSONObject("pose");
+        if (json_pose.has(key)){
+            String angle_string = json_pose.optString(key);
+            double d = Double.parseDouble(angle_string);
+            String coordinates_string = String.valueOf(d);
+            value.append(key + " from old_photo: " + coordinates_string);
+        } else {
+            value.append("No json key found!");
+        }
+        return value;
+    }
+
+    //Converts Stringbuilder that you get from findCoordinates method to float
+    public float sbToFloatCoord(JSONObject obj, String key) throws JSONException {
+        StringBuilder sb = findCoordinates(obj, key);
+        String s = sb.toString();
+        String[] parts = s.split(" ");
+        String string_key = parts[3];
+        double d = Double.parseDouble(string_key);
+        float float_key = (float) d;
+
+        return float_key;
+    }
+
+    //Converts Stringbuilder that you receive from findValue-method to a float
+    public float sbToFloatAngles(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findValue(obj, key);
-        String s= sb.toString();
+        String s = sb.toString();
         String[] parts = s.split(" ");
         String string_key = parts[3];
         double d = Double.parseDouble(string_key);

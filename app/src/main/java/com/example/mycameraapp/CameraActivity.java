@@ -151,14 +151,34 @@ public class CameraActivity extends MainActivity {
                 //Computes the device's orientation based on the rotation matrix
                 SensorManager.getOrientation(outGravity, values);
 
-                //altitude":439.4052680295758,"latitude":46.78072409011031,"longitude":6.647818728206765
 
                 //compensating for magnetic declination;
+                float latitude = 0;
+                float longitude = 0;
+                float altitude = 0;
 
+                //get coordinates from JSON-file
+                try {
+                    latitude = sbToFloatCoord(jsonObj, "latitude");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    longitude = sbToFloatCoord(jsonObj, "longitude");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    altitude = sbToFloatCoord(jsonObj, "altitude");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                GeomagneticField geoField = new GeomagneticField(46.78072409011031f, 6.647818728206765f, 439.4052680295758f, System.currentTimeMillis());
+                //calculate declination
+                GeomagneticField geoField = new GeomagneticField(latitude, longitude, altitude, System.currentTimeMillis());
                 float declination = geoField.getDeclination();
 
+                //add to azimuth
                 float azimuth = Math.round(Math.toDegrees(values[0]) + declination);
 
                 //normalise angles 0 - 360 degrees
