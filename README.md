@@ -1,5 +1,8 @@
 # Smapshot Mobile Application
-This master's thesis project focus on creating a mobile application with the feature of being able to retake historical photographs in order to compare the past with the present. A part of developing a mobile application, this thesis work also includes carrying out a design process and geospatial research. 
+This master's thesis project focus on creating a mobile application with the feature of being able to retake historical photographs in order to compare the past with the present. A part of developing a mobile application, this thesis work also includes carrying out a design process and geospatial research. In other words, this consists of following three topics:
+- Mobile application development
+- Geospatial research
+- Design process
 
 See Smapshot's website [here](https://smapshot.heig-vd.ch/).
 
@@ -26,7 +29,7 @@ See Smapshot's website [here](https://smapshot.heig-vd.ch/).
 - [ ] Iteration 3
 
 ### Scrum board
-Link to [scrum board](https://miro.com/app/board/o9J_lxMVwzM=/).
+Link to [scrum board](https://miro.com/app/board/o9J_lxMVwzM=/), working in weekly sprints.
 
 ## Current functionality included
 - [X] Able to **capture** and **store** photos with Custom Camera API
@@ -43,13 +46,13 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 ```Log.d("tag", "message");```
 
 ## Android Studio links
-* [DESIGN - How to set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
+* [GEO - How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
 * [DEV - How to pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
 * [DEV - Guide for creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
-* [DESIGN - How to change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
-* [GEO - How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
 * [DEV - How to show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
 * [DEV - Transparency in image](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
+* [DESIGN - How to change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
+* [DESIGN - How to set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
 * [DESIGN - Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
 * [DESIGN - Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
 
