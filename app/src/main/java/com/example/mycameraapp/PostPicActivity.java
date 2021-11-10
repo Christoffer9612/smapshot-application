@@ -1,5 +1,6 @@
 package com.example.mycameraapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -16,6 +17,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     private TextView newAzimuth, newTilt, newRoll, success, percentage_error, percentage_error2, percentage_error3;
     public int error;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -86,18 +88,40 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         percentage_error3 = findViewById(R.id.percentage_error3);
         percentage_error3.setTextColor(Color.parseColor("#444444"));
 
+        String instruction_az = null;
+        String instruction_tilt = null;
+        String instruction_roll = null;
+
         try {
-            percentage_error.setText("Azimuth Accuracy: " + percentage_error(az, ti, ro, "azimuth") + "%");
+            instruction_az = instructUser(sbToFloatAngles(jsonObj,"azimuth"), az, "azimuth");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            instruction_tilt = instructUser(sbToFloatAngles(jsonObj,"tilt"), ti, "tilt");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            percentage_error2.setText("Tilt Accuracy: " + percentage_error(az, ti, ro, "tilt") + "%");
+            instruction_roll = instructUser(sbToFloatAngles(jsonObj, "roll"), ro, "roll");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            percentage_error.setText("Azimuth Accuracy: " + percentage_error(az, ti, ro, "azimuth") + "%" + " " + instruction_az);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            percentage_error3.setText("Roll Accuracy: " + percentage_error(az, ti, ro, "roll") + "%");
+            percentage_error2.setText("Tilt Accuracy: " + percentage_error(az, ti, ro, "tilt") + "%" + " " + instruction_tilt);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            percentage_error3.setText("Roll Accuracy: " + percentage_error(az, ti, ro, "roll") + "%" + " " + instruction_roll);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -113,6 +137,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         btnGoBack.setTypeface(montserrat_medium);
 
 
+
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +146,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         });
     }
 
+    //calculates accuracy for each orientation angle (azimuth, tilt, roll)
     public float percentage_error(float az, float ti, float ro, String orientation) throws JSONException {
 
         float float_error;
@@ -158,6 +184,55 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         return float_error;
     }
 
+
+    public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
+
+        String instruction_az_west = ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
+        String instruction_az_east = ", turn device " +  String.valueOf(Math.abs(old_angle - new_angle) + "° east");
+        String instruction_correct = "Perfect!";
+        String instruction_ti_down = ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° down");
+        String instruction_ti_up = ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° up");
+        String instruction_ro_right = ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° right");
+        String instruction_ro_left = ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° left");
+
+
+        if(angle_type.equals("azimuth")) {
+
+            if (old_angle < new_angle) {
+                return instruction_az_west;
+            } else if (old_angle == new_angle) {
+                return instruction_correct;
+            } else {
+                return instruction_az_east;
+            }
+        }
+
+        if(angle_type.equals("tilt")) {
+            if(old_angle > new_angle) {
+               return instruction_ti_up;
+            } else if (old_angle == new_angle) {
+                return instruction_correct;
+            } else {
+                return instruction_ti_down;
+            }
+
+        }
+
+        if(angle_type.equals("roll")) {
+           if(old_angle < new_angle) {
+               return instruction_ro_left;
+           }    else if (old_angle == new_angle) {
+               return instruction_correct;
+           }   else {
+               return instruction_ro_right;
+           }
+
+        }
+        else {
+            return "error";
+        }
+
+    }
 
     public void openMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);

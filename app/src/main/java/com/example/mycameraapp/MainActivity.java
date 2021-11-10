@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    //Converts Stringbuilder that you receive from findValue-method to a float
+    //Converts Stringbuilder that you receive from findValue method to a float
     public float sbToFloatAngles(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findValue(obj, key);
         String s = sb.toString();
