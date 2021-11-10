@@ -1,7 +1,6 @@
 package com.example.mycameraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class Tutorial extends AppCompatActivity {

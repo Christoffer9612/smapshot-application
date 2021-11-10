@@ -22,7 +22,7 @@
 
     <ImageView
         android:id="@+id/testPhoto"
-        android:layout_width="match_parent"
+        android:layout_width="393dp"
         android:layout_height="524dp"
         android:layout_marginEnd="0dp"
         android:layout_marginRight="10dp" />

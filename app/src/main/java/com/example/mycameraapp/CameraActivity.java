@@ -50,7 +50,7 @@ public class CameraActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        // set a change listener on the SeekBar
+        //Setting a change listener to the SeekBar (slider)
         SeekBar seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
 
@@ -58,14 +58,14 @@ public class CameraActivity extends MainActivity {
         transparency = findViewById(R.id.transparency);
         transparency.setText(progress + " %");
 
-        testPhoto = (ImageView) findViewById(R.id.testPhoto);
+        testPhoto = findViewById(R.id.testPhoto);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        btnGoBack = (Button) findViewById(R.id.btnGoBack);
-        btnCapture = (Button) findViewById(R.id.btnCapture);
-        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
-        realTimeParams = (TextView) findViewById(R.id.realTimeParams);
+        btnGoBack = findViewById(R.id.btnGoBack);
+        btnCapture = findViewById(R.id.btnCapture);
+        frameLayout = findViewById(R.id.frameLayout);
+        realTimeParams = findViewById(R.id.realTimeParams);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
@@ -79,7 +79,7 @@ public class CameraActivity extends MainActivity {
         btnCapture.setTextColor(Color.parseColor("#444444"));
         btnCapture.setTypeface(montserrat_medium);
 
-        testPhoto = (ImageView) findViewById(R.id.testPhoto);
+        testPhoto = findViewById(R.id.testPhoto);
 
         seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
@@ -94,7 +94,7 @@ public class CameraActivity extends MainActivity {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            // updated continuously as the user slides the thumb
+            //Updates continuously as the user slides the bar
             transparency.setText(progress + " %");
             testPhoto.setImageResource(R.drawable.st_roch_test);
             testPhoto.setAlpha(progress * (int) 2.55);
@@ -102,12 +102,12 @@ public class CameraActivity extends MainActivity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            // called when the user first touches the SeekBar
+            //Called when the user first touches the SeekBar
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            // called after the user finishes moving the SeekBar
+            //Called after the user finishes moving the SeekBar
         }
     };
 

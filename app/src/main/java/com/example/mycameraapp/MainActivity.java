@@ -1,10 +1,8 @@
 package com.example.mycameraapp;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,10 +24,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView azimuth;
-    public static TextView tilt;
-    public static TextView roll;
-    public static TextView intro; //Displaying json-values from json-file
+    public static TextView azimuth, tilt, roll, intro; //intro is displaying json-values from json-file
     public static JSONObject jsonObj = null;
     public Button btnTakePhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
@@ -42,43 +37,40 @@ public class MainActivity extends AppCompatActivity {
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        thumbnail = (ImageView) findViewById(R.id.thumbnail);
-        thumbnail.setImageResource(R.drawable.thumbnail);
-        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque
-
+        //Finding id:s from activity_main.xml file
+        thumbnail = findViewById(R.id.thumbnail);
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
-        setButton(btnTakePhoto);
-
         btnLoadJSON = findViewById(R.id.loadJson);
-        setButton(btnLoadJSON);
-
         btnTutorial = findViewById(R.id.btnTutorial);
-        setButton(btnTutorial);
-
         btnProfile = findViewById(R.id.btnProfile);
-        setButton(btnProfile);
-
         btnSmapshot = findViewById(R.id.btnSmapshot);
-        setButton(btnSmapshot);
-
-
         azimuth = findViewById(R.id.azimuth);
+        tilt = findViewById(R.id.tilt);
+        roll = findViewById(R.id.roll);
+        intro = findViewById(R.id.intro);
+
+        //Setting stuff
+        thumbnail.setImageResource(R.drawable.thumbnail);
+        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (75 % opacity)
         azimuth.setTextColor(Color.parseColor("#444444"));
         azimuth.setTypeface(montserrat_medium);
 
-        tilt = findViewById(R.id.tilt);
         tilt.setTextColor(Color.parseColor("#444444"));
         tilt.setTypeface(montserrat_medium);
 
-        roll = findViewById(R.id.roll);
         roll.setTextColor(Color.parseColor("#444444"));
         roll.setTypeface(montserrat_medium);
 
-        intro = findViewById(R.id.intro);
         intro.setGravity(Gravity.CENTER);
 
-        String test = loadJSONFromAsset();
+        setButton(btnTakePhoto);
+        setButton(btnLoadJSON);
+        setButton(btnTutorial);
+        setButton(btnProfile);
+        setButton(btnSmapshot);
 
+        //Fetching json-file from /assets/ folder
+        String test = loadJSONFromAsset();
         try {
             jsonObj = new JSONObject(test);
         } catch (JSONException e) {
@@ -89,13 +81,12 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
-
     }
 
     public String loadJSONFromAsset() { //Returns JSON string
         String json = null;
         try {
-            InputStream is = getAssets().open("master_thesis_smapshot_1_bw.json");
+            InputStream is = getAssets().open("test_photo.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -108,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         return json;
     }
 
-    //use when finding the orientation angles from JSON-file, normalise the angles (0-360 degrees)
+    //Used when finding the orientation angles from json-file, normalise the angles (0-360 degrees)
     public StringBuilder findValue(JSONObject obj, String key)
             throws JSONException {
         StringBuilder value = new StringBuilder();
@@ -128,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
-    //use when finding the coordinates from JSON-file
+    //Used when finding the coordinates from json-file
     public StringBuilder findCoordinates(JSONObject obj, String key)
             throws JSONException {
         StringBuilder value = new StringBuilder();
@@ -144,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
-    //Converts Stringbuilder that you get from findCoordinates method to float
+    //Converts StringBuilder that you get from findCoordinates method to float
     public float sbToFloatCoord(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findCoordinates(obj, key);
         String s = sb.toString();
@@ -156,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    //Converts Stringbuilder that you receive from findValue method to a float
+    //Converts StringBuilder that you receive from findValue method to a float
     public float sbToFloatAngles(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findValue(obj, key);
         String s = sb.toString();
