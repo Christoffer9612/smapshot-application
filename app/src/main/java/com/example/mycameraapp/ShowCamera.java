@@ -40,12 +40,12 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
         Camera.Size photoSize = null;
 
         for (Camera.Size size : sizes) {
-            Log.i("RESOLUTION", "Available resolution: "+size.width+" "+size.height);
+            Log.i("RES", "Available resolution: "+size.width+" "+size.height);
             //photoSize = size;
         }
 
         photoSize  = sizes.get(0); //Storing biggest resolution size values (width & height)
-        Log.d("Resolution set to", "" + photoSize.width + "w: " + photoSize.height + "h");
+        Log.d("RESOLUTION SET TO", " h: " + photoSize.width + ", w: " + photoSize.height);
 
         //Change orientation of camera
         if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
@@ -119,6 +119,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+        Log.d("OPTIMAL CAM SIZE: ", "height: " + optimalSize.width + ", width: " + optimalSize.height);
         return optimalSize;
     }
 }
