@@ -199,6 +199,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         if(angle_type.equals("azimuth")) {
 
             if (old_angle < new_angle) {
+                if(Math.abs(old_angle - new_angle) > 180) {
+                  return instruction_az_west;
+                }
                 return instruction_az_west;
             } else if (old_angle == new_angle) {
                 return instruction_correct;
@@ -209,6 +212,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("tilt")) {
             if(old_angle > new_angle) {
+                if(Math.abs(old_angle - new_angle) > 180) {
+                    return instruction_ti_down + String.valueOf(360 - (Math.abs(old_angle - new_angle)));
+                }
                return instruction_ti_up;
             } else if (old_angle == new_angle) {
                 return instruction_correct;
@@ -220,6 +226,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("roll")) {
            if(old_angle < new_angle) {
+               if(Math.abs(old_angle - new_angle) > 180) {
+                   return instruction_ro_right;
+               }
                return instruction_ro_left;
            }    else if (old_angle == new_angle) {
                return instruction_correct;
