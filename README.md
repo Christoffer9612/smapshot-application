@@ -9,7 +9,7 @@ See Smapshot's website [here](https://smapshot.heig-vd.ch/).
 ## Configuration environment
 
 * Java 15
-* [Android Studio Bumblebee 2021.1.1 Canary 12](https://developer.android.com/studio/preview/index.html)
+* [Android Studio Bumblebee 2021.1.1 Beta 3](https://developer.android.com/studio/preview/index.html)
   * Android Studio gradle: JDK 11. Can be found in: ```File -> Settings```
 * Phone: Xiaomi Mi 9T, Motorola G8
   * Android version: 10
