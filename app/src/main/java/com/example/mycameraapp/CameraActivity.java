@@ -189,6 +189,7 @@ public class CameraActivity extends MainActivity {
 
                 pitch = pitch % 360;
                 pitch = (pitch + 360) % 360;
+                pitch = 360 - pitch;
 
                 float roll = Math.round(Math.toDegrees(values[2]));
 
