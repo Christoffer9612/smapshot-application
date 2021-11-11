@@ -39,6 +39,7 @@ Link to [scrum board](https://miro.com/app/board/o9J_lxMVwzM=/), working in week
 - [X] Fetching json-values from json-file, mimicking metadata from Smapshot beta (georeferenced photo)
 - [X] Able to store azimuth, tilt and roll when capturing new photo
 - [X] Display results of parameters & mean accuracy in percentage (comparing old values with new)
+- [X] After a photo is taken, instructions on how to position the device to achieve greater accuracy is given
 - [X] Normalizing angles from json-file and from the sensor values (0-360 degrees)
 - [X] Transparency mode included in camera, support for helping user to retake old photo
 
@@ -49,8 +50,8 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 
 ## Android Studio links
 * [GEO - How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
-* [GEO - Normalise angles with modulus] (https://stackoverflow.com/questions/2320986/easy-way-to-keeping-angles-between-179-and-180-degrees)
-* [GEO - Calculate magnetic declination] (https://www.tabnine.com/code/java/methods/android.hardware.GeomagneticField/getDeclination)
+* [GEO - Normalise angles with modulus](https://stackoverflow.com/questions/2320986/easy-way-to-keeping-angles-between-179-and-180-degrees)
+* [GEO - Calculate magnetic declination](https://www.tabnine.com/code/java/methods/android.hardware.GeomagneticField/getDeclination)
 * [DEV - How to pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
 * [DEV - Guide for creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
 * [DEV - How to show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
