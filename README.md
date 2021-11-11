@@ -60,3 +60,6 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 APK stands for Android Package Kit, a file format that Android uses to distribute and install apps. APKs contain all the elements that an app needs to install correctly on your device. 
 
 *Will be released in the future for the public to try out.* 
+
+## Example
+![](https://github.com/Christoffer9612/smapshot-application/blob/master/transparency_demo.gif)
