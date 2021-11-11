@@ -9,7 +9,7 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="393dp"
+        android:layout_width="match_parent"
         android:layout_height="524dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -22,7 +22,7 @@
 
     <ImageView
         android:id="@+id/overlayPhoto"
-        android:layout_width="393dp"
+        android:layout_width="match_parent"
         android:layout_height="524dp"
         android:layout_marginEnd="0dp"
         android:layout_marginRight="10dp" />
