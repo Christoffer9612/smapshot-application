@@ -23,10 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmapshotBlue">
         <activity
+            android:name=".SelectPhotoActivity"
+            android:exported="true"
+            android:label="@string/select_photo"
+            android:theme="@style/Theme.SmapshotBlue" />
+        <activity
             android:name=".Tutorial"
             android:exported="true"
             android:label="@string/tutorial"
-            android:theme="@style/Theme.SmapshotRed"/>
+            android:theme="@style/Theme.SmapshotRed" />
         <activity
             android:name=".CameraActivity"
             android:exported="true"

@@ -21,7 +21,7 @@
 
 
     <ImageView
-        android:id="@+id/testPhoto"
+        android:id="@+id/overlayPhoto"
         android:layout_width="393dp"
         android:layout_height="524dp"
         android:layout_marginEnd="0dp"
@@ -45,7 +45,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginBottom="12dp"
-        android:onClick="mainMenu"
+        android:onClick="goToSelect"
         android:text="Go back" />
 
     <Button

@@ -159,8 +159,13 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    public void openCustomCam(View view) {
+    public void openCustomCam(View view) { //Not used, replaced with selectPhoto
         Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
+    public void selectPhoto(View view) {
+        Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
     }
 

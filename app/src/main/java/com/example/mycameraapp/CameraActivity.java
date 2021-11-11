@@ -38,10 +38,12 @@ public class CameraActivity extends MainActivity {
     private TextView realTimeParams, transparency;
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
-    private ImageView testPhoto;
+    private ImageView overlayPhoto;
+    private String oldPhoto;
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
+    Bundle bundleSel = new Bundle(); //Bundle from previous Activity: SelectPhotoActivity
 
     private float[] acc, mags, values = new float[3];
 
@@ -58,7 +60,7 @@ public class CameraActivity extends MainActivity {
         transparency = findViewById(R.id.transparency);
         transparency.setText(progress + " %");
 
-        testPhoto = findViewById(R.id.testPhoto);
+        overlayPhoto = findViewById(R.id.overlayPhoto);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
@@ -79,8 +81,6 @@ public class CameraActivity extends MainActivity {
         btnCapture.setTextColor(Color.parseColor("#444444"));
         btnCapture.setTypeface(montserrat_medium);
 
-        testPhoto = findViewById(R.id.testPhoto);
-
         seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
 
@@ -88,16 +88,31 @@ public class CameraActivity extends MainActivity {
         camera = Camera.open();
         showCamera = new ShowCamera(this, camera);
         frameLayout.addView(showCamera);
+
+        //Get the bundle, refactor: create as method?
+        bundleSel = getIntent().getExtras();
+
     }
 
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            //Extract the data…
+            if (bundleSel != null) {
+                oldPhoto = bundleSel.getString("oldPhoto");
+                Log.d("STUFF", oldPhoto);
+            }
+
+            if (oldPhoto.equals("st_roch_test")) {
+                overlayPhoto.setImageResource(R.drawable.st_roch_test);
+            } else if (oldPhoto.equals("dia_303_12172")) {
+                overlayPhoto.setImageResource(R.drawable.dia_303_12172);
+            }
+
             //Updates continuously as the user slides the bar
             transparency.setText(progress + " %");
-            testPhoto.setImageResource(R.drawable.st_roch_test);
-            testPhoto.setAlpha(progress * (int) 2.55);
+            overlayPhoto.setAlpha(progress * (int) 2.55);
         }
 
         @Override
@@ -235,8 +250,8 @@ public class CameraActivity extends MainActivity {
         }
     };
 
-    public void mainMenu(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void goToSelect(View view) {
+        Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
     }
 
