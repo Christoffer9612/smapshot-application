@@ -187,53 +187,34 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
 
-        String instruction_az_west = ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
-        String instruction_az_east = ", turn device " +  String.valueOf(Math.abs(old_angle - new_angle) + "° east");
-        String instruction_correct = "Perfect!";
-        String instruction_ti_down = ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° down");
-        String instruction_ti_up = ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° up");
-        String instruction_ro_right = ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° right");
-        String instruction_ro_left = ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° left");
-
-
+        
         if(angle_type.equals("azimuth")) {
-
             if (old_angle < new_angle) {
-                if(Math.abs(old_angle - new_angle) > 180) {
-                  return instruction_az_west;
-                }
-                return instruction_az_west;
+                return ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
             } else if (old_angle == new_angle) {
-                return instruction_correct;
+                return ", Perfect !";
             } else {
-                return instruction_az_east;
+                return ", turn device " +  String.valueOf(Math.abs(old_angle - new_angle) + "° east");
             }
         }
 
         if(angle_type.equals("tilt")) {
             if(old_angle > new_angle) {
-                if(Math.abs(old_angle - new_angle) > 180) {
-                    return instruction_ti_down + String.valueOf(360 - (Math.abs(old_angle - new_angle)));
-                }
-               return instruction_ti_up;
+               return ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° up");
             } else if (old_angle == new_angle) {
-                return instruction_correct;
+                return ", Perfect !";
             } else {
-                return instruction_ti_down;
+                return ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° down");
             }
-
         }
 
         if(angle_type.equals("roll")) {
            if(old_angle < new_angle) {
-               if(Math.abs(old_angle - new_angle) > 180) {
-                   return instruction_ro_right;
-               }
-               return instruction_ro_left;
+               return ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° left");
            }    else if (old_angle == new_angle) {
-               return instruction_correct;
+               return ", Perfect!";
            }   else {
-               return instruction_ro_right;
+               return ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° right");
            }
 
         }
