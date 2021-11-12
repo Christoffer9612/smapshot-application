@@ -7,23 +7,23 @@
     tools:context=".PostPicActivity">
 
     <TextView
-        android:id="@+id/percentage_error3"
+        android:id="@+id/percentage_accuracy3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="200dp"
-        android:text="percentage_error3"
+        android:text="percentage_accuracy3"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/percentage_error"
+        android:id="@+id/percentage_accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="277dp"
-        android:text="percentage_error"
+        android:text="percentage_accuracy"
         android:textSize="15dp" />
 
     <TextView
@@ -78,13 +78,13 @@
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/percentage_error2"
+        android:id="@+id/percentage_accuracy2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="238dp"
-        android:text="percentage_error2"
+        android:text="percentage_accuracy2"
         android:textSize="15dp" />
 
     <TextView

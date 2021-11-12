@@ -14,7 +14,7 @@ import org.json.JSONException;
 
 public class PostPicActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack;
-    private TextView newAzimuth, newTilt, newRoll, success, percentage_error, percentage_error2, percentage_error3;
+    private TextView newAzimuth, newTilt, newRoll, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
     public int error;
 
     @SuppressLint("SetTextI18n")
@@ -79,14 +79,14 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         newRoll.setText("new roll: " + String.valueOf(ro));
         newRoll.setTypeface(montserrat_medium);
 
-        percentage_error = findViewById(R.id.percentage_error);
-        percentage_error.setTextColor(Color.parseColor("#444444"));
+        percentage_accuracy = findViewById(R.id.percentage_accuracy);
+        percentage_accuracy.setTextColor(Color.parseColor("#444444"));
 
-        percentage_error2 = findViewById(R.id.percentage_error2);
-        percentage_error2.setTextColor(Color.parseColor("#444444"));
+        percentage_accuracy2 = findViewById(R.id.percentage_accuracy2);
+        percentage_accuracy2.setTextColor(Color.parseColor("#444444"));
 
-        percentage_error3 = findViewById(R.id.percentage_error3);
-        percentage_error3.setTextColor(Color.parseColor("#444444"));
+        percentage_accuracy3 = findViewById(R.id.percentage_accuracy3);
+        percentage_accuracy3.setTextColor(Color.parseColor("#444444"));
 
         String instruction_az = null;
         String instruction_tilt = null;
@@ -111,24 +111,24 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
 
         try {
-            percentage_error.setText("Azimuth Accuracy: " + percentage_error(az, ti, ro, "azimuth") + "%" + " " + instruction_az);
+            percentage_accuracy.setText("Azimuth Accuracy: " + percentage_accuracy(az, ti, ro, "azimuth") + "%" + " " + instruction_az);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            percentage_error2.setText("Tilt Accuracy: " + percentage_error(az, ti, ro, "tilt") + "%" + " " + instruction_tilt);
+            percentage_accuracy2.setText("Tilt Accuracy: " + percentage_accuracy(az, ti, ro, "tilt") + "%" + " " + instruction_tilt);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            percentage_error3.setText("Roll Accuracy: " + percentage_error(az, ti, ro, "roll") + "%" + " " + instruction_roll);
+            percentage_accuracy3.setText("Roll Accuracy: " + percentage_accuracy(az, ti, ro, "roll") + "%" + " " + instruction_roll);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        percentage_error.setTypeface(montserrat_medium);
-        percentage_error2.setTypeface(montserrat_medium);
-        percentage_error3.setTypeface(montserrat_medium);
+        percentage_accuracy.setTypeface(montserrat_medium);
+        percentage_accuracy2.setTypeface(montserrat_medium);
+        percentage_accuracy3.setTypeface(montserrat_medium);
 
 
         btnGoBack = (Button) findViewById(R.id.button);
@@ -147,7 +147,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     }
 
     //calculates accuracy for each orientation angle (azimuth, tilt, roll)
-    public float percentage_error(float az, float ti, float ro, String orientation) throws JSONException {
+    public float percentage_accuracy(float az, float ti, float ro, String orientation) throws JSONException {
 
         float float_error = 0;
         float float_error1 = 0;
@@ -158,11 +158,11 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         float roll_old = sbToFloatAngles(jsonObj, "roll");
 
 
-        float_error = errorCalc(azimuth_old, az, float_error);
-        float_error1 = errorCalc(tilt_old, ti, float_error1);
-        float_error2 = errorCalc(roll_old, ro, float_error2);
+        float_error = accuracyCalc(azimuth_old, az, float_error);
+        float_error1 = accuracyCalc(tilt_old, ti, float_error1);
+        float_error2 = accuracyCalc(roll_old, ro, float_error2);
 
-        
+
         if(orientation.equals("azimuth")) {
             return Math.round(float_error);
         } else if (orientation.equals("tilt")) {
@@ -175,7 +175,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         return 0;
     }
     
-    public float errorCalc(float angle_old, float angle_new, float error) {
+    public float accuracyCalc(float angle_old, float angle_new, float error) {
 
         error = Math.abs(angle_old - angle_new);
         error = error/360;
