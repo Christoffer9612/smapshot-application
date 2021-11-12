@@ -149,29 +149,20 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     //calculates accuracy for each orientation angle (azimuth, tilt, roll)
     public float percentage_error(float az, float ti, float ro, String orientation) throws JSONException {
 
-        float float_error;
-        float float_error1;
-        float float_error2;
+        float float_error = 0;
+        float float_error1 = 0;
+        float float_error2 = 0;
 
-        float azimuth_float = sbToFloatAngles(jsonObj, "azimuth");
-        float tilt_float = sbToFloatAngles(jsonObj, "tilt");
-        float roll_float = sbToFloatAngles(jsonObj, "roll");
-
-        //calculate the errors for each angle
-        float_error = Math.abs(azimuth_float - az);
-        float_error = float_error/360;
-        float_error = (float) (((float) (1.0 - float_error)) * 100.0);
+        float azimuth_old = sbToFloatAngles(jsonObj, "azimuth");
+        float tilt_old = sbToFloatAngles(jsonObj, "tilt");
+        float roll_old = sbToFloatAngles(jsonObj, "roll");
 
 
-        float_error1 = Math.abs(tilt_float - ti);
-        float_error1 = float_error1/360;
-        float_error1 = (float) (((float) (1.0 - float_error1)) * 100.0);
+        float_error = errorCalc(azimuth_old, az, float_error);
+        float_error1 = errorCalc(tilt_old, ti, float_error1);
+        float_error2 = errorCalc(roll_old, ro, float_error2);
 
-        float_error2 = Math.abs(roll_float - ro);
-        float_error2 = float_error2/360;
-        float_error2 = (float) (((float) (1.0 - float_error2)) * 100.0);
-
-
+        
         if(orientation.equals("azimuth")) {
             return Math.round(float_error);
         } else if (orientation.equals("tilt")) {
@@ -181,13 +172,22 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         }
 
 
-        return float_error;
+        return 0;
+    }
+    
+    public float errorCalc(float angle_old, float angle_new, float error) {
+
+        error = Math.abs(angle_old - angle_new);
+        error = error/360;
+        error = (float) (((float) (1.0 - error)) * 100.0);
+        
+        return error;
     }
 
 
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
 
-        
+
         if(angle_type.equals("azimuth")) {
             if (old_angle < new_angle) {
                 return ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
