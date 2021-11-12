@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -149,18 +148,16 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     //calculates accuracy for each orientation angle (azimuth, tilt, roll)
     public float percentage_accuracy(float az, float ti, float ro, String orientation) throws JSONException {
 
-        float float_error = 0;
-        float float_error1 = 0;
-        float float_error2 = 0;
+        float float_error = 0, float_error1 = 0, float_error2 = 0;
 
         float azimuth_old = sbToFloatAngles(jsonObj, "azimuth");
         float tilt_old = sbToFloatAngles(jsonObj, "tilt");
         float roll_old = sbToFloatAngles(jsonObj, "roll");
 
 
-        float_error = accuracyCalc(azimuth_old, az, float_error);
-        float_error1 = accuracyCalc(tilt_old, ti, float_error1);
-        float_error2 = accuracyCalc(roll_old, ro, float_error2);
+        float_error = accuracyCalc(azimuth_old, az);
+        float_error1 = accuracyCalc(tilt_old, ti);
+        float_error2 = accuracyCalc(roll_old, ro);
 
 
         if(orientation.equals("azimuth")) {
@@ -175,21 +172,36 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         return 0;
     }
     
-    public float accuracyCalc(float angle_old, float angle_new, float error) {
+    public float accuracyCalc(float angle_old, float angle_new) {
 
-        error = Math.abs(angle_old - angle_new);
-        error = error/360;
+        float error;
+        float x = 360 - angle_old;
+
+        //For the cases where the old angle is around 0 degrees (example: 356 or 4 degrees)
+        if(angle_new - x < Math.abs(angle_old - angle_new)) {
+            error = angle_new + x;
+        } else {
+            error = Math.abs(angle_old - angle_new);
+        }
+
+        error = error /360;
         error = (float) (((float) (1.0 - error)) * 100.0);
-        
-        return error;
+        return Math.abs(error);
     }
 
 
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
 
+        float x = 360 - old_angle;
+
+        //for the cases where the angle is around 0 degrees.
+        boolean b = new_angle - x < Math.abs(old_angle - new_angle);
 
         if(angle_type.equals("azimuth")) {
             if (old_angle < new_angle) {
+                if(b) {
+                    return ", turn device " + String.valueOf(Math.abs(new_angle - x) +  "° east");
+                }
                 return ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
             } else if (old_angle == new_angle) {
                 return ", Perfect !";
@@ -200,6 +212,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("tilt")) {
             if(old_angle > new_angle) {
+                if(b) {
+                    return ", tilt device " + String.valueOf(Math.abs(new_angle - x) +  "° down");
+                }
                return ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° up");
             } else if (old_angle == new_angle) {
                 return ", Perfect !";
@@ -210,6 +225,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("roll")) {
            if(old_angle < new_angle) {
+               if(b) {
+                   return ", roll device " + String.valueOf(Math.abs(new_angle - x) +  "° right");
+               }
                return ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° left");
            }    else if (old_angle == new_angle) {
                return ", Perfect!";
