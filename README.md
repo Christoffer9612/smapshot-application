@@ -31,7 +31,8 @@ For now, this work is only available for Android and not iOS.
 - [X] Calculating results of parameters & mean accuracy in %
 - [X] Instructions on how to position the device to achieve greater accuracy when retaking a photo
 - [X] Transparency mode in camera: displaying old photo on top of camera
-- [X] Select between two photos to retake.
+- [X] Select between two photos to retake
+- [X] Tutorial page with instructions on how to use
 
 ## Contributors
 * Christoffer Karlsson - master thesis student
@@ -55,6 +56,8 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 * [DESIGN - Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
 * [DESIGN - Slider (SeekBar)](https://stackoverflow.com/questions/8629535/implementing-a-slider-seekbar-in-android)
 * [DESIGN - Shape photos, round edges](https://www.youtube.com/watch?v=jihLJ0oVmGo)
+* [DESIGN - rounded corner rectangle](https://stackoverflow.com/questions/18781902/rounded-corner-for-textview-in-android)
+* [DESIGN - set opacity (dynamically)](https://stackoverflow.com/questions/2838757/how-to-set-opacity-alpha-for-view-in-android)
 
 ## APK
 APK stands for Android Package Kit, a file format that Android uses to distribute and install apps. APKs contain all the elements that an app needs to install correctly on your device. 
