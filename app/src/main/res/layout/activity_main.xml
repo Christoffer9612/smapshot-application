@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="138dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
-        android:text="Welcome, find old photos to re-capture in order to get started!"
+        android:text="Welcome, find old photos to retake in order to get started!"
         android:textSize="18dp" />
 
     <TextView
@@ -122,7 +122,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="305dp"
-        android:text="Your profile"
+        android:text="My profile"
         android:textSize="18sp" />
 
     <ImageView
