@@ -24,14 +24,13 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView azimuth, tilt, roll, intro; //intro is displaying json-values from json-file
-    public static JSONObject jsonObj = null;
-    public Button btnTakePhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
+    public static TextView azimuth, tilt, roll, intro;
+    public static JSONObject jsonObj;
+    public Button btnFindPhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Finding id:s from activity_main.xml file
         thumbnail = findViewById(R.id.thumbnail);
-        btnTakePhoto = findViewById(R.id.btnTakePhoto);
+        btnFindPhoto = findViewById(R.id.btnFindPhoto);
         btnLoadJSON = findViewById(R.id.loadJson);
         btnTutorial = findViewById(R.id.btnTutorial);
         btnProfile = findViewById(R.id.btnProfile);
@@ -49,30 +48,26 @@ public class MainActivity extends AppCompatActivity {
         roll = findViewById(R.id.roll);
         intro = findViewById(R.id.intro);
 
-        //Setting stuff
+        //"Configuring" buttons, photos, etc. in main screen (using setter methods)
         thumbnail.setImageResource(R.drawable.thumbnail);
-        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (75 % opacity)
-        azimuth.setTextColor(Color.parseColor("#444444"));
-        azimuth.setTypeface(montserrat_medium);
+        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
 
-        tilt.setTextColor(Color.parseColor("#444444"));
-        tilt.setTypeface(montserrat_medium);
+        intro.setGravity(Gravity.CENTER); //Centering intro text
 
-        roll.setTextColor(Color.parseColor("#444444"));
-        roll.setTypeface(montserrat_medium);
+        setText(azimuth, montserrat_medium);
+        setText(tilt, montserrat_medium);
+        setText(roll, montserrat_medium);
 
-        intro.setGravity(Gravity.CENTER);
-
-        setButton(btnTakePhoto);
-        setButton(btnLoadJSON);
-        setButton(btnTutorial);
-        setButton(btnProfile);
-        setButton(btnSmapshot);
+        setButton(btnFindPhoto, montserrat_medium);
+        setButton(btnLoadJSON, montserrat_medium);
+        setButton(btnTutorial, montserrat_medium);
+        setButton(btnProfile, montserrat_medium);
+        setButton(btnSmapshot, montserrat_medium);
 
         //Fetching json-file from /assets/ folder
-        String test = loadJSONFromAsset();
+        String testPhoto = loadJSONFromAsset();
         try {
-            jsonObj = new JSONObject(test);
+            jsonObj = new JSONObject(testPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -86,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public String loadJSONFromAsset() { //Returns JSON string
         String json = null;
         try {
-            InputStream is = getAssets().open("test_photo.json");
+            InputStream is = getAssets().open("test_photo.json"); // Remove in the future, no need to display test_photo.json on home screen
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -159,12 +154,28 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    public void openCustomCam(View view) { //Not used, replaced with selectPhoto
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+    public void getJSONValues(View view) throws JSONException {
+        azimuth.setText(findValue(jsonObj, "azimuth"));
+        tilt.setText(findValue(jsonObj, "tilt"));
+        roll.setText(findValue(jsonObj, "roll"));
     }
 
-    public void selectPhoto(View view) {
+
+    //Setting button color and font for design purposes
+    public void setButton(Button button, Typeface font) {
+        button.setTypeface(font);
+        button.setTextColor(Color.parseColor("#444444"));
+        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
+    }
+
+    //Setting text color and font for design purposes
+    public void setText(TextView txt, Typeface font) {
+        txt.setTypeface(font);
+        txt.setTextColor(Color.parseColor("#444444"));
+    }
+
+    //Methods for opening new Activities
+    public void openSelectPhoto(View view) {
         Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
     }
@@ -174,16 +185,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getJSONValues(View view) throws JSONException {
-        azimuth.setText(findValue(jsonObj, "azimuth"));
-        tilt.setText(findValue(jsonObj, "tilt"));
-        roll.setText(findValue(jsonObj, "roll"));
+    public void openSmapshot() {
+        //To be implemented...
     }
 
-    public void setButton(Button button) {
-        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
-        button.setTypeface(montserrat_medium);
-        button.setTextColor(Color.parseColor("#444444"));
-        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
+    public void openChallenge() {
+        //To be implemented...
+    }
+
+    public void openProfile() {
+        //To be implemented...
     }
 }
