@@ -233,7 +233,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("roll")) {
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", roll device " + Math.round(diff) + "° right";
+                return ", roll device " + Math.round(diff) + "° rigit mght";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
                 return ", tilt device " + Math.round(diff) + "° left";
             } else if (clockwise < diff && clockwise < counterclockwise) {
