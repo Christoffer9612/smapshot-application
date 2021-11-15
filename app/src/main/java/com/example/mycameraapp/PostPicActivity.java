@@ -29,11 +29,12 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         Bundle bundle = getIntent().getExtras();
         Bundle bundleSelectedPhoto =  getIntent().getExtras();
 
-        //Extracting data from bundle
-        Float az = bundle.getFloat("azimuth");
-        Float ti = bundle.getFloat("tilt");
-        Float ro = bundle.getFloat("roll");
+        //Extracting data from bundle, values for real time params
+        Float realTimeAzimuth = bundle.getFloat("azimuth");
+        Float realTimeTilt = bundle.getFloat("tilt");
+        Float realTimeRoll = bundle.getFloat("roll");
 
+        //values for JSON-file params
         Float azimuthOld = null;
         Float tiltOld = null;
         Float rollOld = null;
@@ -70,17 +71,17 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         newAzimuth = findViewById(R.id.newAzimuth);
         newAzimuth.setTextColor(Color.parseColor("#444444"));
-        newAzimuth.setText("new azimuth: " + String.valueOf(az));
+        newAzimuth.setText("new azimuth: " + realTimeAzimuth);
         newAzimuth.setTypeface(montserrat_medium);
 
         newTilt = findViewById(R.id.newTilt);
         newTilt.setTextColor(Color.parseColor("#444444"));
-        newTilt.setText("new tilt: " + String.valueOf(ti));
+        newTilt.setText("new tilt: " + realTimeTilt);
         newTilt.setTypeface(montserrat_medium);
 
         newRoll = findViewById(R.id.newRoll);
         newRoll.setTextColor(Color.parseColor("#444444"));
-        newRoll.setText("new roll: " + String.valueOf(ro));
+        newRoll.setText("new roll: " + realTimeRoll);
         newRoll.setTypeface(montserrat_medium);
 
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
@@ -97,38 +98,26 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         String instruction_roll = null;
 
         try {
-            instruction_az = instructUser(sbToFloatAngles(jsonObj,"azimuth"), az, "azimuth");
+            instruction_az = instructUser(azimuthOld, realTimeAzimuth, "azimuth");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         try {
-            instruction_tilt = instructUser(sbToFloatAngles(jsonObj,"tilt"), ti, "tilt");
+            instruction_tilt = instructUser(tiltOld, realTimeTilt, "tilt");
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
-            instruction_roll = instructUser(sbToFloatAngles(jsonObj, "roll"), ro, "roll");
+            instruction_roll = instructUser(rollOld, realTimeRoll, "roll");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        try {
-            percentage_accuracy.setText("Azimuth Accuracy: " + percentage_accuracy(az, ti, ro, "azimuth") + "%" + " " + instruction_az);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            percentage_accuracy2.setText("Tilt Accuracy: " + percentage_accuracy(az, ti, ro, "tilt") + "%" + " " + instruction_tilt);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            percentage_accuracy3.setText("Roll Accuracy: " + percentage_accuracy(az, ti, ro, "roll") + "%" + " " + instruction_roll);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        percentage_accuracy.setText("Azimuth Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az);
+        percentage_accuracy2.setText("Tilt Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt);
+        percentage_accuracy3.setText("Roll Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
 
         percentage_accuracy.setTypeface(montserrat_medium);
         percentage_accuracy2.setTypeface(montserrat_medium);
@@ -151,94 +140,107 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     }
 
     //calculates accuracy for each orientation angle (azimuth, tilt, roll)
-    public float percentage_accuracy(float az, float ti, float ro, String orientation) throws JSONException {
-
-        float float_error = 0, float_error1 = 0, float_error2 = 0;
-
-        float azimuth_old = sbToFloatAngles(jsonObj, "azimuth");
-        float tilt_old = sbToFloatAngles(jsonObj, "tilt");
-        float roll_old = sbToFloatAngles(jsonObj, "roll");
+    public float percentage_accuracy(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
 
 
-        float_error = accuracyCalc(azimuth_old, az);
-        float_error1 = accuracyCalc(tilt_old, ti);
-        float_error2 = accuracyCalc(roll_old, ro);
+        float azimuthAccuracy = 0, tiltAccuracy = 0, rollAccuracy = 0;
 
-
-        if(orientation.equals("azimuth")) {
-            return Math.round(float_error);
-        } else if (orientation.equals("tilt")) {
-            return Math.round(float_error1);
-        } else if (orientation.equals("roll")) {
-            return Math.round(float_error2);
+        if(orientationAngle.equals("azimuth")) {
+            azimuthAccuracy = accuracyCalc(azimuthOld, az);
+            return Math.round(azimuthAccuracy);
+        } else if (orientationAngle.equals("tilt")) {
+            tiltAccuracy = accuracyCalc(tiltOld, ti);
+            return Math.round(tiltAccuracy);
+        } else if (orientationAngle.equals("roll")) {
+            rollAccuracy = accuracyCalc(rollOld, ro);
+            return Math.round(rollAccuracy);
         }
-
 
         return 0;
     }
     
     public float accuracyCalc(float angle_old, float angle_new) {
+        //compute three accuracies, going difference, clockwise and counterclockwise
+        //return highest accuracy
 
-        float error;
-        float x = 360 - angle_old;
+        float accuracy_diff;
+        float accuracy_clockwise;
+        float accuracy_counterclockwise;
 
-        //For the cases where the old angle is around 0 degrees (example: 356 or 4 degrees)
-        if(angle_new - x < Math.abs(angle_old - angle_new)) {
-            error = angle_new + x;
+        //Straight difference Diff
+        accuracy_diff = Math.abs(angle_old - angle_new);
+        accuracy_diff = accuracy_diff /360;
+        accuracy_diff = (float) (((float) (1.0 - accuracy_diff)) * 100.0);
+
+        //clockwise up to 360 + old_angle
+        float x = 360 - angle_new;
+        accuracy_clockwise = x + angle_old;
+        accuracy_clockwise = accuracy_clockwise/360;
+        accuracy_clockwise= (float) (((float) (1.0 - accuracy_clockwise)) * 100.0);
+
+        //counterclockwise down to 0 degrees + (360-old_angle)
+        float y = 360 - angle_old;
+        accuracy_counterclockwise = angle_new + y;
+        accuracy_counterclockwise = accuracy_counterclockwise/360;
+        accuracy_counterclockwise= (float) (((float) (1.0 - accuracy_counterclockwise)) * 100.0);
+
+        //return the highest accuracy
+        if(accuracy_diff > accuracy_clockwise && accuracy_diff > accuracy_counterclockwise) {
+            return Math.abs(accuracy_diff);
+        } else if (accuracy_clockwise > accuracy_diff && accuracy_clockwise > accuracy_counterclockwise) {
+            return Math.abs(accuracy_clockwise);
         } else {
-            error = Math.abs(angle_old - angle_new);
+            return Math.abs(accuracy_counterclockwise);
         }
 
-        error = error /360;
-        error = (float) (((float) (1.0 - error)) * 100.0);
-        return Math.abs(error);
-    }
+        }
 
 
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
+        //compute three rotations, diff, clockwise to 360 and then to old angle, counterclockwise to 0 and then to old angle backwards.
+        //return the smallest rotation and in the right direction
 
-        float x = 360 - old_angle;
+        float diff = Math.abs(old_angle - new_angle);
+        float clockwise = (360 - new_angle) + old_angle;
+        float counterclockwise = new_angle + (360 - old_angle);
 
-        //for the cases where the angle is around 0 degrees.
-        boolean b = new_angle - x < Math.abs(old_angle - new_angle);
+
 
         if(angle_type.equals("azimuth")) {
-            if (old_angle < new_angle) {
-                if(b) {
-                    return ", turn device " + String.valueOf(Math.abs(new_angle - x) +  "° east");
-                }
-                return ", turn device " + String.valueOf(Math.abs(old_angle - new_angle) + "° west");
-            } else if (old_angle == new_angle) {
-                return ", Perfect !";
+            if (diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
+                return ", turn device " + diff + "° east";
+            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle) {
+                return ", turn device " + diff + "° west";
+            } else if (clockwise < diff && clockwise < counterclockwise) {
+                return ", turn device " + clockwise + "° east";
             } else {
-                return ", turn device " +  String.valueOf(Math.abs(old_angle - new_angle) + "° east");
+                return ", turn device " + counterclockwise + "° west";
             }
         }
 
         if(angle_type.equals("tilt")) {
-            if(old_angle > new_angle) {
-                if(b) {
-                    return ", tilt device " + String.valueOf(Math.abs(new_angle - x) +  "° down");
-                }
-               return ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° up");
-            } else if (old_angle == new_angle) {
-                return ", Perfect !";
+            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
+                return ", tilt device " + diff + "° up";
+            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
+                return ", tilt device " + diff + "° down";
+            } else if (clockwise < diff && clockwise < counterclockwise) {
+                return ", turn device " + clockwise + "° up";
             } else {
-                return ", tilt device " + String.valueOf(Math.abs(old_angle - new_angle) + "° down");
+                return ", turn device " + counterclockwise + "° down";
             }
+
         }
 
         if(angle_type.equals("roll")) {
-           if(old_angle < new_angle) {
-               if(b) {
-                   return ", roll device " + String.valueOf(Math.abs(new_angle - x) +  "° right");
-               }
-               return ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° left");
-           }    else if (old_angle == new_angle) {
-               return ", Perfect!";
-           }   else {
-               return ", roll device " + String.valueOf(Math.abs(old_angle - new_angle) + "° right");
-           }
+            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
+                return ", roll device " + diff + "° right";
+            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
+                return ", tilt device " + diff + "° left";
+            } else if (clockwise < diff && clockwise < counterclockwise) {
+                return ", turn device " + clockwise + "° right";
+            } else {
+                return ", turn device " + counterclockwise + "° left";
+            }
 
         }
         else {
