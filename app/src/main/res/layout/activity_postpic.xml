@@ -38,42 +38,55 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="137dp"
-        android:layout_height="81dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="570dp"
+        android:layout_width="140dp"
+        android:layout_height="73dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="12dp"
         android:onClick="openMainActivity"
         android:text="Go back"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/json1"
+        android:id="@+id/oldTilt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="669dp"
-        android:text="JSON placeholder 1"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/json2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="640dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginBottom="377dp"
         android:text="JSON placeholder 2"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/json3"
+        android:id="@+id/oldAz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="609dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginBottom="406dp"
+        android:text="JSON placeholder 1"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/oldRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginBottom="346dp"
         android:text="JSON placeholder 3"
         android:textSize="15dp" />
 
@@ -88,33 +101,43 @@
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/newRoll"
+        android:id="@+id/newTilt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="349dp"
-        android:text="new JSON value 3"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:layout_marginBottom="377dp"
+        android:text="new JSON value 2"
         android:textSize="15dp" />
 
     <TextView
         android:id="@+id/newAzimuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="408dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_marginBottom="406dp"
         android:text="new JSON value 1"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/newTilt"
+        android:id="@+id/newRoll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="379dp"
-        android:text="new JSON value 2"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:layout_marginBottom="347dp"
+        android:text="new JSON value 3"
         android:textSize="15dp" />
 
 </RelativeLayout>

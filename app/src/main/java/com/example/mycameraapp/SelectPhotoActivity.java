@@ -38,23 +38,16 @@ public class SelectPhotoActivity extends AppCompatActivity {
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        //Finding id:s from activity_select_photo.xml file
         testPhoto = findViewById(R.id.selTestPhoto);
         diaPhoto = findViewById(R.id.selDia303);
         btnPhoto = findViewById(R.id.btnPhoto);
         btnBack = findViewById(R.id.btnBack);
 
-        //Setting stuff
         testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
         diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
 
-        btnPhoto.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnPhoto.setTextColor(Color.parseColor("#444444"));
-        btnPhoto.setTypeface(montserrat_medium);
-
-        btnBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnBack.setTextColor(Color.parseColor("#444444"));
-        btnBack.setTypeface(montserrat_medium);
+        setButton(btnPhoto, montserrat_medium);
+        setButton(btnBack, montserrat_medium);
 
     }
 
@@ -84,6 +77,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
     public void openMainMenu(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     //Refactor: merge with method below?
@@ -94,13 +88,13 @@ public class SelectPhotoActivity extends AppCompatActivity {
         if (!selectedTest) {
             if (!selectedDia) {
                 testPhoto.setStrokeColor(csl);
-                testPhoto.setStrokeWidth(25);
+                testPhoto.setStrokeWidth(30);
                 selectedTest = true;
             } else {
                 diaPhoto.setStrokeColor(csl);
                 diaPhoto.setStrokeWidth(0);
                 testPhoto.setStrokeColor(csl);
-                testPhoto.setStrokeWidth(25);
+                testPhoto.setStrokeWidth(30);
                 selectedTest = true;
                 selectedDia = false;
             }
@@ -134,13 +128,13 @@ public class SelectPhotoActivity extends AppCompatActivity {
         if (!selectedDia) {
             if (!selectedTest) {
                 diaPhoto.setStrokeColor(csl);
-                diaPhoto.setStrokeWidth(25);
+                diaPhoto.setStrokeWidth(30);
                 selectedDia = true;
             } else {
                 testPhoto.setStrokeColor(csl);
                 testPhoto.setStrokeWidth(0);
                 diaPhoto.setStrokeColor(csl);
-                diaPhoto.setStrokeWidth(25);
+                diaPhoto.setStrokeWidth(30);
                 selectedDia = true;
                 selectedTest = false;
             }
@@ -212,6 +206,12 @@ public class SelectPhotoActivity extends AppCompatActivity {
             value.append("No json key found!");
         }
         return value;
+    }
+
+    private void setButton(Button button, Typeface font) {
+        button.setTypeface(font);
+        button.setTextColor(Color.parseColor("#444444"));
+        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }

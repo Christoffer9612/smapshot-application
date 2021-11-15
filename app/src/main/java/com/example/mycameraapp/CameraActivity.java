@@ -73,13 +73,8 @@ public class CameraActivity extends MainActivity {
         realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
         realTimeParams.setTypeface(montserrat_medium);
 
-        btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnGoBack.setTextColor(Color.parseColor("#444444"));
-        btnGoBack.setTypeface(montserrat_medium);
-
-        btnCapture.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnCapture.setTextColor(Color.parseColor("#444444"));
-        btnCapture.setTypeface(montserrat_medium);
+        setButton(btnGoBack, montserrat_medium);
+        setButton(btnCapture, montserrat_medium);
 
         seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
@@ -288,6 +283,12 @@ public class CameraActivity extends MainActivity {
         intent.putExtras(bundleSelectedPhoto);
 
         startActivity(intent);
+    }
+
+    private void setButton(Button button, Typeface font) {
+        button.setTypeface(font);
+        button.setTextColor(Color.parseColor("#444444"));
+        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }

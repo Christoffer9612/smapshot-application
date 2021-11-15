@@ -46,13 +46,10 @@ public class MainActivity extends AppCompatActivity {
         azimuth = findViewById(R.id.azimuth);
         tilt = findViewById(R.id.tilt);
         roll = findViewById(R.id.roll);
-        intro = findViewById(R.id.intro);
 
-        //"Configuring" buttons, photos, etc. in main screen (using setter methods)
+        //"Configuring" buttons, photos, colors, font, etc. in main screen
         thumbnail.setImageResource(R.drawable.thumbnail);
         thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
-
-        intro.setGravity(Gravity.CENTER); //Centering text
 
         setText(azimuth, montserrat_medium);
         setText(tilt, montserrat_medium);
@@ -142,18 +139,6 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    //Converts StringBuilder that you receive from findValue method to a float
-    public float sbToFloatAngles(JSONObject obj, String key) throws JSONException {
-        StringBuilder sb = findValue(obj, key);
-        String s = sb.toString();
-        String[] parts = s.split(" ");
-        String string_key = parts[3];
-        double d = Double.parseDouble(string_key);
-        float float_key = (float) d;
-
-        return float_key;
-    }
-
     public void getJSONValues(View view) throws JSONException {
         azimuth.setText(findValue(jsonObj, "azimuth"));
         tilt.setText(findValue(jsonObj, "tilt"));
@@ -161,28 +146,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     //Setting button color and font for design purposes
-    public void setButton(Button button, Typeface font) {
+    private void setButton(Button button, Typeface font) {
         button.setTypeface(font);
         button.setTextColor(Color.parseColor("#444444"));
         button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
     //Setting text color and font for design purposes
-    public void setText(TextView txt, Typeface font) {
+    private void setText(TextView txt, Typeface font) {
         txt.setTypeface(font);
         txt.setTextColor(Color.parseColor("#444444"));
     }
+
+
 
     //Methods for opening new Activities
     public void openSelectPhoto(View view) {
         Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void openTutorial(View view) {
         Intent intent = new Intent(this, Tutorial.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }
 
     public void openSmapshot() {

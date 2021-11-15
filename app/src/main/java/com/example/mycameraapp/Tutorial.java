@@ -48,6 +48,10 @@ public class Tutorial extends AppCompatActivity {
         stepThree.getBackground().setAlpha(179);
         stepFour.getBackground().setAlpha(153);
 
+        btnGoBack.setTypeface(montserrat_medium);
+        btnGoBack.setTextColor(Color.parseColor("#444444"));
+        btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
+
     }
 
     //Setting text color and font for design purposes
@@ -58,6 +62,7 @@ public class Tutorial extends AppCompatActivity {
     public void openMainMenu(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }
