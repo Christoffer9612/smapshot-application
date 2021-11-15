@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="669dp"
-        android:text="JSON placeholder 1"
+        android:text=""
         android:textSize="15dp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="640dp"
-        android:text="JSON placeholder 2"
+        android:text=""
         android:textSize="15dp" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="609dp"
-        android:text="JSON placeholder 3"
+        android:text=""
         android:textSize="15dp" />
 
     <!-- Use SP(Scale Independent Pixel) -->
@@ -98,7 +98,7 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/btnTakePhoto"
+        android:id="@+id/btnFindPhoto"
         android:layout_width="178dp"
         android:layout_height="90dp"
         android:layout_alignParentEnd="true"
@@ -108,7 +108,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="404dp"
-        android:onClick="selectPhoto"
+        android:onClick="openSelectPhoto"
         android:text="Find photos"
         android:textSize="18sp" />
 
