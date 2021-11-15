@@ -45,7 +45,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/st_roch_test"
         app:shapeAppearanceOverlay="@style/RoundedSquare"
-        android:onClick="selectedTest"/>
+        android:onClick="selectTest"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selDia303"
@@ -60,7 +60,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/dia_303_12172"
         app:shapeAppearanceOverlay="@style/RoundedSquare"
-        android:onClick="selectedDia" />
+        android:onClick="selectDia" />
 
     <Button
         android:id="@+id/btnPhoto"

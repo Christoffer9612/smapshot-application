@@ -43,7 +43,7 @@ public class CameraActivity extends MainActivity {
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
-    Bundle bundleSel = new Bundle(); //Bundle from previous Activity: SelectPhotoActivity
+    Bundle bundleSelectedPhoto = new Bundle(); //Bundle from: SelectPhotoActivity
 
     private float[] acc, mags, values = new float[3];
 
@@ -90,7 +90,7 @@ public class CameraActivity extends MainActivity {
         frameLayout.addView(showCamera);
 
         //Get the bundle, refactor: create as method?
-        bundleSel = getIntent().getExtras();
+        bundleSelectedPhoto = getIntent().getExtras();
 
     }
 
@@ -98,10 +98,9 @@ public class CameraActivity extends MainActivity {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            //Extract the data…
-            if (bundleSel != null) {
-                oldPhoto = bundleSel.getString("oldPhoto");
-                Log.d("STUFF", oldPhoto);
+            //Extract name of old photo selected (test vs. dia) to display on top of camera as transparent
+            if (bundleSelectedPhoto != null) {
+                oldPhoto = bundleSelectedPhoto.getString("oldPhoto");
             }
 
             if (oldPhoto.equals("st_roch_test")) {
@@ -288,8 +287,9 @@ public class CameraActivity extends MainActivity {
     public void openPostPicture() {
         Intent intent = new Intent(this, PostPicActivity.class);
 
-        //Add the bundle to the intent
+        //Passing bundles to next intent (result screen to display json values)
         intent.putExtras(bundle);
+        intent.putExtras(bundleSelectedPhoto);
 
         startActivity(intent);
     }

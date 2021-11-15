@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import org.json.JSONException;
 public class PostPicActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack;
     private TextView newAzimuth, newTilt, newRoll, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
-    public int error;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -25,12 +25,29 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        //Get the bundle
+        //Getting bundles
         Bundle bundle = getIntent().getExtras();
-        //Extracting data
+        Bundle bundleSelectedPhoto =  getIntent().getExtras();
+
+        //Extracting data from bundle
         Float az = bundle.getFloat("azimuth");
         Float ti = bundle.getFloat("tilt");
         Float ro = bundle.getFloat("roll");
+
+        Float azimuthOld = null;
+        Float tiltOld = null;
+        Float rollOld = null;
+
+        // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
+        if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
+            azimuthOld = bundleSelectedPhoto.getFloat("azimuth_test");
+            tiltOld = bundleSelectedPhoto.getFloat("tilt_test");
+            rollOld = bundleSelectedPhoto.getFloat("roll_test");
+        } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
+            azimuthOld = bundleSelectedPhoto.getFloat("azimuth_dia");
+            tiltOld = bundleSelectedPhoto.getFloat("tilt_dia");
+            rollOld = bundleSelectedPhoto.getFloat("roll_dia");
+        }
 
         success = findViewById(R.id.success);
         success.setTextColor(Color.parseColor("#444444"));
@@ -39,29 +56,17 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         azimuth = findViewById(R.id.json1);
         azimuth.setTextColor(Color.parseColor("#444444"));
         azimuth.setTypeface(montserrat_medium);
-        try {
-            azimuth.setText(findValue(jsonObj, "azimuth"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        azimuth.setText("Azimuth old photo: " + azimuthOld);
 
         tilt = findViewById(R.id.json2);
         tilt.setTextColor(Color.parseColor("#444444"));
         tilt.setTypeface(montserrat_medium);
-        try {
-            tilt.setText(findValue(jsonObj, "tilt"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        tilt.setText("Tilt old photo: " + tiltOld);
 
         roll = findViewById(R.id.json3);
         roll.setTextColor(Color.parseColor("#444444"));
         roll.setTypeface(montserrat_medium);
-        try {
-            roll.setText(findValue(jsonObj, "roll"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        roll.setText("Roll old photo: " + rollOld);
 
         newAzimuth = findViewById(R.id.newAzimuth);
         newAzimuth.setTextColor(Color.parseColor("#444444"));
