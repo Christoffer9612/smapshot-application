@@ -2,6 +2,7 @@ package com.example.mycameraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -20,12 +21,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SelectPhotoActivity extends AppCompatActivity {
-    private ShapeableImageView selTestPhoto, selDia303;
+    private ShapeableImageView testPhoto, diaPhoto;
     private Button btnPhoto, btnBack;
     private boolean selectedTest, selectedDia;
     public Bundle bundleSelectedPhoto;
     public static JSONObject jsonObj = null;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +39,14 @@ public class SelectPhotoActivity extends AppCompatActivity {
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
         //Finding id:s from activity_select_photo.xml file
-        selTestPhoto = findViewById(R.id.selTestPhoto);
-        selDia303 = findViewById(R.id.selDia303);
+        testPhoto = findViewById(R.id.selTestPhoto);
+        diaPhoto = findViewById(R.id.selDia303);
         btnPhoto = findViewById(R.id.btnPhoto);
         btnBack = findViewById(R.id.btnBack);
 
         //Setting stuff
-        selTestPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
-        selDia303.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
+        testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
+        diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
 
         btnPhoto.setBackgroundColor(Color.parseColor("#E2E2E2"));
         btnPhoto.setTextColor(Color.parseColor("#444444"));
@@ -84,26 +86,33 @@ public class SelectPhotoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Refactor: merge with method below
+    //Refactor: merge with method below?
     public void selectTest(View view) throws JSONException {
+        int colorInt = getResources().getColor(R.color.smapshot_blue);
+        ColorStateList csl = ColorStateList.valueOf(colorInt);
 
         if (!selectedTest) {
-            int colorInt = getResources().getColor(R.color.smapshot_blue);
-            ColorStateList csl = ColorStateList.valueOf(colorInt);
-
-            selTestPhoto.setStrokeColor(csl);
-            selTestPhoto.setStrokeWidth(25);
-
-            selectedTest = true;
+            if (!selectedDia) {
+                testPhoto.setStrokeColor(csl);
+                testPhoto.setStrokeWidth(25);
+                selectedTest = true;
+            } else {
+                diaPhoto.setStrokeColor(csl);
+                diaPhoto.setStrokeWidth(0);
+                testPhoto.setStrokeColor(csl);
+                testPhoto.setStrokeWidth(25);
+                selectedTest = true;
+                selectedDia = false;
+            }
         } else {
-            selTestPhoto.setStrokeWidth(0);
+            testPhoto.setStrokeWidth(0);
             selectedTest = false;
         }
 
         //Fetching json-file from /assets/ folder
-        String test = fetchJSON("test_photo.json");
+        String testPhoto = fetchJSON("test_photo.json");
         try {
-            jsonObj = new JSONObject(test);
+            jsonObj = new JSONObject(testPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -117,26 +126,33 @@ public class SelectPhotoActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("roll_test", roll);
     }
 
-    //Refactor: merge with method above
+    //Refactor: merge with method above?
     public void selectDia(View view) throws JSONException {
+        int colorInt = getResources().getColor(R.color.smapshot_blue);
+        ColorStateList csl = ColorStateList.valueOf(colorInt);
 
         if (!selectedDia) {
-            int colorInt = getResources().getColor(R.color.smapshot_blue);
-            ColorStateList csl = ColorStateList.valueOf(colorInt);
-
-            selDia303.setStrokeColor(csl);
-            selDia303.setStrokeWidth(25);
-
-            selectedDia = true;
+            if (!selectedTest) {
+                diaPhoto.setStrokeColor(csl);
+                diaPhoto.setStrokeWidth(25);
+                selectedDia = true;
+            } else {
+                testPhoto.setStrokeColor(csl);
+                testPhoto.setStrokeWidth(0);
+                diaPhoto.setStrokeColor(csl);
+                diaPhoto.setStrokeWidth(25);
+                selectedDia = true;
+                selectedTest = false;
+            }
         } else {
-            selDia303.setStrokeWidth(0);
+            diaPhoto.setStrokeWidth(0);
             selectedDia = false;
         }
 
         //Fetching json-file from /assets/ folder
-        String test = fetchJSON("dia_303_12172.json");
+        String diaPhoto = fetchJSON("dia_303_12172.json");
         try {
-            jsonObj = new JSONObject(test);
+            jsonObj = new JSONObject(diaPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }

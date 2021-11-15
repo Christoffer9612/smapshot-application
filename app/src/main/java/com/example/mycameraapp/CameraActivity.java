@@ -99,13 +99,9 @@ public class CameraActivity extends MainActivity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             //Extract name of old photo selected (test vs. dia) to display on top of camera as transparent
-            if (bundleSelectedPhoto != null) {
-                oldPhoto = bundleSelectedPhoto.getString("oldPhoto");
-            }
-
-            if (oldPhoto.equals("st_roch_test")) {
+            if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
                 overlayPhoto.setImageResource(R.drawable.st_roch_test);
-            } else if (oldPhoto.equals("dia_303_12172")) {
+            } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
                 overlayPhoto.setImageResource(R.drawable.dia_303_12172);
             }
 
