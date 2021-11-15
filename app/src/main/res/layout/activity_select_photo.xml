@@ -85,7 +85,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginBottom="12dp"
-        android:onClick="mainMenu"
+        android:onClick="openMainMenu"
         android:text="Go back" />
 
 </RelativeLayout>

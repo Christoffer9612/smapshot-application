@@ -81,7 +81,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
         Log.d("SELECT", "Select one old photo!"); // Display message in UI: "Please select one photo to retake"
     }
 
-    public void mainMenu(View view) {
+    public void openMainMenu(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

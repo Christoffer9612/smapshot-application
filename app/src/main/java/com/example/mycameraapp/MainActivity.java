@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         thumbnail.setImageResource(R.drawable.thumbnail);
         thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
 
-        intro.setGravity(Gravity.CENTER); //Centering intro text
+        intro.setGravity(Gravity.CENTER); //Centering text
 
         setText(azimuth, montserrat_medium);
         setText(tilt, montserrat_medium);
