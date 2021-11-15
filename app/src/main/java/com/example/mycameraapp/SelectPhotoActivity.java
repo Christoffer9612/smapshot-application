@@ -203,10 +203,9 @@ public class SelectPhotoActivity extends AppCompatActivity {
         if (json_pose.has(key)){
             String angle_string = json_pose.optString(key);
             double d = Double.parseDouble(angle_string);
-            int angle_int = (int) d;
-            angle_int = angle_int % 360;
-            angle_int = (angle_int + 360) % 360;
-            angle_string = String.valueOf(angle_int);
+            d = d % 360;
+            d = (d + 360) % 360;
+            angle_string = String.valueOf(d);
             value.append(key + " from old_photo: " + angle_string);
 
         } else {

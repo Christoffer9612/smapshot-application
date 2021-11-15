@@ -57,31 +57,31 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         azimuth = findViewById(R.id.json1);
         azimuth.setTextColor(Color.parseColor("#444444"));
         azimuth.setTypeface(montserrat_medium);
-        azimuth.setText("Azimuth old photo: " + azimuthOld);
+        azimuth.setText("Azimuth old photo: " + Math.round(azimuthOld));
 
         tilt = findViewById(R.id.json2);
         tilt.setTextColor(Color.parseColor("#444444"));
         tilt.setTypeface(montserrat_medium);
-        tilt.setText("Tilt old photo: " + tiltOld);
+        tilt.setText("Tilt old photo: " + Math.round(tiltOld));
 
         roll = findViewById(R.id.json3);
         roll.setTextColor(Color.parseColor("#444444"));
         roll.setTypeface(montserrat_medium);
-        roll.setText("Roll old photo: " + rollOld);
+        roll.setText("Roll old photo: " + Math.round(rollOld));
 
         newAzimuth = findViewById(R.id.newAzimuth);
         newAzimuth.setTextColor(Color.parseColor("#444444"));
-        newAzimuth.setText("new azimuth: " + realTimeAzimuth);
+        newAzimuth.setText("new azimuth: " + Math.round(realTimeAzimuth));
         newAzimuth.setTypeface(montserrat_medium);
 
         newTilt = findViewById(R.id.newTilt);
         newTilt.setTextColor(Color.parseColor("#444444"));
-        newTilt.setText("new tilt: " + realTimeTilt);
+        newTilt.setText("new tilt: " + Math.round(realTimeTilt));
         newTilt.setTypeface(montserrat_medium);
 
         newRoll = findViewById(R.id.newRoll);
         newRoll.setTextColor(Color.parseColor("#444444"));
-        newRoll.setText("new roll: " + realTimeRoll);
+        newRoll.setText("new roll: " + Math.round(realTimeRoll));
         newRoll.setTypeface(montserrat_medium);
 
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
@@ -208,38 +208,38 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(angle_type.equals("azimuth")) {
             if (diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", turn device " + diff + "° east";
+                return ", turn device " + Math.round(diff) + "° east";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle) {
-                return ", turn device " + diff + "° west";
+                return ", turn device " + Math.round(diff) + "° west";
             } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", turn device " + clockwise + "° east";
+                return ", turn device " + Math.round(clockwise) + "° east";
             } else {
-                return ", turn device " + counterclockwise + "° west";
+                return ", turn device " + Math.round(counterclockwise) + "° west";
             }
         }
 
         if(angle_type.equals("tilt")) {
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", tilt device " + diff + "° up";
+                return ", tilt device " + Math.round(diff) + "° up";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", tilt device " + diff + "° down";
+                return ", tilt device " + Math.round(diff) + "° down";
             } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", turn device " + clockwise + "° up";
+                return ", turn device " + Math.round(clockwise) + "° up";
             } else {
-                return ", turn device " + counterclockwise + "° down";
+                return ", turn device " + Math.round(counterclockwise) + "° down";
             }
 
         }
 
         if(angle_type.equals("roll")) {
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", roll device " + diff + "° right";
+                return ", roll device " + Math.round(diff) + "° right";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", tilt device " + diff + "° left";
+                return ", tilt device " + Math.round(diff) + "° left";
             } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", turn device " + clockwise + "° right";
+                return ", turn device " + Math.round(clockwise) + "° right";
             } else {
-                return ", turn device " + counterclockwise + "° left";
+                return ", turn device " + Math.round(counterclockwise) + "° left";
             }
 
         }
