@@ -15,7 +15,6 @@ For now, this work is only available for Android and not iOS.
   * Android Studio gradle: JDK 11. Can be found in: ```File -> Settings```
 * Phone: Xiaomi Mi 9T, Motorola G8. Currently, layout of app is designed towards Xiaomi Mi 9T. There are aspect ratio issues with Motorola G8 (4:3).
   * Android version: 10
-* Gradle version: to be specified
 
 ### Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
@@ -37,6 +36,8 @@ For now, this work is only available for Android and not iOS.
 ## Contributors
 * Christoffer Karlsson - master thesis student
 * Alfred Hirschfeld - master thesis student
+
+See developer notes [here](https://github.com/Christoffer9612/smapshot-application/blob/master/developer_notes.md).
 
 ## Debugging
 To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
