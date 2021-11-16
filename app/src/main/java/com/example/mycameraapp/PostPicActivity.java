@@ -13,8 +13,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 public class PostPicActivity extends MainActivity { //AppCompatActivity
-    private Button btnGoBack;
-    private TextView newAzimuth, newTilt, newRoll, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
+    private Button btnGoBack, btnRetake;
+    private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -26,12 +26,8 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
         success = findViewById(R.id.success);
-        azimuth = findViewById(R.id.oldAz);
-        tilt = findViewById(R.id.oldTilt);
-        roll = findViewById(R.id.oldRoll);
-        newAzimuth = findViewById(R.id.newAzimuth);
-        newTilt = findViewById(R.id.newTilt);
-        newRoll = findViewById(R.id.newRoll);
+        oldParams = findViewById(R.id.oldParams);
+        newParams = findViewById(R.id.newParams);
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
         percentage_accuracy2 = findViewById(R.id.percentage_accuracy2);
         percentage_accuracy3 = findViewById(R.id.percentage_accuracy3);
@@ -62,23 +58,14 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         }
 
         setText(success, montserrat_medium);
-        setText(azimuth, montserrat_medium);
-        setText(tilt, montserrat_medium);
-        setText(roll, montserrat_medium);
-        setText(newAzimuth, montserrat_medium);
-        setText(newTilt, montserrat_medium);
-        setText(newRoll, montserrat_medium);
+        oldParams.setTypeface(montserrat_medium);
+        setText(newParams, montserrat_medium);
 
-        azimuth.setText("Old azimuth: " + Math.round(azimuthOld) + "°");
-        tilt.setText("Old tilt: " + Math.round(tiltOld)+ "°");
-        roll.setText("Old roll: " + Math.round(rollOld)+ "°");
-        newAzimuth.setText("new azimuth: " + Math.round(realTimeAzimuth)+ "°");
-        newTilt.setText("new tilt: " + Math.round(realTimeTilt)+ "°");
-        newRoll.setText("new roll: " + Math.round(realTimeRoll)+ "°");
+        oldParams.setText("Old azimuth: " + Math.round(azimuthOld) + "°" + "\n" + "Old tilt: " + Math.round(tiltOld) + "°" + "\n" + "Old roll: " + Math.round(rollOld) + "°");
+        newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°");
 
-        percentage_accuracy.setTextColor(Color.parseColor("#444444"));
-        percentage_accuracy2.setTextColor(Color.parseColor("#444444"));
-        percentage_accuracy3.setTextColor(Color.parseColor("#444444"));
+        oldParams.getBackground().setAlpha(100);
+        newParams.getBackground().setAlpha(140);
 
         String instruction_az = null;
         String instruction_tilt = null;
@@ -101,18 +88,21 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
             e.printStackTrace();
         }
 
-        percentage_accuracy.setText("Azimuth Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az);
-        percentage_accuracy2.setText("Tilt Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt);
-        percentage_accuracy3.setText("Roll Accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
+        percentage_accuracy.setText("Azimuth accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az);
+        percentage_accuracy2.setText("Tilt accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt);
+        percentage_accuracy3.setText("Roll accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
 
         percentage_accuracy.setTypeface(montserrat_medium);
         percentage_accuracy2.setTypeface(montserrat_medium);
         percentage_accuracy3.setTypeface(montserrat_medium);
+        percentage_accuracy.getBackground().setAlpha(204);
+        percentage_accuracy2.getBackground().setAlpha(179);
+        percentage_accuracy3.getBackground().setAlpha(153);
 
         btnGoBack = findViewById(R.id.button);
-        btnGoBack.setBackgroundColor(Color.parseColor("#E2E2E2"));
-        btnGoBack.setTextColor(Color.parseColor("#444444"));
-        btnGoBack.setTypeface(montserrat_medium);
+        btnRetake = findViewById(R.id.btnRetake);
+        setButton(btnGoBack, montserrat_medium);
+        setButton(btnRetake, montserrat_medium);
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,6 +239,12 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     private void setText(TextView txt, Typeface font) {
         txt.setTypeface(font);
         txt.setTextColor(Color.parseColor("#444444"));
+    }
+
+    private void setButton(Button button, Typeface font) {
+        button.setTypeface(font);
+        button.setTextColor(Color.parseColor("#444444"));
+        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }

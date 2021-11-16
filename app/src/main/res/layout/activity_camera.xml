@@ -71,11 +71,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="196dp"
-        android:layout_marginLeft="196dp"
+        android:layout_marginStart="193dp"
+        android:layout_marginLeft="193dp"
         android:layout_marginBottom="106dp"
         android:text="0 %"
-        android:textSize="18dp" />
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/txtTrans"
@@ -87,7 +87,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="109dp"
+        android:layout_marginBottom="106dp"
         android:text="TRANSPARENCY"
         android:textSize="16dp" />
 

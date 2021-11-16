@@ -122,7 +122,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="305dp"
-        android:text="My profile"
+        android:text="My photos"
         android:textSize="18sp" />
 
     <ImageView

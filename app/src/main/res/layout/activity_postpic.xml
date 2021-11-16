@@ -7,23 +7,42 @@
     tools:context=".PostPicActivity">
 
     <TextView
-        android:id="@+id/percentage_accuracy3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/percentage_accuracy"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp"
-        android:text="percentage_accuracy3"
+        android:layout_marginBottom="213dp"
+        android:background="@drawable/blue_rounded_corner"
+        android:gravity="center"
+        android:text="percentage_accuracy"
+        android:textColor="#FFFFFF"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/percentage_accuracy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/percentage_accuracy2"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="277dp"
-        android:text="percentage_accuracy"
+        android:layout_marginBottom="153dp"
+        android:background="@drawable/blue_rounded_corner"
+        android:gravity="center"
+        android:text="percentage_accuracy2"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/percentage_accuracy3"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="94dp"
+        android:background="@drawable/blue_rounded_corner"
+        android:gravity="center"
+        android:text="percentage_accuracy3"
+        android:textColor="#FFFFFF"
         android:textSize="15dp" />
 
     <TextView
@@ -32,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="31dp"
         android:text="You successfully took a picture!"
         android:textSize="22dp" />
 
@@ -50,94 +69,48 @@
         android:text="Go back"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/oldTilt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+    <Button
+        android:id="@+id/btnRetake"
+        android:layout_width="140dp"
+        android:layout_height="73dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginBottom="377dp"
-        android:text="JSON placeholder 2"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="12dp"
+        android:text="Retake" />
+
+    <TextView
+        android:id="@+id/newParams"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginBottom="272dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:gravity="center"
+        android:text="New params \n test \n test"
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/oldAz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginBottom="406dp"
-        android:text="JSON placeholder 1"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/oldRoll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/oldParams"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginBottom="346dp"
-        android:text="JSON placeholder 3"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/percentage_accuracy2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="238dp"
-        android:text="percentage_accuracy2"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/newTilt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="47dp"
-        android:layout_marginRight="47dp"
-        android:layout_marginBottom="377dp"
-        android:text="new JSON value 2"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/newAzimuth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:layout_marginBottom="406dp"
-        android:text="new JSON value 1"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/newRoll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="47dp"
-        android:layout_marginRight="47dp"
-        android:layout_marginBottom="347dp"
-        android:text="new JSON value 3"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginBottom="272dp"
+        android:background="@drawable/black_rounded_corner"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:text="Old params \n test \n test"
         android:textSize="15dp" />
 
 </RelativeLayout>
