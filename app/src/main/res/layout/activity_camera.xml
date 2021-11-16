@@ -20,12 +20,14 @@
     </FrameLayout>
 
 
-    <ImageView
+    <com.example.mycameraapp.TouchImageView
         android:id="@+id/overlayPhoto"
         android:layout_width="match_parent"
         android:layout_height="524dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/realTimeParams"
@@ -97,6 +99,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="108dp"
         android:max="100"
-        android:progress="0" />
+        android:progress="0"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
