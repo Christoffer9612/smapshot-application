@@ -32,6 +32,7 @@ For now, this work is only available for Android and not iOS.
 - [X] Transparency mode in camera: displaying old photo on top of camera
 - [X] Select between two photos to retake
 - [X] Tutorial page with instructions on how to use
+- [X] Zoom in/out old photo on camera view
 
 ## Contributors
 * Christoffer Karlsson - master thesis student
