@@ -15,6 +15,7 @@ import java.util.List;
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     Camera camera;
     SurfaceHolder holder;
+    private int position = 0;
 
     public ShowCamera(Context context, Camera camera) {
         super(context);
@@ -28,24 +29,31 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
         Camera.Parameters params = camera.getParameters();
 
+        //Aspect ratio of camera (4:3 is set)
+        List<Camera.Size> ratioSizes = params.getSupportedPreviewSizes();
+        for (Camera.Size size : ratioSizes) {
+            int width = size.width;
+            int height = size.height;
+            double aspectRatio = (double) width / (double) height;
+            Log.d("ASPECT RATIO", "height: " + size.width + ", width: " + size.height + ", aspect ratio = " + aspectRatio);
+            position++;
+            if (aspectRatio == 1.3333333333333333) {
+                params.setPreviewSize(width, height); //Setting preview camera to 4:3 ratio
+                Log.d("RATIO SET TO", "height: " + width + ", width: " + height);
+                break;
+            }
+        }
 
-        // Used for aspect ratio in camera
-        List<Camera.Size> sizes1 = params.getSupportedPreviewSizes();
-        Camera.Size optimalSize = getOptimalPreviewSize(sizes1, getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels);
-        params.setPreviewSize(optimalSize.width, optimalSize.height);
-
-
-
-        List<Camera.Size> sizes = params.getSupportedPictureSizes(); //List with different resolution sizes available on Android phone
+        //Picture sizes (resolution)
+        List<Camera.Size> sizes = params.getSupportedPictureSizes();
         Camera.Size photoSize = null;
 
         for (Camera.Size size : sizes) {
-            Log.i("RES", "Available resolution: "+size.width+" "+size.height);
-            //photoSize = size;
+            Log.d("PIC", "Available resolution: "+size.width+" "+size.height);
         }
 
         photoSize  = sizes.get(0); //Storing biggest resolution size values (width & height)
-        Log.d("RESOLUTION SET TO", " h: " + photoSize.width + ", w: " + photoSize.height);
+        Log.d("PICTURE RES", " height: " + photoSize.width + ", width: " + photoSize.height);
 
         //Change orientation of camera
         if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
@@ -78,49 +86,12 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int width, int height) {
-
     }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
         camera.stopPreview();
         camera.release();
-    }
-
-    // Used for aspect ratio in camera
-    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
-        final double ASPECT_TOLERANCE = 0.05;
-        double targetRatio = (double) w/h;
-
-        if (sizes==null) return null;
-
-        Camera.Size optimalSize = null;
-
-        double minDiff = Double.MAX_VALUE;
-
-        int targetHeight = h;
-
-        // Find size
-        for (Camera.Size size : sizes) {
-            double ratio = (double) size.width / size.height;
-            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
-            if (Math.abs(size.height - targetHeight) < minDiff) {
-                optimalSize = size;
-                minDiff = Math.abs(size.height - targetHeight);
-            }
-        }
-
-        if (optimalSize == null) {
-            minDiff = Double.MAX_VALUE;
-            for (Camera.Size size : sizes) {
-                if (Math.abs(size.height - targetHeight) < minDiff) {
-                    optimalSize = size;
-                    minDiff = Math.abs(size.height - targetHeight);
-                }
-            }
-        }
-        Log.d("OPTIMAL CAM SIZE: ", "height: " + optimalSize.width + ", width: " + optimalSize.height);
-        return optimalSize;
     }
 }
 

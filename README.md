@@ -33,6 +33,7 @@ For now, this work is only available for Android and not iOS.
 - [X] Select between two photos to retake
 - [X] Tutorial page with instructions on how to use
 - [X] Zoom in/out old photo on camera view
+- [X] Aspect ratio of camera preview set to 4:3 (1.33) for all devices
 
 ## Contributors
 * Christoffer Karlsson - master thesis student
