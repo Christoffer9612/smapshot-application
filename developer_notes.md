@@ -17,3 +17,6 @@
 * [DESIGN - rounded corner rectangle](https://stackoverflow.com/questions/18781902/rounded-corner-for-textview-in-android)
 * [DESIGN - set opacity (dynamically)](https://stackoverflow.com/questions/2838757/how-to-set-opacity-alpha-for-view-in-android)
 * [DESIGN - transition effect](https://stackoverflow.com/questions/18475826/how-to-perform-a-fade-animation-on-activity-transition)
+
+## Known bugs
+- [ ] Zooming old photo before toggling transparency mode
