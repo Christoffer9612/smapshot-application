@@ -123,19 +123,19 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     }
 
     //Calculates accuracy for each orientation angle (azimuth, tilt, roll)
-    public float percentage_accuracy(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
+    public int percentage_accuracy(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
 
         float azimuthAccuracy = 0, tiltAccuracy = 0, rollAccuracy = 0;
 
         if(orientationAngle.equals("azimuth")) {
             azimuthAccuracy = accuracyCalc(azimuthOld, az);
-            return azimuthAccuracy;
+            return (int) Math.round(azimuthAccuracy);
         } else if (orientationAngle.equals("tilt")) {
             tiltAccuracy = accuracyCalc(tiltOld, ti);
-            return Math.round(tiltAccuracy);
+            return (int) Math.round(tiltAccuracy);
         } else if (orientationAngle.equals("roll")) {
             rollAccuracy = accuracyCalc(rollOld, ro);
-            return Math.round(rollAccuracy);
+            return (int) Math.round(rollAccuracy);
         }
         return 0;
     }
