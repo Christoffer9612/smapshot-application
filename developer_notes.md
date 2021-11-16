@@ -9,6 +9,7 @@
 * [DEV - Creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
 * [DEV - Show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
 * [DEV - Transparency in photo](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
+* [DEV - calculating aspect ratio](https://stackoverflow.com/questions/28861102/correct-way-to-calculate-best-camera-preview-size-maintaing-aspect-ratio)
 * [DESIGN - Change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
 * [DESIGN - Set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
 * [DESIGN - Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
@@ -16,7 +17,8 @@
 * [DESIGN - Shape photos, round edges](https://www.youtube.com/watch?v=jihLJ0oVmGo)
 * [DESIGN - rounded corner rectangle](https://stackoverflow.com/questions/18781902/rounded-corner-for-textview-in-android)
 * [DESIGN - set opacity (dynamically)](https://stackoverflow.com/questions/2838757/how-to-set-opacity-alpha-for-view-in-android)
-* [DESIGN - transition effect](https://stackoverflow.com/questions/18475826/how-to-perform-a-fade-animation-on-activity-transition)
+* [DESIGN - transition effect](https://stackoverflow.com/questions/18475826/how-to-perform-a-fade-animation-on-activity-transition)'
+* [DESIGN - change app icon](https://stackoverflow.com/questions/26615889/how-do-you-change-the-launcher-logo-of-an-app-in-android-studio)
 
 ## Known bugs
 - [ ] Zooming old photo before toggling transparency mode
