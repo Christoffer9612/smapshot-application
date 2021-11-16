@@ -69,12 +69,12 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         setText(newTilt, montserrat_medium);
         setText(newRoll, montserrat_medium);
 
-        azimuth.setText("Old azimuth: " + Math.round(azimuthOld));
-        tilt.setText("Old tilt: " + Math.round(tiltOld));
-        roll.setText("Old roll: " + Math.round(rollOld));
-        newAzimuth.setText("new azimuth: " + Math.round(realTimeAzimuth));
-        newTilt.setText("new tilt: " + Math.round(realTimeTilt));
-        newRoll.setText("new roll: " + Math.round(realTimeRoll));
+        azimuth.setText("Old azimuth: " + Math.round(azimuthOld) + "°");
+        tilt.setText("Old tilt: " + Math.round(tiltOld)+ "°");
+        roll.setText("Old roll: " + Math.round(rollOld)+ "°");
+        newAzimuth.setText("new azimuth: " + Math.round(realTimeAzimuth)+ "°");
+        newTilt.setText("new tilt: " + Math.round(realTimeTilt)+ "°");
+        newRoll.setText("new roll: " + Math.round(realTimeRoll)+ "°");
 
         percentage_accuracy.setTextColor(Color.parseColor("#444444"));
         percentage_accuracy2.setTextColor(Color.parseColor("#444444"));
@@ -129,7 +129,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         if(orientationAngle.equals("azimuth")) {
             azimuthAccuracy = accuracyCalc(azimuthOld, az);
-            return Math.round(azimuthAccuracy);
+            return azimuthAccuracy;
         } else if (orientationAngle.equals("tilt")) {
             tiltAccuracy = accuracyCalc(tiltOld, ti);
             return Math.round(tiltAccuracy);
@@ -167,11 +167,11 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         //return the highest accuracy
         if(accuracy_diff > accuracy_clockwise && accuracy_diff > accuracy_counterclockwise) {
-            return Math.abs(accuracy_diff);
+            return accuracy_diff;
         } else if (accuracy_clockwise > accuracy_diff && accuracy_clockwise > accuracy_counterclockwise) {
-            return Math.abs(accuracy_clockwise);
+            return accuracy_clockwise;
         } else {
-            return Math.abs(accuracy_counterclockwise);
+            return accuracy_counterclockwise;
         }
 
         }
@@ -188,6 +188,10 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
 
         if(angle_type.equals("azimuth")) {
+            if(Math.round(diff) == 0.0) {
+                return ", Perfect!";
+            }
+
             if (diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
                 return ", turn device " + Math.round(diff) + "° east";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle) {
@@ -200,6 +204,10 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         }
 
         if(angle_type.equals("tilt")) {
+            if(Math.round(diff) == 0.0) {
+                return ", Perfect!";
+            }
+
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
                 return ", tilt device " + Math.round(diff) + "° up";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
@@ -213,8 +221,11 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
         }
 
         if(angle_type.equals("roll")) {
+            if(Math.round(diff) == 0.0) {
+                return ", Perfect!";
+            }
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", roll device " + Math.round(diff) + "° rigit mght";
+                return ", roll device " + Math.round(diff) + "° right";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
                 return ", tilt device " + Math.round(diff) + "° left";
             } else if (clockwise < diff && clockwise < counterclockwise) {
