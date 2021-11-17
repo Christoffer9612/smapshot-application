@@ -2,6 +2,7 @@ package com.example.mycameraapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -231,8 +232,13 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
     }
 
-    public void openMainActivity(View view) {
+    private void openMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSelectPhoto(View view) {
+        Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
     }
 

@@ -40,7 +40,6 @@ public class CameraActivity extends MainActivity {
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
-    private String oldPhoto;
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -57,7 +56,9 @@ public class CameraActivity extends MainActivity {
         SeekBar seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
 
-        int progress = seekBar.getProgress();
+        //int progress = seekBar.getProgress();
+        int progress = 100;
+
         transparency = findViewById(R.id.transparency);
         transparency.setText(progress + " %");
 
@@ -88,19 +89,20 @@ public class CameraActivity extends MainActivity {
         //Get the bundle, refactor: create as method?
         bundleSelectedPhoto = getIntent().getExtras();
 
+        //Extract name of old photo selected (test vs. dia) to display on top of camera as transparent
+        if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
+            overlayPhoto.setImageResource(R.drawable.st_roch_test);
+        } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
+            overlayPhoto.setImageResource(R.drawable.dia_303_12172);
+        }
+        overlayPhoto.setAlpha(progress * (int) 2.55);
+
     }
 
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            //Extract name of old photo selected (test vs. dia) to display on top of camera as transparent
-            if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
-                overlayPhoto.setImageResource(R.drawable.st_roch_test);
-            } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
-                overlayPhoto.setImageResource(R.drawable.dia_303_12172);
-            }
-
             //Updates continuously as the user slides the bar
             transparency.setText(progress + " %");
             overlayPhoto.setAlpha(progress * (int) 2.55);

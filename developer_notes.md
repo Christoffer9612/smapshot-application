@@ -21,4 +21,3 @@
 * [DESIGN - change app icon](https://stackoverflow.com/questions/26615889/how-do-you-change-the-launcher-logo-of-an-app-in-android-studio)
 
 ## Known bugs
-- [ ] Zooming old photo before toggling transparency mode
