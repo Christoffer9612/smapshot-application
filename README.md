@@ -21,6 +21,7 @@ For now, this work is only available for Android and not iOS.
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
 
 ## Current functionality
+. [X] Adapted for being used in: **portrait mode**
 - [X] Custom Camera API
 - [X] Capture & store photos
 - [X] Displaying sensor values when opening camera: tilt, roll and azimuth
