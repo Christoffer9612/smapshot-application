@@ -203,9 +203,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
                 return ", tilt device " + Math.round(diff) + "° down";
             } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", turn device " + Math.round(clockwise) + "° up";
+                return ", tilt device " + Math.round(clockwise) + "° up";
             } else {
-                return ", turn device " + Math.round(counterclockwise) + "° down";
+                return ", tilt device " + Math.round(counterclockwise) + "° down";
             }
 
         }
@@ -217,11 +217,11 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
                 return ", roll device " + Math.round(diff) + "° right";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", tilt device " + Math.round(diff) + "° left";
+                return ", roll device " + Math.round(diff) + "° left";
             } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", turn device " + Math.round(clockwise) + "° right";
+                return ", roll device " + Math.round(clockwise) + "° right";
             } else {
-                return ", turn device " + Math.round(counterclockwise) + "° left";
+                return ", roll device " + Math.round(counterclockwise) + "° left";
             }
 
         }
