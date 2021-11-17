@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".SelectPhotoActivity">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/selTestPhoto"
+        android:layout_width="165dp"
+        android:layout_height="168dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:onClick="selectTest"
+        android:scaleType="centerCrop"
+        android:src="@drawable/st_roch_test"
+        app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+    <TextView
+        android:id="@+id/txtDia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selDia303"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:text="Photo from Smapshot"
+        android:textSize="12dp" />
+
     <TextView
         android:id="@+id/txtTestPhoto"
         android:layout_width="wrap_content"
@@ -19,34 +47,6 @@
         android:text="Test from Yverdon"
         android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/txtDia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selDia303"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="33dp"
-        android:text="Photo from Smapshot"
-        android:textSize="12dp" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/selTestPhoto"
-        android:layout_width="165dp"
-        android:layout_height="168dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="119dp"
-        android:onClick="selectTest"
-        android:scaleType="centerCrop"
-        android:src="@drawable/st_roch_test"
-        app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selDia303"
         android:layout_width="165dp"
@@ -54,13 +54,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="119dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginRight="34dp"
+        android:layout_marginRight="25dp"
+        android:onClick="selectDia"
         android:scaleType="centerCrop"
         android:src="@drawable/dia_303_12172"
-        app:shapeAppearanceOverlay="@style/RoundedSquare"
-        android:onClick="selectDia" />
+        app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <Button
         android:id="@+id/btnPhoto"
@@ -87,5 +87,14 @@
         android:layout_marginBottom="12dp"
         android:onClick="openMainMenu"
         android:text="Go back" />
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="337dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="286dp" />
 
 </RelativeLayout>

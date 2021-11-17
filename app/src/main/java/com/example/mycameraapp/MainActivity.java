@@ -3,7 +3,6 @@ package com.example.mycameraapp;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -179,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         //To be implemented...
     }
 
-    public void openChallenge() {
+    public void openChallenge(View view) {
         //To be implemented...
     }
 

@@ -35,6 +35,7 @@ For now, this work is only available for Android and not iOS.
 - [X] Tutorial page with instructions on how to use
 - [X] Zoom in/out old photo on camera view
 - [X] Aspect ratio of camera preview set to 4:3 (1.33) for all devices
+- [X] OpenStreetMap to view map of photos. The app requires wifi to load map.
 
 ## Contributors
 * Christoffer Karlsson - master thesis student

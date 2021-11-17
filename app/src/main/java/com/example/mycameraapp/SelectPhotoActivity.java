@@ -1,13 +1,23 @@
 package com.example.mycameraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +26,17 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.mylocation.DirectedLocationOverlay;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.IMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +47,8 @@ public class SelectPhotoActivity extends AppCompatActivity {
     private boolean selectedTest, selectedDia;
     public Bundle bundleSelectedPhoto;
     public static JSONObject jsonObj = null;
+    private GeoPoint testPoint, diaPoint;
+    private IMapController mapController;
 
     @SuppressLint("Range")
     @Override
@@ -49,6 +72,57 @@ public class SelectPhotoActivity extends AppCompatActivity {
         setButton(btnPhoto, montserrat_medium);
         setButton(btnBack, montserrat_medium);
 
+
+        //OpenStreetMap
+        Context ctx = getApplicationContext();
+        //important! set your user agent to prevent getting banned from the osm servers
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
+        MapView map = (MapView) findViewById(R.id.map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+
+        //Move the map to a default view point. For this, access the map controller:
+        mapController = map.getController();
+        mapController.setZoom(15);
+        GeoPoint startPoint = new GeoPoint(46.780828, 6.64775); //Location of Yverdon-les-Bains, read location with Listener instead?
+        mapController.setCenter(startPoint);
+
+        //Adding geopoints of old photos
+        testPoint = new GeoPoint(46.780828, 6.64775); //Hardcoded, fetch from json-file instead
+        Marker testMarker = new Marker(map);
+        testMarker.setTitle("Test photo from St Roch building, Yverdon.");
+        addMarker(map, testPoint, testMarker);
+        diaPoint = new GeoPoint(46.78596271776273, 6.648714295980383); //Hardcoded, fetch from json-file instead
+        Marker diaMarker = new Marker(map);
+        diaMarker.setTitle("Photo from 1999, Smapshot archives.");
+        addMarker(map, diaPoint, diaMarker);
+
+    }
+
+    public void addMarker(MapView map, GeoPoint point, Marker marker) {
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().add(marker);
+
+        // Read your drawable from somewhere
+        //Drawable dr = getResources().getDrawable(R.drawable.favicon_196);
+        //Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+        // Scale it to 50 x 50
+        //Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 20, 20, true));
+        // Set your new, scaled drawable "d"
+        //marker.setIcon(d);
+
+    }
+
+    //OpenStreetMap method
+    public void onResume(){
+        super.onResume();
+        //this will refresh the osmdroid configuration on resuming.
+        //if you make changes to the configuration, use
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //Configuration.getInstance().save(this, prefs);
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 
     public void openCustomCam(View view) {

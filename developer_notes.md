@@ -4,6 +4,7 @@
 ## Android Studio links
 * [GEO - How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
 * [GEO - Normalise angles with modulus](https://stackoverflow.com/questions/2320986/easy-way-to-keeping-angles-between-179-and-180-degrees)
+* [GEO - Integrate MapView from OpenStreetMapDroid](https://help.famoco.com/developers/media/display-map/)
 * [GEO - Calculate magnetic declination](https://www.tabnine.com/code/java/methods/android.hardware.GeomagneticField/getDeclination)
 * [DEV - Pass a value from one Activity to another](https://stackoverflow.com/questions/3510649/how-to-pass-a-value-from-one-activity-to-another-in-android)
 * [DEV - Creating custom camera in Android Studio](https://www.youtube.com/watch?v=_wZvds9CfuE&t=16s)
@@ -21,3 +22,6 @@
 * [DESIGN - change app icon](https://stackoverflow.com/questions/26615889/how-do-you-change-the-launcher-logo-of-an-app-in-android-studio)
 
 ## Known bugs
+
+* When adding custom markers in OSMdroid, they move with the map. Solution [here](https://stackoverflow.com/questions/54811451/osmdroid-default-marker-moving-when-zooming-out-on-android-api-28#_=), added into current codebase.
+
