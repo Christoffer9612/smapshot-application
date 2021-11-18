@@ -19,6 +19,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -48,7 +49,9 @@ public class SelectPhotoActivity extends AppCompatActivity {
     public Bundle bundleSelectedPhoto;
     public static JSONObject jsonObj = null;
     private GeoPoint testPoint, diaPoint;
+    private Marker testMarker, diaMarker;
     private IMapController mapController;
+    private MapView map;
 
     @SuppressLint("Range")
     @Override
@@ -77,7 +80,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
         Context ctx = getApplicationContext();
         //important! set your user agent to prevent getting banned from the osm servers
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        MapView map = (MapView) findViewById(R.id.map);
+        map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
@@ -90,11 +93,11 @@ public class SelectPhotoActivity extends AppCompatActivity {
 
         //Adding geopoints of old photos
         testPoint = new GeoPoint(46.780828, 6.64775); //Hardcoded, fetch from json-file instead
-        Marker testMarker = new Marker(map);
+        testMarker = new Marker(map);
         testMarker.setTitle("Test photo from St Roch building, Yverdon.");
         addMarker(map, testPoint, testMarker);
         diaPoint = new GeoPoint(46.78596271776273, 6.648714295980383); //Hardcoded, fetch from json-file instead
-        Marker diaMarker = new Marker(map);
+        diaMarker = new Marker(map);
         diaMarker.setTitle("Photo from 1999, Smapshot archives.");
         addMarker(map, diaPoint, diaMarker);
 
@@ -159,6 +162,8 @@ public class SelectPhotoActivity extends AppCompatActivity {
         int colorInt = getResources().getColor(R.color.smapshot_blue);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
 
+        testMarker.showInfoWindow();
+        
         if (!selectedTest) {
             if (!selectedDia) {
                 testPhoto.setStrokeColor(csl);
@@ -198,6 +203,8 @@ public class SelectPhotoActivity extends AppCompatActivity {
     public void selectDia(View view) throws JSONException {
         int colorInt = getResources().getColor(R.color.smapshot_blue);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
+
+        diaMarker.showInfoWindow();
 
         if (!selectedDia) {
             if (!selectedTest) {
