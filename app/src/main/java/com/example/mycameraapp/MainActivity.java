@@ -1,10 +1,7 @@
 package com.example.mycameraapp;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,9 +11,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.view.View;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -129,13 +123,13 @@ public class MainActivity extends AppCompatActivity {
 
     //Methods for opening new Activities
     public void openSelectPhoto(View view) {
-        Intent intent = new Intent(this, SelectPhotoActivity.class);
+        Intent intent = new Intent(this, SelectActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void openTutorial(View view) {
-        Intent intent = new Intent(this, Tutorial.class);
+        Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }

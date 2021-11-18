@@ -2,11 +2,8 @@ package com.example.mycameraapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Camera;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +11,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
-public class PostPicActivity extends MainActivity { //AppCompatActivity
+public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
     private ImageView east, west;
@@ -25,7 +22,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postpic);
+        setContentView(R.layout.activity_result);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
@@ -254,7 +251,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     }
 
     public void openSelectPhoto(View view) {
-        Intent intent = new Intent(this, SelectPhotoActivity.class);
+        Intent intent = new Intent(this, SelectActivity.class);
         startActivity(intent);
     }
 

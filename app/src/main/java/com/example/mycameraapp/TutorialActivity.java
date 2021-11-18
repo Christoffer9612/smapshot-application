@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Tutorial extends AppCompatActivity {
+public class TutorialActivity extends AppCompatActivity {
 
     public static TextView stepOne, stepTwo, stepThree, stepFour;
     public Button btnGoBack;

@@ -31,13 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmapshotBlue">
         <activity
-            android:name=".SelectPhotoActivity"
+            android:name=".SelectActivity"
             android:exported="true"
             android:label="@string/select_photo"
             android:hardwareAccelerated="false"
             android:theme="@style/Theme.SmapshotBlue" />
         <activity
-            android:name=".Tutorial"
+            android:name=".TutorialActivity"
             android:exported="true"
             android:label="@string/tutorial"
             android:theme="@style/Theme.SmapshotRed" />
@@ -47,7 +47,7 @@
             android:label="@string/take_photo"
             android:theme="@style/Theme.SmapshotRed" />
         <activity
-            android:name=".PostPicActivity"
+            android:name=".ResultActivity"
             android:exported="true"
             android:label="@string/photo_captured" />
         <activity android:name=".MainActivity">

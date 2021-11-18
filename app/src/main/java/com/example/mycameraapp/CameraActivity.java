@@ -1,7 +1,6 @@
 package com.example.mycameraapp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -245,7 +244,7 @@ public class CameraActivity extends MainActivity {
     };
 
     public void goToSelect(View view) {
-        Intent intent = new Intent(this, SelectPhotoActivity.class);
+        Intent intent = new Intent(this, SelectActivity.class);
         startActivity(intent);
     }
 
@@ -281,7 +280,7 @@ public class CameraActivity extends MainActivity {
 
 
     public void openPostPicture() {
-        Intent intent = new Intent(this, PostPicActivity.class);
+        Intent intent = new Intent(this, ResultActivity.class);
 
         //Passing bundles to next intent (result screen to display json values)
         intent.putExtras(bundle);
