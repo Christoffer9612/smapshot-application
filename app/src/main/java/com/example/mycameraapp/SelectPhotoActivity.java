@@ -162,24 +162,25 @@ public class SelectPhotoActivity extends AppCompatActivity {
         int colorInt = getResources().getColor(R.color.smapshot_blue);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
 
-        testMarker.showInfoWindow();
-        
         if (!selectedTest) {
             if (!selectedDia) {
                 testPhoto.setStrokeColor(csl);
                 testPhoto.setStrokeWidth(30);
                 selectedTest = true;
+                testMarker.showInfoWindow();
             } else {
                 diaPhoto.setStrokeColor(csl);
                 diaPhoto.setStrokeWidth(0);
                 testPhoto.setStrokeColor(csl);
                 testPhoto.setStrokeWidth(30);
                 selectedTest = true;
+                testMarker.showInfoWindow();
                 selectedDia = false;
             }
         } else {
             testPhoto.setStrokeWidth(0);
             selectedTest = false;
+            testMarker.closeInfoWindow();
         }
 
         //Fetching json-file from /assets/ folder
@@ -211,17 +212,20 @@ public class SelectPhotoActivity extends AppCompatActivity {
                 diaPhoto.setStrokeColor(csl);
                 diaPhoto.setStrokeWidth(30);
                 selectedDia = true;
+                diaMarker.showInfoWindow();
             } else {
                 testPhoto.setStrokeColor(csl);
                 testPhoto.setStrokeWidth(0);
                 diaPhoto.setStrokeColor(csl);
                 diaPhoto.setStrokeWidth(30);
                 selectedDia = true;
+                diaMarker.showInfoWindow();
                 selectedTest = false;
             }
         } else {
             diaPhoto.setStrokeWidth(0);
             selectedDia = false;
+            diaMarker.closeInfoWindow();
         }
 
         //Fetching json-file from /assets/ folder
