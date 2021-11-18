@@ -40,6 +40,7 @@ public class CameraActivity extends MainActivity {
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
+    private Utils utils = new Utils(this);
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -75,8 +76,8 @@ public class CameraActivity extends MainActivity {
         realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
         realTimeParams.setTypeface(montserrat_medium);
 
-        setButton(btnGoBack, montserrat_medium);
-        setButton(btnCapture, montserrat_medium);
+        utils.setButton(btnGoBack, montserrat_medium);
+        utils.setButton(btnCapture, montserrat_medium);
 
         seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
         seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
@@ -287,12 +288,6 @@ public class CameraActivity extends MainActivity {
         intent.putExtras(bundleSelectedPhoto);
 
         startActivity(intent);
-    }
-
-    private void setButton(Button button, Typeface font) {
-        button.setTypeface(font);
-        button.setTextColor(Color.parseColor("#444444"));
-        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }

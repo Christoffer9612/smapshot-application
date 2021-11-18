@@ -19,6 +19,7 @@ For now, this work is only available for Android and not iOS.
 ### Known issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
+* Osmdroid (OpenStreetMap) doesn't load in codefiles. Solution: open ```build.gradle``` (Module), do a minor change and change back to its original state in order for gradle to display a "Sync Now" button in the upper right corner. Press "Sync Now".
 
 ## Current functionality
 - [X] Adapted for being used in: **portrait mode**

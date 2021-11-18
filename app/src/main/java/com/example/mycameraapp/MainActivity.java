@@ -1,8 +1,10 @@
 package com.example.mycameraapp;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static JSONObject jsonObj;
     public Button btnFindPhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
+    private Utils utils = new Utils(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +53,19 @@ public class MainActivity extends AppCompatActivity {
         thumbnail.setImageResource(R.drawable.thumbnail);
         thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
 
-        setText(azimuth, montserrat_medium);
-        setText(tilt, montserrat_medium);
-        setText(roll, montserrat_medium);
+        utils.setText(azimuth, montserrat_medium);
+        utils.setText(tilt, montserrat_medium);
+        utils.setText(roll, montserrat_medium);
 
-        setButton(btnFindPhoto, montserrat_medium);
-        setButton(btnLoadJSON, montserrat_medium);
-        setButton(btnTutorial, montserrat_medium);
-        setButton(btnProfile, montserrat_medium);
-        setButton(btnSmapshot, montserrat_medium);
+        utils.setButton(btnFindPhoto, montserrat_medium);
+        utils.setButton(btnLoadJSON, montserrat_medium);
+        utils.setButton(btnTutorial, montserrat_medium);
+        utils.setButton(btnProfile, montserrat_medium);
+        utils.setButton(btnSmapshot, montserrat_medium);
 
         //Fetching json-file from /assets/ folder
-        String testPhoto = loadJSONFromAsset();
+        JsonFinder jsonFinder = new JsonFinder(this);
+        String testPhoto = jsonFinder.JSONFromAsset(this, "test_photo.json");
         try {
             jsonObj = new JSONObject(testPhoto);
         } catch (JSONException e) {
@@ -74,21 +78,6 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build() );
     }
 
-    public String loadJSONFromAsset() { //Returns JSON string
-        String json = null;
-        try {
-            InputStream is = getAssets().open("test_photo.json"); // Remove in the future, no need to display test_photo.json on home screen
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
 
     //Used when finding the orientation angles from json-file, normalise the angles (0-360 degrees)
     public StringBuilder findValue(JSONObject obj, String key)
@@ -137,29 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         return float_key;
     }
-
-    public void getJSONValues(View view) throws JSONException {
-        azimuth.setText(findValue(jsonObj, "azimuth"));
-        tilt.setText(findValue(jsonObj, "tilt"));
-        roll.setText(findValue(jsonObj, "roll"));
-    }
-
-
-
-    //Setting button color and font for design purposes
-    private void setButton(Button button, Typeface font) {
-        button.setTypeface(font);
-        button.setTextColor(Color.parseColor("#444444"));
-        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
-    }
-
-    //Setting text color and font for design purposes
-    private void setText(TextView txt, Typeface font) {
-        txt.setTypeface(font);
-        txt.setTextColor(Color.parseColor("#444444"));
-    }
-
-
 
     //Methods for opening new Activities
     public void openSelectPhoto(View view) {

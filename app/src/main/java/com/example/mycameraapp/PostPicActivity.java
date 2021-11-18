@@ -18,6 +18,7 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
     private ImageView east, west;
+    private Utils utils = new Utils(this);
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -63,9 +64,9 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
             rollOld = bundleSelectedPhoto.getFloat("roll_dia");
         }
 
-        setText(success, montserrat_medium);
+        utils.setText(success, montserrat_medium);
         oldParams.setTypeface(montserrat_medium);
-        setText(newParams, montserrat_medium);
+        utils.setText(newParams, montserrat_medium);
 
         oldParams.setText("Old azimuth: " + Math.round(azimuthOld) + "°" + "\n" + "Old tilt: " + Math.round(tiltOld) + "°" + "\n" + "Old roll: " + Math.round(rollOld) + "°");
         newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°");
@@ -107,8 +108,8 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
 
         btnGoBack = findViewById(R.id.button);
         btnRetake = findViewById(R.id.btnRetake);
-        setButton(btnGoBack, montserrat_medium);
-        setButton(btnRetake, montserrat_medium);
+        utils.setButton(btnGoBack, montserrat_medium);
+        utils.setButton(btnRetake, montserrat_medium);
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,17 +256,6 @@ public class PostPicActivity extends MainActivity { //AppCompatActivity
     public void openSelectPhoto(View view) {
         Intent intent = new Intent(this, SelectPhotoActivity.class);
         startActivity(intent);
-    }
-
-    private void setText(TextView txt, Typeface font) {
-        txt.setTypeface(font);
-        txt.setTextColor(Color.parseColor("#444444"));
-    }
-
-    private void setButton(Button button, Typeface font) {
-        button.setTypeface(font);
-        button.setTextColor(Color.parseColor("#444444"));
-        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }

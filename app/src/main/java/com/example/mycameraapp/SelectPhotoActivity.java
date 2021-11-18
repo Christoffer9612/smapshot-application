@@ -52,6 +52,8 @@ public class SelectPhotoActivity extends AppCompatActivity {
     private Marker testMarker, diaMarker;
     private IMapController mapController;
     private MapView map;
+    private JsonFinder jsonFinder = new JsonFinder(this);
+    private Utils utils = new Utils(this);
 
     @SuppressLint("Range")
     @Override
@@ -72,8 +74,8 @@ public class SelectPhotoActivity extends AppCompatActivity {
         testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
         diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
 
-        setButton(btnPhoto, montserrat_medium);
-        setButton(btnBack, montserrat_medium);
+        utils.setButton(btnPhoto, montserrat_medium);
+        utils.setButton(btnBack, montserrat_medium);
 
 
         //OpenStreetMap
@@ -91,12 +93,38 @@ public class SelectPhotoActivity extends AppCompatActivity {
         GeoPoint startPoint = new GeoPoint(46.780828, 6.64775); //Location of Yverdon-les-Bains, read location with Listener instead?
         mapController.setCenter(startPoint);
 
+        //Using JsonFinder to get key-values in json-files under /assets/
+        Double latitudeTest = null;
+        Double longitudeTest = null;
+        String jsonTest = jsonFinder.JSONFromAsset(this, "test_photo.json");
+        try {
+            JSONObject jsonObjTest = new JSONObject(jsonTest);
+            jsonObjTest = jsonObjTest.getJSONObject("pose"); //Json object within a json object...
+            latitudeTest = jsonFinder.getValue(jsonObjTest, "latitude");
+            longitudeTest = jsonFinder.getValue(jsonObjTest, "longitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Double latitudeDia = null;
+        Double longitudeDia = null;
+        String jsonDia = jsonFinder.JSONFromAsset(this, "dia_303_12172.json");
+        try {
+            JSONObject jsonObjDia = new JSONObject(jsonDia);
+            jsonObjDia = jsonObjDia.getJSONObject("pose"); //Json object within a json object...
+            latitudeDia = jsonFinder.getValue(jsonObjDia, "latitude");
+            longitudeDia = jsonFinder.getValue(jsonObjDia, "longitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         //Adding geopoints of old photos
-        testPoint = new GeoPoint(46.780828, 6.64775); //Hardcoded, fetch from json-file instead
+        testPoint = new GeoPoint(latitudeTest, longitudeTest);
         testMarker = new Marker(map);
         testMarker.setTitle("Test photo from St Roch building, Yverdon.");
         addMarker(map, testPoint, testMarker);
-        diaPoint = new GeoPoint(46.78596271776273, 6.648714295980383); //Hardcoded, fetch from json-file instead
+
+        diaPoint = new GeoPoint(latitudeDia, longitudeDia);
         diaMarker = new Marker(map);
         diaMarker.setTitle("Photo from 1999, Smapshot archives.");
         addMarker(map, diaPoint, diaMarker);
@@ -184,7 +212,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
         }
 
         //Fetching json-file from /assets/ folder
-        String testPhoto = fetchJSON("test_photo.json");
+        String testPhoto = jsonFinder.JSONFromAsset(this,"test_photo.json");
         try {
             jsonObj = new JSONObject(testPhoto);
         } catch (JSONException e) {
@@ -229,7 +257,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
         }
 
         //Fetching json-file from /assets/ folder
-        String diaPhoto = fetchJSON("dia_303_12172.json");
+        String diaPhoto = jsonFinder.JSONFromAsset(this,"dia_303_12172.json");
         try {
             jsonObj = new JSONObject(diaPhoto);
         } catch (JSONException e) {
@@ -245,23 +273,6 @@ public class SelectPhotoActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("roll_dia", roll);
     }
 
-
-    public String fetchJSON(String filename) {
-        String json = null;
-        try {
-            InputStream is = getAssets().open(filename);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
     //Converts StringBuilder that you receive from findValue method to a float
     public float sbToFloatAng(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findJSONParams(obj, key);
@@ -275,8 +286,7 @@ public class SelectPhotoActivity extends AppCompatActivity {
     }
 
     //Used when finding the orientation angles from json-file, normalise the angles (0-360 degrees)
-    public StringBuilder findJSONParams(JSONObject obj, String key)
-            throws JSONException {
+    public StringBuilder findJSONParams(JSONObject obj, String key) throws JSONException {
         StringBuilder value = new StringBuilder();
         JSONObject json_pose = obj.getJSONObject("pose");
         if (json_pose.has(key)){
@@ -291,12 +301,6 @@ public class SelectPhotoActivity extends AppCompatActivity {
             value.append("No json key found!");
         }
         return value;
-    }
-
-    private void setButton(Button button, Typeface font) {
-        button.setTypeface(font);
-        button.setTextColor(Color.parseColor("#444444"));
-        button.setBackgroundColor(Color.parseColor("#E2E2E2"));
     }
 
 }
