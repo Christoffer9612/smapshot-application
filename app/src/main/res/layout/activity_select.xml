@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".SelectActivity">
 
+    <TextView
+        android:id="@+id/backgroundOne"
+        android:layout_width="185dp"
+        android:layout_height="213dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/grey_rounded_corner" />
+
+    <TextView
+        android:id="@+id/backgroundTwo"
+        android:layout_width="185dp"
+        android:layout_height="213dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selTestPhoto"
         android:layout_width="165dp"
@@ -13,7 +37,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="50dp"
         android:onClick="selectTest"
@@ -28,9 +52,10 @@
         android:layout_below="@+id/selDia303"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:gravity="center"
         android:text="Photo from Smapshot"
         android:textSize="12dp" />
 
@@ -41,10 +66,11 @@
         android:layout_below="@+id/selTestPhoto"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="36dp"
-        android:text="Test from Yverdon"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Test photo from St Roch"
         android:textSize="12dp" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -55,7 +81,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="25dp"
         android:onClick="selectDia"
         android:scaleType="centerCrop"

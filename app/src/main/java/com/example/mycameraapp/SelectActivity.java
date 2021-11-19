@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -61,8 +62,9 @@ public class SelectActivity extends AppCompatActivity {
         diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
 
         utils.setButton(btnPhoto, montserrat_medium);
+        btnPhoto.getBackground().setAlpha(100); //Proceed button transparent
+        btnPhoto.setTextColor(Color.rgb(204,204,204)); //Proceed button text transparent
         utils.setButton(btnBack, montserrat_medium);
-
 
         //OpenStreetMap
         Context ctx = getApplicationContext();
@@ -211,6 +213,8 @@ public class SelectActivity extends AppCompatActivity {
                 testPhoto.setStrokeColor(csl);
                 testPhoto.setStrokeWidth(30);
                 selectedTest = true;
+                btnPhoto.setTextColor(Color.parseColor("#444444"));
+                btnPhoto.getBackground().setAlpha(255);
                 testMarker.showInfoWindow();
             } else {
                 diaPhoto.setStrokeColor(csl);
@@ -224,6 +228,8 @@ public class SelectActivity extends AppCompatActivity {
         } else {
             testPhoto.setStrokeWidth(0);
             selectedTest = false;
+            btnPhoto.setTextColor(Color.rgb(204,204,204));
+            btnPhoto.getBackground().setAlpha(100);
             testMarker.closeInfoWindow();
         }
 
@@ -258,6 +264,8 @@ public class SelectActivity extends AppCompatActivity {
                 diaPhoto.setStrokeColor(csl);
                 diaPhoto.setStrokeWidth(30);
                 selectedDia = true;
+                btnPhoto.setTextColor(Color.parseColor("#444444"));
+                btnPhoto.getBackground().setAlpha(255);
                 diaMarker.showInfoWindow();
             } else {
                 testPhoto.setStrokeColor(csl);
@@ -271,6 +279,8 @@ public class SelectActivity extends AppCompatActivity {
         } else {
             diaPhoto.setStrokeWidth(0);
             selectedDia = false;
+            btnPhoto.setTextColor(Color.rgb(204,204,204));
+            btnPhoto.getBackground().setAlpha(100);
             diaMarker.closeInfoWindow();
         }
 
