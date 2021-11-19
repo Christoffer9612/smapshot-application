@@ -17,6 +17,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -36,6 +37,7 @@ public class SelectActivity extends AppCompatActivity {
     private MapView map;
     private JsonFinder jsonFinder = new JsonFinder(this);
     private Utils utils = new Utils(this);
+    private com.google.android.material.imageview.ShapeableImageView selTestPhoto, selDia303;
 
     @SuppressLint("Range")
     @Override
@@ -52,6 +54,8 @@ public class SelectActivity extends AppCompatActivity {
         diaPhoto = findViewById(R.id.selDia303);
         btnPhoto = findViewById(R.id.btnPhoto);
         btnBack = findViewById(R.id.btnBack);
+        selTestPhoto = findViewById(R.id.selTestPhoto);
+        selDia303 = findViewById(R.id.selDia303);
 
         testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
         diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
@@ -105,11 +109,41 @@ public class SelectActivity extends AppCompatActivity {
         testMarker = new Marker(map);
         testMarker.setTitle("Test photo from St Roch building, Yverdon.");
         addMarker(map, testPoint, testMarker);
+        //Listener to know when user clicks on Marker on map
+        testMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView map) {
+                marker.showInfoWindow();
+                map.getController().animateTo(marker.getPosition());
+                Log.d("CLICKED", "Test clicked");
+                try {
+                    selectTest(selTestPhoto);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
 
         diaPoint = new GeoPoint(latitudeDia, longitudeDia);
         diaMarker = new Marker(map);
         diaMarker.setTitle("Photo from 1999, Smapshot archives.");
         addMarker(map, diaPoint, diaMarker);
+        //Listener to know when user clicks on Marker on map
+        diaMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView map) {
+                marker.showInfoWindow();
+                map.getController().animateTo(marker.getPosition());
+                Log.d("CLICKED", "Dia clicked");
+                try {
+                    selectDia(selDia303);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -208,6 +242,8 @@ public class SelectActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("azimuth_test", az);
         bundleSelectedPhoto.putFloat("tilt_test", tilt);
         bundleSelectedPhoto.putFloat("roll_test", roll);
+
+        mapController.animateTo(testPoint);
     }
 
     //Refactor: merge with method above?
@@ -253,6 +289,8 @@ public class SelectActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("azimuth_dia", az);
         bundleSelectedPhoto.putFloat("tilt_dia", tilt);
         bundleSelectedPhoto.putFloat("roll_dia", roll);
+
+        mapController.animateTo(diaPoint);
     }
 
     //Converts StringBuilder that you receive from findValue method to a float

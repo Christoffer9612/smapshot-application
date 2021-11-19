@@ -33,7 +33,7 @@ public class JsonFinder {
         return json;
     }
 
-    /*Method for returning values from String key.*/
+    /*Method for returning double value from String key.*/
     public Double getValue(JSONObject jsonObj, String key) throws JSONException {
         Double val = jsonObj.getDouble(key);
         return val;
