@@ -1,19 +1,28 @@
 package com.example.mycameraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONException;
@@ -25,6 +34,9 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SelectActivity extends AppCompatActivity {
     private ShapeableImageView testPhoto, diaPhoto;
@@ -39,6 +51,7 @@ public class SelectActivity extends AppCompatActivity {
     private JsonFinder jsonFinder = new JsonFinder(this);
     private Utils utils = new Utils(this);
     private com.google.android.material.imageview.ShapeableImageView selTestPhoto, selDia303;
+    private FusedLocationProviderClient client;
 
     @SuppressLint("Range")
     @Override
@@ -77,9 +90,7 @@ public class SelectActivity extends AppCompatActivity {
 
         //Move the map to a default view point. For this, access the map controller:
         mapController = map.getController();
-        mapController.setZoom(15);
-        GeoPoint startPoint = new GeoPoint(46.780828, 6.64775); //Location of Yverdon-les-Bains, read location with Listener instead?
-        mapController.setCenter(startPoint);
+        mapController.setZoom(16);
 
         //Using JsonFinder to get key-values in json-files under /assets/
         Double latitudeTest = null;
@@ -147,7 +158,34 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
+        //Getting current location
+        client = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        client.getLastLocation().addOnSuccessListener(SelectActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    Log.d("COORD", "Lat: " + location.getLatitude() + ", Long: " + location.getLongitude());
+                    GeoPoint currentPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+                    Marker currentMarker = new Marker(map);
+                    addMarker(map, currentPoint, currentMarker);
+                    mapController.setCenter(currentPoint);
+                    // Read your drawable from somewhere
+                    Drawable dr = getResources().getDrawable(R.drawable.blue_location);
+                    Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+                    // Scale it to 50 x 50
+                    Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 60, 60, true));
+                    // Set your new, scaled drawable "d"
+                    currentMarker.setIcon(d);
+                    currentMarker.setTitle("Your current location.");
+                }
+            }
+        });
+
     }
+
 
     public void addMarker(MapView map, GeoPoint point, Marker marker) {
         marker.setPosition(point);

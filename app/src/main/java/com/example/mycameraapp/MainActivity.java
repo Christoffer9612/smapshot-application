@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         intro = findViewById(R.id.intro);
 
 
+        //Remove this later
         requestPermission();
         client = LocationServices.getFusedLocationProviderClient(this);
         btnSmapshot.setOnClickListener(new View.OnClickListener() {
