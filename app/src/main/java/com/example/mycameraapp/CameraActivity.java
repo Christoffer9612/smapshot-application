@@ -35,7 +35,7 @@ public class CameraActivity extends MainActivity {
     private ShowCamera showCamera;
     private Button btnGoBack, btnCapture;
     private String currentPhotoPath;
-    private TextView realTimeParams, transparency;
+    private TextView realTimeParams_az, realTimeParams_ti, realTimeParams_ro, transparency;
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
@@ -46,6 +46,11 @@ public class CameraActivity extends MainActivity {
     Bundle bundleSelectedPhoto = new Bundle(); //Bundle from: SelectPhotoActivity
 
     private float[] acc, mags, values = new float[3];
+
+    //values for JSON-file params
+    Float azimuthOld = null;
+    Float tiltOld = null;
+    Float rollOld = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +74,19 @@ public class CameraActivity extends MainActivity {
         btnGoBack = findViewById(R.id.btnGoBack);
         btnCapture = findViewById(R.id.btnCapture);
         frameLayout = findViewById(R.id.frameLayout);
-        realTimeParams = findViewById(R.id.realTimeParams);
+        realTimeParams_az = findViewById(R.id.realTimeParams_az);
+        realTimeParams_ti = findViewById(R.id.realTimeParams_ti);
+        realTimeParams_ro = findViewById(R.id.realTimeParams_ro);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        realTimeParams.setTextColor(Color.parseColor("#FFFFFF"));
-        realTimeParams.setTypeface(montserrat_medium);
+        realTimeParams_az.setTextColor(Color.parseColor("#FFFFFF"));
+        realTimeParams_az.setTypeface(montserrat_medium);
+
+        realTimeParams_ti.setTextColor(Color.parseColor("#FFFFFF"));
+        realTimeParams_ti.setTypeface(montserrat_medium);
+
+        realTimeParams_ro.setTextColor(Color.parseColor("#FFFFFF"));
+        realTimeParams_ro.setTypeface(montserrat_medium);
 
         utils.setButton(btnGoBack, montserrat_medium);
         utils.setButton(btnCapture, montserrat_medium);
@@ -171,9 +184,40 @@ public class CameraActivity extends MainActivity {
 
 
                 float roll = normaliseAngles(Math.round(Math.toDegrees(values[2])));
-                
 
-                realTimeParams.setText("azimuth = " + azimuth + "\ntilt = " + pitch + "\nroll = " + roll);
+
+                // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
+                if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
+                    azimuthOld = bundleSelectedPhoto.getFloat("azimuth_test");
+                    tiltOld = bundleSelectedPhoto.getFloat("tilt_test");
+                    rollOld = bundleSelectedPhoto.getFloat("roll_test");
+                } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
+                    azimuthOld = bundleSelectedPhoto.getFloat("azimuth_dia");
+                    tiltOld = bundleSelectedPhoto.getFloat("tilt_dia");
+                    rollOld = bundleSelectedPhoto.getFloat("roll_dia");
+                }
+
+                if(Math.abs(azimuth - azimuthOld) < 5.0) {
+                    realTimeParams_az.setTextColor(Color.GREEN);
+                } else {
+                    realTimeParams_az.setTextColor(Color.WHITE);
+                }
+
+                if(Math.abs(pitch - tiltOld) < 5.0) {
+                    realTimeParams_ti.setTextColor(Color.GREEN);
+                } else {
+                    realTimeParams_ti.setTextColor(Color.WHITE);
+                }
+
+                if(Math.abs(roll - rollOld) < 5.0) {
+                    realTimeParams_ro.setTextColor(Color.GREEN);
+                } else {
+                    realTimeParams_ro.setTextColor(Color.WHITE);
+                }
+
+                realTimeParams_az.setText("azimuth = " + azimuth);
+                realTimeParams_ti.setText("tilt = " + pitch);
+                realTimeParams_ro.setText("roll = " + roll);
                 azimuthValue = azimuth; //Store values when taking photo
                 tiltValue = pitch; //Store values when taking photo
                 rollValue = roll; //Store values when taking photo

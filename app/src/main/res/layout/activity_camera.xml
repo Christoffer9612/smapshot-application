@@ -16,7 +16,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp">
-
     </FrameLayout>
 
 
@@ -30,9 +29,25 @@
         android:focusable="true" />
 
     <TextView
-        android:id="@+id/realTimeParams"
+        android:id="@+id/realTimeParams_az"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Placeholder params"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/realTimeParams_ti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Placeholder params"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/realTimeParams_ro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="Placeholder params"
         android:textSize="18dp" />
 
