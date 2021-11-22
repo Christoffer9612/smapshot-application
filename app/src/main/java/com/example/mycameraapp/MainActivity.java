@@ -1,36 +1,46 @@
 package com.example.mycameraapp;
 
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.view.View;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView azimuth, tilt, roll;
+    public static TextView azimuth, tilt, roll, intro;
     public static JSONObject jsonObj;
     public Button btnFindPhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
     private Utils utils = new Utils(this);
+    private FusedLocationProviderClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
+        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
 
         //Finding id:s from activity_main.xml file
         thumbnail = findViewById(R.id.thumbnail);
@@ -42,6 +52,30 @@ public class MainActivity extends AppCompatActivity {
         azimuth = findViewById(R.id.azimuth);
         tilt = findViewById(R.id.tilt);
         roll = findViewById(R.id.roll);
+        intro = findViewById(R.id.intro);
+
+
+        requestPermission();
+        client = LocationServices.getFusedLocationProviderClient(this);
+        btnSmapshot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if(location != null) {
+                            intro.setText("Latitude: " + location.getLatitude() + "\n Longitude: " + location.getLongitude());
+                        }
+                    }
+                });
+            }
+        });
+
+
+
 
         //"Configuring" buttons, photos, colors, font, etc. in main screen
         thumbnail.setImageResource(R.drawable.thumbnail);
@@ -70,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
+    }
+
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
     }
 
 
