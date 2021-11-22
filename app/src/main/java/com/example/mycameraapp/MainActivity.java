@@ -111,27 +111,6 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
     }
 
-
-    //Used when finding the orientation angles from json-file, normalise the angles (0-360 degrees)
-    public StringBuilder findValue(JSONObject obj, String key)
-            throws JSONException {
-        StringBuilder value = new StringBuilder();
-        JSONObject json_pose = obj.getJSONObject("pose");
-        if (json_pose.has(key)){
-            String angle_string = json_pose.optString(key);
-            double d = Double.parseDouble(angle_string);
-            int angle_int = (int) d;
-            angle_int = angle_int % 360;
-            angle_int = (angle_int + 360) % 360;
-            angle_string = String.valueOf(angle_int);
-            value.append(key + " from old_photo: " + angle_string);
-
-        } else {
-            value.append("No json key found!");
-        }
-        return value;
-    }
-
     //Used when finding the coordinates from json-file
     public StringBuilder findCoordinates(JSONObject obj, String key)
             throws JSONException {

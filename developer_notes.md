@@ -11,6 +11,7 @@
 * [DEV - Show image using ImageView in Android (setImageResource)](https://stackoverflow.com/questions/8051069/how-to-show-image-using-imageview-in-android)
 * [DEV - Transparency in photo](https://stackoverflow.com/questions/5078041/how-can-i-make-an-image-transparent-on-android)
 * [DEV - calculating aspect ratio](https://stackoverflow.com/questions/28861102/correct-way-to-calculate-best-camera-preview-size-maintaing-aspect-ratio)
+* [DEV - get current location](https://www.youtube.com/watch?v=XQJiiuk8Feo)
 * [DESIGN - Change fonts in TextView](https://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview)
 * [DESIGN - Set default font family for entire Android app](https://stackoverflow.com/questions/16404820/how-to-set-default-font-family-for-entire-android-app)
 * [DESIGN - Button font size](https://stackoverflow.com/questions/2823808/android-button-font-size)
