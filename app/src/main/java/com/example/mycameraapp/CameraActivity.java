@@ -159,50 +159,19 @@ public class CameraActivity extends MainActivity {
                 //Computes the device's orientation based on the rotation matrix
                 SensorManager.getOrientation(outGravity, values);
 
-
                 //compensating for magnetic declination;
-                float latitude = 0;
-                float longitude = 0;
-                float altitude = 0;
-
-                //get coordinates from JSON-file
-                try {
-                    latitude = sbToFloatCoord(jsonObj, "latitude");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    longitude = sbToFloatCoord(jsonObj, "longitude");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    altitude = sbToFloatCoord(jsonObj, "altitude");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                //calculate declination
-                GeomagneticField geoField = new GeomagneticField(latitude, longitude, altitude, System.currentTimeMillis());
-                float declination = geoField.getDeclination();
-
-                //add to azimuth
-                float azimuth = Math.round(Math.toDegrees(values[0]) + declination);
+                float declination = getDeclination();
 
                 //normalise angles 0 - 360 degrees
-                azimuth = azimuth % 360;
-                azimuth = (azimuth + 360) % 360;
+                //add declination to azimuth
+                float azimuth = normaliseAngles(Math.round(Math.toDegrees(values[0]) + declination));
 
-                float pitch = Math.round(Math.toDegrees(values[1]));
-
-                pitch = pitch % 360;
-                pitch = (pitch + 360) % 360;
+                float pitch = normaliseAngles(Math.round(Math.toDegrees(values[1])));
                 pitch = 360 - pitch;
 
-                float roll = Math.round(Math.toDegrees(values[2]));
 
-                roll = roll % 360;
-                roll = (roll + 360) % 360;
+                float roll = normaliseAngles(Math.round(Math.toDegrees(values[2])));
+                
 
                 realTimeParams.setText("azimuth = " + azimuth + "\ntilt = " + pitch + "\nroll = " + roll);
                 azimuthValue = azimuth; //Store values when taking photo
@@ -213,6 +182,44 @@ public class CameraActivity extends MainActivity {
             }
         }
     };
+
+    public float getDeclination() {
+
+        //compensating for magnetic declination;
+        float latitude = 0;
+        float longitude = 0;
+        float altitude = 0;
+
+        //get coordinates from JSON-file
+        try {
+            latitude = sbToFloatCoord(jsonObj, "latitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            longitude = sbToFloatCoord(jsonObj, "longitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            altitude = sbToFloatCoord(jsonObj, "altitude");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //calculate declination
+        GeomagneticField geoField = new GeomagneticField(latitude, longitude, altitude, System.currentTimeMillis());
+        float declination = geoField.getDeclination();
+        return declination;
+    }
+
+    public float normaliseAngles (float angle) {
+
+        angle = angle % 360;
+        angle = (angle + 360) % 360;
+
+        return angle;
+    }
 
     Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
         @Override
@@ -288,5 +295,6 @@ public class CameraActivity extends MainActivity {
 
         startActivity(intent);
     }
+
 
 }
