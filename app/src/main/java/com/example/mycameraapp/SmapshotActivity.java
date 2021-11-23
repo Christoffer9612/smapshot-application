@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class SmapshotActivity extends AppCompatActivity {
 
     private ImageView smapshotModel;
+    private TextView info;
     private Button goBack, visitWebsite;
     private Utils utils = new Utils(this);
 
@@ -23,11 +24,13 @@ public class SmapshotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smapshot);
 
+        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
+
         smapshotModel = findViewById(R.id.smapshotModel);
         goBack = findViewById(R.id.btnGoBack);
         visitWebsite = findViewById(R.id.btnVisitWebsite);
-
-        Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
+        info = findViewById(R.id.info);
+        info.setTypeface(montserrat_medium);
 
         smapshotModel.setImageResource(R.drawable.smapshot_web);
         utils.setButton(goBack, montserrat_medium);

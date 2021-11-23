@@ -55,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
         roll = findViewById(R.id.roll);
         intro = findViewById(R.id.intro);
 
-        //Remove this later
         requestPermission();
-        client = LocationServices.getFusedLocationProviderClient(this);/*
-        btnSmapshot.setOnClickListener(new View.OnClickListener() {
+
+        //Displaying last known location coordinates, can remove in future:
+        client = LocationServices.getFusedLocationProviderClient(this);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -74,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-    */
-
-
 
         //"Configuring" buttons, photos, colors, font, etc. in main screen
         thumbnail.setImageResource(R.drawable.thumbnail);
