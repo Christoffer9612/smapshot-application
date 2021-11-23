@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Remove this later
         requestPermission();
-        client = LocationServices.getFusedLocationProviderClient(this);
+        client = LocationServices.getFusedLocationProviderClient(this);/*
         btnSmapshot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
+    */
 
 
 
@@ -151,8 +151,10 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }
 
-    public void openSmapshot() {
-        //To be implemented...
+    public void openSmapshot(View view) {
+        Intent intent = new Intent(MainActivity.this, SmapshotActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }
 
     public void openChallenge(View view) {

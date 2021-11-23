@@ -7,7 +7,6 @@
     <uses-permission
         android:name="android.hardware.Camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -28,11 +27,17 @@
         android:roundIcon="@drawable/favicon_196"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmapshotBlue">
+
+        <activity
+            android:name=".SmapshotActivity"
+            android:exported="true"
+            android:label="@string/what_is_smapshot"
+            android:theme="@style/Theme.SmapshotBlue"/>
         <activity
             android:name=".SelectActivity"
             android:exported="true"
-            android:label="@string/select_photo"
             android:hardwareAccelerated="false"
+            android:label="@string/select_photo"
             android:theme="@style/Theme.SmapshotBlue" />
         <activity
             android:name=".TutorialActivity"
