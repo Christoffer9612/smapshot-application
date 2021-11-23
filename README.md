@@ -21,23 +21,11 @@ For now, this work is only available for Android and not iOS.
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
 * Osmdroid (OpenStreetMap) doesn't load in codefiles. Solution: open ```build.gradle``` (Module), do a minor change and change back to its original state in order for gradle to display a "Sync Now" button in the upper right corner. Press "Sync Now".
 
-## Current functionality
-- [X] Adapted for being used in: **portrait mode**
-- [X] Custom Camera API
-- [X] Capture & store photos
-- [X] Displaying sensor values when opening camera: tilt, roll and azimuth
-- [X] Displaying sensor values from old photos (tilt, roll and azimuth)
-- [X] Normalizing angles (0-360 degrees)
-- [X] Able to store azimuth, tilt and roll when capturing new photo and compare with old
-- [X] Calculating results of parameters & mean accuracy in %
-- [X] Instructions on how to position the device to achieve greater accuracy when retaking a photo
-- [X] Transparency mode in camera: displaying old photo on top of camera
-- [X] Select between two photos to retake
-- [X] Tutorial page with instructions on how to use
-- [X] Zoom in/out old photo on camera view
-- [X] Aspect ratio of camera preview set to 4:3 (1.33) for all devices
-- [X] OpenStreetMap to view map of photos. The app requires wifi to load map.
-- [X] Displaying location in OpenStreetMap.
+## Permissions
+The mobile application requires three permissions:
+* Location - to display your current location and photos to retake nearby.
+* Camera - to take photos with your camera.
+* Storage - to store photos captured.
 
 ## Contributors
 * Christoffer Karlsson - master thesis student

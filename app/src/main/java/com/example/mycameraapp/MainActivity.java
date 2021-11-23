@@ -1,5 +1,6 @@
 package com.example.mycameraapp;
 
+import android.Manifest;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         roll = findViewById(R.id.roll);
         intro = findViewById(R.id.intro);
 
-
         //Remove this later
         requestPermission();
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -101,15 +101,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ActivityCompat.requestPermissions(this, new String[]{CAMERA, WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
     }
 
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE}, 1);
     }
 
     //Used when finding the coordinates from json-file

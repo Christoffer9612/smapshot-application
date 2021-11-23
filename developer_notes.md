@@ -26,3 +26,20 @@
 
 * When adding custom markers in OSMdroid, they move with the map. Solution [here](https://stackoverflow.com/questions/54811451/osmdroid-default-marker-moving-when-zooming-out-on-android-api-28#_=), added into current codebase.
 
+## Current functionality
+- [X] Adapted for being used in: **portrait mode**
+- [X] Custom Camera API
+- [X] Capture & store photos
+- [X] Displaying sensor values when opening camera: tilt, roll and azimuth
+- [X] Displaying sensor values from old photos (tilt, roll and azimuth)
+- [X] Normalizing angles (0-360 degrees)
+- [X] Able to store azimuth, tilt and roll when capturing new photo and compare with old
+- [X] Calculating results of parameters & mean accuracy in %
+- [X] Instructions on how to position the device to achieve greater accuracy when retaking a photo
+- [X] Transparency mode in camera: displaying old photo on top of camera
+- [X] Select between two photos to retake
+- [X] Tutorial page with instructions on how to use
+- [X] Zoom in/out old photo on camera view
+- [X] Aspect ratio of camera preview set to 4:3 (1.33) for all devices
+- [X] OpenStreetMap to view map of photos. The app requires wifi to load map.
+- [X] Displaying location in OpenStreetMap.
