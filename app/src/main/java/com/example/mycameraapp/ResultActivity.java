@@ -1,9 +1,19 @@
 package com.example.mycameraapp;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,9 +21,14 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
+    private ImageView newPhoto, oldPhoto;
 
     private Utils utils = new Utils(this);
 
@@ -29,6 +44,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         success = findViewById(R.id.success);
         oldParams = findViewById(R.id.oldParams);
         newParams = findViewById(R.id.newParams);
+        oldPhoto = findViewById(R.id.oldPhoto);
 
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
         percentage_accuracy2 = findViewById(R.id.percentage_accuracy2);
@@ -53,10 +69,12 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             azimuthOld = bundleSelectedPhoto.getFloat("azimuth_test");
             tiltOld = bundleSelectedPhoto.getFloat("tilt_test");
             rollOld = bundleSelectedPhoto.getFloat("roll_test");
+            oldPhoto.setImageResource(R.drawable.st_roch_test);
         } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
             azimuthOld = bundleSelectedPhoto.getFloat("azimuth_dia");
             tiltOld = bundleSelectedPhoto.getFloat("tilt_dia");
             rollOld = bundleSelectedPhoto.getFloat("roll_dia");
+            oldPhoto.setImageResource(R.drawable.dia_303_12172);
         }
 
         utils.setText(success, montserrat_medium);
@@ -112,6 +130,55 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 openMainActivity(v);
             }
         });
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //write your code here to be executed after 1 second
+                loadPhoto();
+            }
+        }, 1000); //Delay so most recent photo can be displayed
+    }
+
+    public void loadPhoto() {
+        //Get photo filenames
+        File storageDir = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        File[] listFiles = storageDir.listFiles();
+        Comparator c = new Comparator<File>(){ //File-specific Comparator
+
+            public int compare(File file1, File file2){
+                //this Comparator uses timestamps for orders
+                long tsFile1 = file1.lastModified();
+                long tsFile2 = file2.lastModified();
+                return Long.valueOf(tsFile1).compareTo(tsFile2);
+            }
+        };
+
+        //Apply the comparator on the array:
+        Arrays.sort(listFiles, c);
+        int i = 0;
+        for (File f : listFiles) {
+            Log.d("CREATEDDD", i + ": " + String.valueOf(f));
+            i++;
+        }
+        //From the sorted array, the last one is the desired file
+        String imgPath = listFiles[listFiles.length-1].getAbsolutePath();
+
+        //Set new photo in result view:
+        File imgFile = new File(imgPath);
+        if(imgFile.exists()){
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            newPhoto = (ImageView) findViewById(R.id.newPhoto);
+            ObjectAnimator.ofFloat(newPhoto, View.ALPHA, 0.1f, 1.0f).setDuration(500).start(); //Animates (fade)
+            newPhoto.setImageBitmap(RotateBitmap(myBitmap, 90)); //Rotate preview of photo 90 degrees
+        }
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
     //Calculates accuracy for each orientation angle (azimuth, tilt, roll)
