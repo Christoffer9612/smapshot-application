@@ -14,7 +14,7 @@ import org.json.JSONException;
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
-    private ImageView east, west;
+
     private Utils utils = new Utils(this);
 
     @SuppressLint("SetTextI18n")
@@ -29,8 +29,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         success = findViewById(R.id.success);
         oldParams = findViewById(R.id.oldParams);
         newParams = findViewById(R.id.newParams);
-        east = (ImageView) findViewById(R.id.east);
-        west = (ImageView) findViewById(R.id.west);
 
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
         percentage_accuracy2 = findViewById(R.id.percentage_accuracy2);
@@ -181,31 +179,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float counterclockwise = new_angle + (360 - old_angle);
 
 
-
-        if(angle_type.equals("azimuth")) {
-            if(Math.round(diff) == 0.0) {
-                east.setVisibility(View.GONE);
-                west.setVisibility(View.GONE);
-                return ", Perfect!";
-            }
-            if (diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                east.setVisibility(View.VISIBLE);
-                west.setVisibility(View.GONE);
-                return ", turn device " + Math.round(diff) + "° east";
-            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle) {
-                west.setVisibility(View.VISIBLE);
-                east.setVisibility(View.GONE);
-                return ", turn device " + Math.round(diff) + "° west";
-            } else if (clockwise < diff && clockwise < counterclockwise) {
-                east.setVisibility(View.VISIBLE);
-                west.setVisibility(View.GONE);
-                return ", turn device " + Math.round(clockwise) + "° east";
-            } else {
-                west.setVisibility(View.VISIBLE);
-                east.setVisibility(View.GONE);
-                return ", turn device " + Math.round(counterclockwise) + "° west";
-            }
-        }
 
         if(angle_type.equals("tilt")) {
             if(Math.round(diff) == 0.0) {

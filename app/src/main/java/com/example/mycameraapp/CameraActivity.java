@@ -40,6 +40,9 @@ public class CameraActivity extends MainActivity {
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
     private Utils utils = new Utils(this);
+    private ImageView right, left;
+
+
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -70,6 +73,9 @@ public class CameraActivity extends MainActivity {
         overlayPhoto = findViewById(R.id.overlayPhoto);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
+
+        right = (ImageView) findViewById(R.id.btnright);
+        left = (ImageView) findViewById(R.id.btnleft);
 
         btnGoBack = findViewById(R.id.btnGoBack);
         btnCapture = findViewById(R.id.btnCapture);
@@ -109,6 +115,10 @@ public class CameraActivity extends MainActivity {
             overlayPhoto.setImageResource(R.drawable.dia_303_12172);
         }
         overlayPhoto.setAlpha(progress * (int) 2.55);
+
+
+
+
 
     }
 
@@ -182,9 +192,7 @@ public class CameraActivity extends MainActivity {
                 float pitch = normaliseAngles(Math.round(Math.toDegrees(values[1])));
                 pitch = 360 - pitch;
 
-
                 float roll = normaliseAngles(Math.round(Math.toDegrees(values[2])));
-
 
                 // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
                 if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
@@ -197,23 +205,14 @@ public class CameraActivity extends MainActivity {
                     rollOld = bundleSelectedPhoto.getFloat("roll_dia");
                 }
 
-                if(Math.abs(azimuth - azimuthOld) < 5.0) {
-                    realTimeParams_az.setTextColor(Color.GREEN);
-                } else {
-                    realTimeParams_az.setTextColor(Color.WHITE);
-                }
+                //setting the colors of real time parameters, green if within range of 5.0
+                setRealTimeParamsColor(azimuthOld, azimuth, "azimuth");
+                setRealTimeParamsColor(tiltOld, pitch, "tilt");
+                setRealTimeParamsColor(rollOld, roll, "roll");
 
-                if(Math.abs(pitch - tiltOld) < 5.0) {
-                    realTimeParams_ti.setTextColor(Color.GREEN);
-                } else {
-                    realTimeParams_ti.setTextColor(Color.WHITE);
-                }
-
-                if(Math.abs(roll - rollOld) < 5.0) {
-                    realTimeParams_ro.setTextColor(Color.GREEN);
-                } else {
-                    realTimeParams_ro.setTextColor(Color.WHITE);
-                }
+                //determine which picture to illustrate direction instruction to user.
+                float [] azRotation = wayOfRotation(azimuthOld, azimuth);
+                setImageInstruction(azRotation, azimuthOld, azimuth);
 
                 realTimeParams_az.setText("azimuth = " + azimuth);
                 realTimeParams_ti.setText("tilt = " + pitch);
@@ -256,6 +255,82 @@ public class CameraActivity extends MainActivity {
         float declination = geoField.getDeclination();
         return declination;
     }
+
+    public float [] wayOfRotation(float angleOld, float angleRealTime) {
+
+        float [] rotations = new float[3];
+
+        float diff = Math.abs(angleOld - angleRealTime);
+        float clockwise = (360 - angleRealTime) + angleOld;
+        float counterclockwise = angleRealTime + (360 - angleOld);
+
+        rotations[0] = diff;
+        Log.d("test", String.valueOf(diff));
+        rotations[1] = clockwise;
+        rotations[2] = counterclockwise;
+
+        return rotations;
+
+    }
+    public void setImageInstruction(float [] rotations, float angleOld, float realTimeAngle) {
+
+
+        if(Math.round(rotations[0]) < 50.0) {
+            right.clearAnimation();
+            left.clearAnimation();
+            right.setVisibility(View.INVISIBLE);
+            left.setVisibility(View.INVISIBLE);
+        }
+
+        if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle < angleOld) {
+            right.setVisibility(View.VISIBLE);
+            left.setVisibility(View.GONE);
+            return;
+        } else if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle > angleOld) {
+            left.setVisibility(View.VISIBLE);
+            right.setVisibility(View.GONE);
+        } else if (rotations[1] < rotations[0] && rotations[1] < rotations[2]) {
+            right.setVisibility(View.VISIBLE);
+            left.setVisibility(View.GONE);
+        } else {
+            left.setVisibility(View.VISIBLE);
+            right.setVisibility(View.GONE);
+        }
+    }
+
+    public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle) {
+
+        if (orientationAngle.equals("azimuth")) {
+
+            if (Math.abs(angleRealTime - angleOld) < 5.0) {
+                realTimeParams_az.setTextColor(Color.GREEN);
+                right.setVisibility(View.GONE);
+                left.setVisibility(View.GONE);
+            } else {
+                realTimeParams_az.setTextColor(Color.WHITE);
+            }
+        }
+
+        if (orientationAngle.equals("tilt")) {
+
+        if (Math.abs(angleRealTime - angleOld) < 5.0) {
+            realTimeParams_ti.setTextColor(Color.GREEN);
+        } else {
+            realTimeParams_ti.setTextColor(Color.WHITE);
+            }
+        }
+
+        if(orientationAngle.equals("roll")) {
+
+        if (Math.abs(angleRealTime - angleOld) < 5.0) {
+            realTimeParams_ro.setTextColor(Color.GREEN);
+        } else {
+            realTimeParams_ro.setTextColor(Color.WHITE);
+            }
+        }
+
+    }
+
 
     public float normaliseAngles (float angle) {
 

@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp">
+
     </FrameLayout>
 
 
@@ -132,5 +133,23 @@
         android:layout_marginBottom="107dp"
         android:text="PINCH TO ZOOM"
         android:textSize="16dp" />
+
+
+    <ImageView
+        android:id="@+id/btnright"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft = "150dp"
+        android:visibility="gone"
+        android:src="@drawable/rightarrow" />
+
+    <ImageView
+        android:id="@+id/btnleft"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft = "150dp"
+        android:visibility="gone"
+        android:src="@drawable/leftarrow" />
+
 
 </RelativeLayout>
