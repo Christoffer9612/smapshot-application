@@ -33,10 +33,8 @@ The mobile application requires three permissions:
 
 See developer notes [here](https://github.com/Christoffer9612/smapshot-application/blob/master/developer_notes.md).
 
-## Debugging
-To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
-
-```Log.d("tag", "message");```
+## Developer notes
+If you want to further improve or contribute to the project, check developer_notes.md for more detailed information.
 
 ## APK
 APK stands for Android Package Kit, a file format that Android uses to distribute and install apps. APKs contain all the elements that an app needs to install correctly on your device. 

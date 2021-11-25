@@ -138,7 +138,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 //write your code here to be executed after 1 second
                 loadPhoto();
             }
-        }, 1000); //Delay so most recent photo can be displayed
+        }, 1200); //Delay so most recent photo can be displayed
     }
 
     public void loadPhoto() {

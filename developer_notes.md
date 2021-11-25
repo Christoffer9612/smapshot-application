@@ -1,6 +1,11 @@
 ## Class diagram
 *To be created...* 
 
+## Debugging
+To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
+
+```Log.d("tag", "message");```
+
 ## Android Studio links
 * [GEO - How to track device orientation in real time](https://stackoverflow.com/questions/63442812/how-to-make-an-android-class-in-java-that-returns-device-angle?noredirect=1&lq=1)
 * [GEO - Normalise angles with modulus](https://stackoverflow.com/questions/2320986/easy-way-to-keeping-angles-between-179-and-180-degrees)
@@ -19,8 +24,9 @@
 * [DESIGN - Shape photos, round edges](https://www.youtube.com/watch?v=jihLJ0oVmGo)
 * [DESIGN - rounded corner rectangle](https://stackoverflow.com/questions/18781902/rounded-corner-for-textview-in-android)
 * [DESIGN - set opacity (dynamically)](https://stackoverflow.com/questions/2838757/how-to-set-opacity-alpha-for-view-in-android)
-* [DESIGN - transition effect](https://stackoverflow.com/questions/18475826/how-to-perform-a-fade-animation-on-activity-transition)'
+* [DESIGN - transition effect](https://stackoverflow.com/questions/18475826/how-to-perform-a-fade-animation-on-activity-transition)
 * [DESIGN - change app icon](https://stackoverflow.com/questions/26615889/how-do-you-change-the-launcher-logo-of-an-app-in-android-studio)
+* [DESIGN - animate ImageView](https://stackoverflow.com/questions/8720626/android-fade-in-and-fade-out-with-imageview)
 
 ## Known bugs
 
