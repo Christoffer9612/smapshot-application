@@ -1,6 +1,19 @@
 ## Class diagram
 *To be created...* 
 
+## Configuration
+
+* Java 15
+* [Android Studio Bumblebee 2021.1.1 Beta 3](https://developer.android.com/studio/preview/index.html)
+  * Android Studio gradle: JDK 11. Can be found in: ```File -> Settings```
+* Phone: Xiaomi Mi 9T, Motorola G8. Currently, layout of app is designed towards Xiaomi Mi 9T. There are aspect ratio issues with Motorola G8 (4:3).
+  * Android version: 10
+
+### Known issues
+* Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
+* How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
+* Osmdroid (OpenStreetMap) doesn't load in codefiles. Solution: open ```build.gradle``` (Module), do a minor change and change back to its original state in order for gradle to display a "Sync Now" button in the upper right corner. Press "Sync Now".
+
 ## Debugging
 To debug the code and follow printouts, use the Logcat terminal which can be found at the bottom of Android Studio UI next to "Build". Add print-statements using syntax: 
 
