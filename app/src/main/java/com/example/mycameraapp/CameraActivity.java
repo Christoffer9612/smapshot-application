@@ -115,11 +115,6 @@ public class CameraActivity extends MainActivity {
             overlayPhoto.setImageResource(R.drawable.dia_303_12172);
         }
         overlayPhoto.setAlpha(progress * (int) 2.55);
-
-
-
-
-
     }
 
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -214,9 +209,9 @@ public class CameraActivity extends MainActivity {
                 float [] azRotation = wayOfRotation(azimuthOld, azimuth);
                 setImageInstruction(azRotation, azimuthOld, azimuth);
 
-                realTimeParams_az.setText("azimuth = " + azimuth);
-                realTimeParams_ti.setText("tilt = " + pitch);
-                realTimeParams_ro.setText("roll = " + roll);
+                realTimeParams_az.setText("azimuth = " + (int) azimuth);
+                realTimeParams_ti.setText("tilt = " + (int) pitch);
+                realTimeParams_ro.setText("roll = " + (int) roll);
                 azimuthValue = azimuth; //Store values when taking photo
                 tiltValue = pitch; //Store values when taking photo
                 rollValue = roll; //Store values when taking photo
@@ -331,12 +326,9 @@ public class CameraActivity extends MainActivity {
 
     }
 
-
     public float normaliseAngles (float angle) {
-
         angle = angle % 360;
         angle = (angle + 360) % 360;
-
         return angle;
     }
 
