@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -52,6 +53,7 @@ public class SelectActivity extends AppCompatActivity {
     private Utils utils = new Utils(this);
     private com.google.android.material.imageview.ShapeableImageView selTestPhoto, selDia303;
     private FusedLocationProviderClient client;
+    private TextView txtDiaDistance, txtTestDistance;
 
     @SuppressLint("Range")
     @Override
@@ -70,6 +72,8 @@ public class SelectActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         selTestPhoto = findViewById(R.id.selTestPhoto);
         selDia303 = findViewById(R.id.selDia303);
+        txtDiaDistance = findViewById(R.id.txtDiaDistance);
+        txtTestDistance = findViewById(R.id.txtTestDistance);
 
         testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
         diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
@@ -163,10 +167,16 @@ public class SelectActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        Double finalLatitudeTest = latitudeTest;
+        Double finalLongitudeTest = longitudeTest;
+        Double finalLatitudeDia = latitudeDia;
+        Double finalLongitudeDia = longitudeDia;
         client.getLastLocation().addOnSuccessListener(SelectActivity.this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
+                    double currentLat = location.getLatitude();
+                    double currentLon = location.getLongitude();
                     Log.d("COORD", "Lat: " + location.getLatitude() + ", Long: " + location.getLongitude());
                     GeoPoint currentPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
                     Marker currentMarker = new Marker(map);
@@ -180,10 +190,30 @@ public class SelectActivity extends AppCompatActivity {
                     // Set your new, scaled drawable "d"
                     currentMarker.setIcon(d);
                     currentMarker.setTitle("Your current location.");
+
+                    txtTestDistance.setText(distance(currentLat, finalLatitudeTest, currentLon, finalLongitudeTest) + "m");
+                    txtDiaDistance.setText(distance(currentLat, finalLatitudeDia, currentLon, finalLongitudeDia) + "m");
                 }
             }
         });
+    }
 
+    public int distance(double lat1, double lat2, double lon1, double lon2) {
+        lon1 = Math.toRadians(lon1);
+        lon2 = Math.toRadians(lon2);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+        double a = Math.pow(Math.sin(dlat / 2), 2)
+                + Math.cos(lat1) * Math.cos(lat2)
+                * Math.pow(Math.sin(dlon / 2),2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double r = 6371;
+        double distMeters = c * r * 1000;
+        int result = (int) distMeters;
+        Log.d("DISTANCE", "" + result + " meters");
+        return result;
     }
 
 
