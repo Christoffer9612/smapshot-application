@@ -8,40 +8,14 @@
 
     <TextView
         android:id="@+id/percentage_accuracy"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="213dp"
-        android:background="@drawable/blue_rounded_corner"
-        android:gravity="center"
-        android:text="percentage_accuracy"
-        android:textColor="#FFFFFF"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/percentage_accuracy2"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="153dp"
-        android:background="@drawable/blue_rounded_corner"
-        android:gravity="center"
-        android:text="percentage_accuracy2"
-        android:textColor="#FFFFFF"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/percentage_accuracy3"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
+        android:layout_width="388dp"
+        android:layout_height="71dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="94dp"
         android:background="@drawable/blue_rounded_corner"
         android:gravity="center"
-        android:text="percentage_accuracy3"
+        android:text="azimuth \n tilt \n roll"
         android:textColor="#FFFFFF"
         android:textSize="15dp" />
 
@@ -91,10 +65,29 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="Old photo"
         android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txtScore"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/oldPhoto"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="167dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
+        android:gravity="center"
+        android:text="Your score: 10 🎉"
+        android:textSize="24dp" />
 
     <TextView
         android:id="@+id/txtNewPhoto"
@@ -103,11 +96,11 @@
         android:layout_below="@+id/oldPhoto"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="70dp"
         android:layout_marginRight="66dp"
         android:gravity="center"
-        android:text="Your photo"
+        android:text="New photo"
         android:textSize="12dp" />
 
     <ImageView
@@ -119,8 +112,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="96dp"
-        android:background="@drawable/grey_rounded_corner" />
+        android:layout_marginTop="75dp"
+        android:background="@drawable/black_rounded_corner" />
 
     <ImageView
         android:id="@+id/newPhoto"
@@ -129,21 +122,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="75dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/grey_rounded_corner" />
 
     <TextView
         android:id="@+id/newParams"
-        android:layout_width="180dp"
+        android:layout_width="185dp"
         android:layout_height="70dp"
+        android:layout_below="@+id/newPhoto"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="22dp"
-        android:layout_marginBottom="272dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="315dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="center"
         android:text="New params \n test \n test"
@@ -151,21 +147,22 @@
 
     <TextView
         android:id="@+id/oldParams"
-        android:layout_width="180dp"
+        android:layout_width="185dp"
         android:layout_height="70dp"
+        android:layout_below="@+id/oldPhoto"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginBottom="272dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="315dp"
         android:background="@drawable/black_rounded_corner"
         android:gravity="center"
-        android:textColor="#FFFFFF"
         android:text="Old params \n test \n test"
+        android:textColor="#FFFFFF"
         android:textSize="15dp" />
-
 
 
 </RelativeLayout>

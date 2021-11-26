@@ -49,18 +49,18 @@
 
     <ImageView
         android:id="@+id/smapshotModel"
-        android:layout_width="352dp"
-        android:layout_height="245dp"
+        android:layout_width="387dp"
+        android:layout_height="287dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="120dp" />
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="102dp" />
 
 </RelativeLayout>

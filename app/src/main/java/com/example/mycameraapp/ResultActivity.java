@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
-    private TextView oldParams, newParams, success, percentage_accuracy, percentage_accuracy2, percentage_accuracy3;
+    private TextView oldParams, newParams, success, percentage_accuracy;
     private ImageView newPhoto, oldPhoto;
 
     private Utils utils = new Utils(this);
@@ -47,8 +47,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldPhoto = findViewById(R.id.oldPhoto);
 
         percentage_accuracy = findViewById(R.id.percentage_accuracy);
-        percentage_accuracy2 = findViewById(R.id.percentage_accuracy2);
-        percentage_accuracy3 = findViewById(R.id.percentage_accuracy3);
 
         //Getting bundles
         Bundle bundle = getIntent().getExtras();
@@ -85,6 +83,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°");
 
         oldParams.getBackground().setAlpha(100);
+        oldPhoto.getBackground().setAlpha(100);
         newParams.getBackground().setAlpha(140);
 
         String instruction_az = null;
@@ -108,16 +107,12 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             e.printStackTrace();
         }
 
-        percentage_accuracy.setText("Azimuth accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az);
-        percentage_accuracy2.setText("Tilt accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt);
-        percentage_accuracy3.setText("Roll accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
+        percentage_accuracy.setText("Azimuth accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az
+        + "\n" + "Tilt accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt
+        + "\n" + "Roll accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
 
         percentage_accuracy.setTypeface(montserrat_medium);
-        percentage_accuracy2.setTypeface(montserrat_medium);
-        percentage_accuracy3.setTypeface(montserrat_medium);
         percentage_accuracy.getBackground().setAlpha(204);
-        percentage_accuracy2.getBackground().setAlpha(179);
-        percentage_accuracy3.getBackground().setAlpha(153);
 
         btnGoBack = findViewById(R.id.button);
         btnRetake = findViewById(R.id.btnRetake);
