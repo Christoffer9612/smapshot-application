@@ -133,7 +133,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 //write your code here to be executed after 1 second
                 loadPhoto();
             }
-        }, 1200); //Delay so most recent photo can be displayed
+        }, 2000); //Delay so most recent photo can be displayed
     }
 
     public void loadPhoto() {
@@ -239,6 +239,23 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float diff = Math.abs(old_angle - new_angle);
         float clockwise = (360 - new_angle) + old_angle;
         float counterclockwise = new_angle + (360 - old_angle);
+
+        if(angle_type.equals("azimuth")) {
+            if(Math.round(diff) == 0.0) {
+                return ", Perfect!";
+            }
+
+            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
+                return ", turn device " + Math.round(diff) + "° clockwise";
+            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
+                return ", turn device " + Math.round(diff) + "° counterclockwise";
+            } else if (clockwise < diff && clockwise < counterclockwise) {
+                return ", tilt device " + Math.round(clockwise) + "° clockwise";
+            } else {
+                return ", tilt device " + Math.round(counterclockwise) + "° counterclockwise";
+            }
+
+        }
 
 
 
