@@ -7,9 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -107,9 +104,11 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             e.printStackTrace();
         }
 
-        percentage_accuracy.setText("Azimuth accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%" + " " + instruction_az
-        + "\n" + "Tilt accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%" + " " + instruction_tilt
-        + "\n" + "Roll accuracy: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" + " " + instruction_roll);
+        percentage_accuracy.setText("Azimuth uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
+         + "\n" + "Tilt uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
+        + "\n" + "Roll uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
+
+
 
         percentage_accuracy.setTypeface(montserrat_medium);
         percentage_accuracy.getBackground().setAlpha(204);
@@ -179,54 +178,57 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     //Calculates accuracy for each orientation angle (azimuth, tilt, roll)
     public int percentage_accuracy(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
 
-        float azimuthAccuracy = 0, tiltAccuracy = 0, rollAccuracy = 0;
+        float azimuthUncertainty = 0, tiltUncertainty = 0, rollUncertainty = 0;
 
         if(orientationAngle.equals("azimuth")) {
-
-            azimuthAccuracy = accuracyCalc(azimuthOld, az);
-            return (int) Math.round(azimuthAccuracy);
+            azimuthUncertainty = uncertaintyCalc(azimuthOld, az) * 100;
+            return Math.round(azimuthUncertainty);
         } else if (orientationAngle.equals("tilt")) {
-            tiltAccuracy = accuracyCalc(tiltOld, ti);
-            return (int) Math.round(tiltAccuracy);
+            tiltUncertainty = uncertaintyCalc(tiltOld, ti) * 100;
+            return Math.round(tiltUncertainty);
         } else if (orientationAngle.equals("roll")) {
-            rollAccuracy = accuracyCalc(rollOld, ro);
-            return (int) Math.round(rollAccuracy);
+            rollUncertainty = uncertaintyCalc(rollOld, ro) * 100;
+            return Math.round(rollUncertainty);
         }
         return 0;
     }
     
-    public float accuracyCalc(float angle_old, float angle_new) {
+    public float uncertaintyCalc(float angle_old, float angle_new) {
         //compute three accuracies, going difference, clockwise and counterclockwise
         //return highest accuracy
 
-        float accuracy_diff;
-        float accuracy_clockwise;
-        float accuracy_counterclockwise;
+
+        float uncertainty_diff;
+        float uncertainty_clockwise;
+        float uncertainty_counterclockwise;
 
         //Straight difference Diff
-        accuracy_diff = Math.abs(angle_old - angle_new);
-        accuracy_diff = accuracy_diff /360;
-        accuracy_diff = (float) (((float) (1.0 - accuracy_diff)) * 100.0);
+        uncertainty_diff = Math.abs(angle_old - angle_new);
+        uncertainty_diff = (float) (uncertainty_diff /360.0);
 
         //clockwise up to 360 + old_angle
         float x = 360 - angle_new;
-        accuracy_clockwise = x + angle_old;
-        accuracy_clockwise = accuracy_clockwise/360;
-        accuracy_clockwise= (float) (((float) (1.0 - accuracy_clockwise)) * 100.0);
+        uncertainty_clockwise = x + angle_old;
+        uncertainty_clockwise = (float) (uncertainty_clockwise/360.0);
+
 
         //counterclockwise down to 0 degrees + (360-old_angle)
         float y = 360 - angle_old;
-        accuracy_counterclockwise = angle_new + y;
-        accuracy_counterclockwise = accuracy_counterclockwise/360;
-        accuracy_counterclockwise= (float) (((float) (1.0 - accuracy_counterclockwise)) * 100.0);
+        uncertainty_counterclockwise = angle_new + y;
+        uncertainty_counterclockwise = (float) (uncertainty_counterclockwise/360.0);
+
 
         //return the highest accuracy
-        if(accuracy_diff > accuracy_clockwise && accuracy_diff > accuracy_counterclockwise) {
-            return accuracy_diff;
-        } else if (accuracy_clockwise > accuracy_diff && accuracy_clockwise > accuracy_counterclockwise) {
-            return accuracy_clockwise;
+        if(uncertainty_diff < uncertainty_clockwise && uncertainty_diff < uncertainty_counterclockwise) {
+            Log.d("diff", "" + uncertainty_diff);
+            return uncertainty_diff;
+        } else if (uncertainty_clockwise < uncertainty_diff && uncertainty_clockwise < uncertainty_counterclockwise) {
+            Log.d("diff", String.valueOf(uncertainty_clockwise));
+            return uncertainty_clockwise;
         } else {
-            return accuracy_counterclockwise;
+            Log.d("diff", String.valueOf(uncertainty_counterclockwise));
+            return uncertainty_counterclockwise;
+
         }
 
         }
@@ -257,13 +259,10 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         }
 
-
-
         if(angle_type.equals("tilt")) {
             if(Math.round(diff) == 0.0) {
                 return ", Perfect!";
             }
-
             if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
                 return ", tilt device " + Math.round(diff) + "° up";
             } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){

@@ -260,7 +260,6 @@ public class CameraActivity extends MainActivity {
         float counterclockwise = angleRealTime + (360 - angleOld);
 
         rotations[0] = diff;
-        Log.d("test", String.valueOf(diff));
         rotations[1] = clockwise;
         rotations[2] = counterclockwise;
 
