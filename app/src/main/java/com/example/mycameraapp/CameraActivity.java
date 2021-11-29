@@ -182,22 +182,22 @@ public class CameraActivity extends MainActivity {
 
                 //normalise angles 0 - 360 degrees
                 //add declination to azimuth
-                float azimuth = normaliseAngles(Math.round(Math.toDegrees(values[0]) + declination));
+                float azimuth = utils.normaliseAngles(Math.round(Math.toDegrees(values[0]) + declination));
 
-                float pitch = normaliseAngles(Math.round(Math.toDegrees(values[1])));
-                pitch = 360 - pitch;
+                float pitch = 360 - utils.normaliseAngles(Math.round(Math.toDegrees(values[1])));
+                pitch = utils.normaliseAngles180(pitch);
 
-                float roll = normaliseAngles(Math.round(Math.toDegrees(values[2])));
+                float roll = utils.normaliseAngles180(Math.round(Math.toDegrees(values[2])));
 
                 // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
                 if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
-                    azimuthOld = bundleSelectedPhoto.getFloat("azimuth_test");
-                    tiltOld = bundleSelectedPhoto.getFloat("tilt_test");
-                    rollOld = bundleSelectedPhoto.getFloat("roll_test");
+                    azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_test"));
+                    tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_test"));
+                    rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_test"));
                 } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
-                    azimuthOld = bundleSelectedPhoto.getFloat("azimuth_dia");
-                    tiltOld = bundleSelectedPhoto.getFloat("tilt_dia");
-                    rollOld = bundleSelectedPhoto.getFloat("roll_dia");
+                    azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_dia"));
+                    tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
+                    rollOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("roll_dia"));
                 }
 
                 //setting the colors of real time parameters, green if within range of 5.0
@@ -325,11 +325,7 @@ public class CameraActivity extends MainActivity {
 
     }
 
-    public float normaliseAngles (float angle) {
-        angle = angle % 360;
-        angle = (angle + 360) % 360;
-        return angle;
-    }
+
 
     Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
         @Override

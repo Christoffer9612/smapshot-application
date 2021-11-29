@@ -61,14 +61,14 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
         if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
-            azimuthOld = bundleSelectedPhoto.getFloat("azimuth_test");
-            tiltOld = bundleSelectedPhoto.getFloat("tilt_test");
-            rollOld = bundleSelectedPhoto.getFloat("roll_test");
+            azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_test"));
+            tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_test"));
+            rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_test"));
             oldPhoto.setImageResource(R.drawable.st_roch_test);
         } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
-            azimuthOld = bundleSelectedPhoto.getFloat("azimuth_dia");
-            tiltOld = bundleSelectedPhoto.getFloat("tilt_dia");
-            rollOld = bundleSelectedPhoto.getFloat("roll_dia");
+            azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_dia"));
+            tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
+            rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_dia"));
             oldPhoto.setImageResource(R.drawable.dia_303_12172);
         }
 
@@ -107,7 +107,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         percentage_accuracy.setText("Azimuth uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
          + "\n" + "Tilt uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
         + "\n" + "Roll uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
-
 
 
         percentage_accuracy.setTypeface(montserrat_medium);
@@ -181,59 +180,21 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float azimuthUncertainty = 0, tiltUncertainty = 0, rollUncertainty = 0;
 
         if(orientationAngle.equals("azimuth")) {
-            azimuthUncertainty = uncertaintyCalc(azimuthOld, az) * 100;
+            azimuthUncertainty = utils.uncertaintyCalc(azimuthOld, az) * 100;
             return Math.round(azimuthUncertainty);
         } else if (orientationAngle.equals("tilt")) {
-            tiltUncertainty = uncertaintyCalc(tiltOld, ti) * 100;
+            tiltUncertainty = utils.uncertaintyCalc180(tiltOld, ti) * 100;
             return Math.round(tiltUncertainty);
         } else if (orientationAngle.equals("roll")) {
-            rollUncertainty = uncertaintyCalc(rollOld, ro) * 100;
+            rollUncertainty = utils.uncertaintyCalc180(rollOld, ro) * 100;
             return Math.round(rollUncertainty);
         }
         return 0;
     }
-    
-    public float uncertaintyCalc(float angle_old, float angle_new) {
-        //compute three accuracies, going difference, clockwise and counterclockwise
-        //return highest accuracy
 
 
-        float uncertainty_diff;
-        float uncertainty_clockwise;
-        float uncertainty_counterclockwise;
 
-        //Straight difference Diff
-        uncertainty_diff = Math.abs(angle_old - angle_new);
-        uncertainty_diff = (float) (uncertainty_diff /360.0);
-
-        //clockwise up to 360 + old_angle
-        float x = 360 - angle_new;
-        uncertainty_clockwise = x + angle_old;
-        uncertainty_clockwise = (float) (uncertainty_clockwise/360.0);
-
-
-        //counterclockwise down to 0 degrees + (360-old_angle)
-        float y = 360 - angle_old;
-        uncertainty_counterclockwise = angle_new + y;
-        uncertainty_counterclockwise = (float) (uncertainty_counterclockwise/360.0);
-
-
-        //return the highest accuracy
-        if(uncertainty_diff < uncertainty_clockwise && uncertainty_diff < uncertainty_counterclockwise) {
-            Log.d("diff", "" + uncertainty_diff);
-            return uncertainty_diff;
-        } else if (uncertainty_clockwise < uncertainty_diff && uncertainty_clockwise < uncertainty_counterclockwise) {
-            Log.d("diff", String.valueOf(uncertainty_clockwise));
-            return uncertainty_clockwise;
-        } else {
-            Log.d("diff", String.valueOf(uncertainty_counterclockwise));
-            return uncertainty_counterclockwise;
-
-        }
-
-        }
-
-
+    //not used anymore, remove? also needs to be corrected to to change in normalisation of angles
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
         //compute three rotations, diff, clockwise to 360 and then to old angle, counterclockwise to 0 and then to old angle backwards.
         //return the smallest rotation and in the right direction
