@@ -115,6 +115,8 @@ public class CameraActivity extends MainActivity {
             overlayPhoto.setImageResource(R.drawable.dia_303_12172);
         }
         overlayPhoto.setAlpha(progress * (int) 2.55);
+
+
     }
 
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -269,27 +271,29 @@ public class CameraActivity extends MainActivity {
     public void setImageInstruction(float [] rotations, float angleOld, float realTimeAngle) {
 
 
-        if(Math.round(rotations[0]) < 50.0) {
+        if(Math.round(rotations[0]) < 5) {
             right.clearAnimation();
             left.clearAnimation();
-            right.setVisibility(View.INVISIBLE);
-            left.setVisibility(View.INVISIBLE);
-        }
-
-        if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle < angleOld) {
-            right.setVisibility(View.VISIBLE);
+            right.setVisibility(View.GONE);
             left.setVisibility(View.GONE);
             return;
-        } else if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle > angleOld) {
-            left.setVisibility(View.VISIBLE);
-            right.setVisibility(View.GONE);
-        } else if (rotations[1] < rotations[0] && rotations[1] < rotations[2]) {
-            right.setVisibility(View.VISIBLE);
-            left.setVisibility(View.GONE);
-        } else {
-            left.setVisibility(View.VISIBLE);
-            right.setVisibility(View.GONE);
         }
+
+            if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle < angleOld) {
+                right.setVisibility(View.VISIBLE);
+                left.setVisibility(View.GONE);
+                return;
+            } else if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle > angleOld) {
+                left.setVisibility(View.VISIBLE);
+                right.setVisibility(View.GONE);
+            } else if (rotations[1] < rotations[0] && rotations[1] < rotations[2]) {
+                right.setVisibility(View.VISIBLE);
+                left.setVisibility(View.GONE);
+            } else {
+                left.setVisibility(View.VISIBLE);
+                right.setVisibility(View.GONE);
+            }
+
     }
 
     public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle) {
@@ -298,8 +302,6 @@ public class CameraActivity extends MainActivity {
 
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
                 realTimeParams_az.setTextColor(Color.GREEN);
-                right.setVisibility(View.GONE);
-                left.setVisibility(View.GONE);
             } else {
                 realTimeParams_az.setTextColor(Color.WHITE);
             }

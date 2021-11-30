@@ -137,17 +137,19 @@
 
     <ImageView
         android:id="@+id/btnright"
-        android:layout_width="20dp"
+        android:layout_width="18dp"
         android:layout_height="20dp"
-        android:layout_marginLeft = "150dp"
+        android:layout_marginLeft = "140dp"
+        android:layout_marginTop="2dp"
         android:visibility="gone"
         android:src="@drawable/rightarrow" />
 
     <ImageView
         android:id="@+id/btnleft"
-        android:layout_width="20dp"
+        android:layout_width="18dp"
         android:layout_height="20dp"
-        android:layout_marginLeft = "150dp"
+        android:layout_marginLeft = "140dp"
+        android:layout_marginTop="2dp"
         android:visibility="gone"
         android:src="@drawable/leftarrow" />
 
