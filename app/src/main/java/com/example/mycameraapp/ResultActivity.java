@@ -24,7 +24,7 @@ import java.util.Comparator;
 
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
-    private TextView oldParams, newParams, success, percentage_accuracy;
+    private TextView oldParams, newParams, success, percentageUncertainty, txtScore;
     private ImageView newPhoto, oldPhoto;
 
     private Utils utils = new Utils(this);
@@ -42,8 +42,8 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams = findViewById(R.id.oldParams);
         newParams = findViewById(R.id.newParams);
         oldPhoto = findViewById(R.id.oldPhoto);
-
-        percentage_accuracy = findViewById(R.id.percentage_accuracy);
+        percentageUncertainty = findViewById(R.id.percentage_accuracy);
+        txtScore = findViewById(R.id.txtScore);
 
         //Getting bundles
         Bundle bundle = getIntent().getExtras();
@@ -104,18 +104,22 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             e.printStackTrace();
         }
 
-        percentage_accuracy.setText("Azimuth uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
-         + "\n" + "Tilt uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
-        + "\n" + "Roll uncertainty estimation: " + percentage_accuracy(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
+        percentageUncertainty.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
+         + "\n" + "Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
+        + "\n" + "Roll uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
 
-
-        percentage_accuracy.setTypeface(montserrat_medium);
-        percentage_accuracy.getBackground().setAlpha(204);
+        percentageUncertainty.setTypeface(montserrat_medium);
+        percentageUncertainty.getBackground().setAlpha(204);
 
         btnGoBack = findViewById(R.id.button);
         btnRetake = findViewById(R.id.btnRetake);
         utils.setButton(btnGoBack, montserrat_medium);
         utils.setButton(btnRetake, montserrat_medium);
+
+        ///setScore, using the three percentageUncertainties of the the three orientation angles
+        setScore(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"),
+                percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"),
+                percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll"));
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +179,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     }
 
     //Calculates accuracy for each orientation angle (azimuth, tilt, roll)
-    public int percentage_accuracy(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
+    public int percentageUncertainty(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
 
         float azimuthUncertainty = 0, tiltUncertainty = 0, rollUncertainty = 0;
 
@@ -191,10 +195,29 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         }
         return 0;
     }
+    //sets grade from meanUncertainty of the three orientation angles
+    public void setScore(float azimuthUncertainty, float tiltUncertainty, float rollUncertainty) {
+
+        float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
+
+        if(meanUncertainty < 5) {
+            txtScore.setText("Your grade: A 🎉");
+        } else if (meanUncertainty < 15) {
+            txtScore.setText("Your grade: B 🎉");
+        } else if (meanUncertainty < 25) {
+            txtScore.setText("Your grade: C 🎉");
+        } else if (meanUncertainty < 35) {
+            txtScore.setText("Your grade: D 🎉");
+        } else if (meanUncertainty < 45)  {
+            txtScore.setText("Your grade: E");
+        } else {
+            txtScore.setText("Your grade: F");
+        }
+    }
 
 
 
-    //not used anymore, remove? also needs to be corrected to to change in normalisation of angles
+    //not used anymore, remove? also needs to be corrected due to the change in normalisation of angles
     public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
         //compute three rotations, diff, clockwise to 360 and then to old angle, counterclockwise to 0 and then to old angle backwards.
         //return the smallest rotation and in the right direction

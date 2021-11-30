@@ -182,7 +182,8 @@ public class CameraActivity extends MainActivity {
                 //compensating for magnetic declination;
                 float declination = getDeclination();
 
-                //normalise angles 0 - 360 degrees
+                //normalise azimuth 0 to 360 degrees
+                //normalise tilt and roll -180 to 180 degrees
                 //add declination to azimuth
                 float azimuth = utils.normaliseAngles(Math.round(Math.toDegrees(values[0]) + declination));
 
@@ -252,7 +253,9 @@ public class CameraActivity extends MainActivity {
         float declination = geoField.getDeclination();
         return declination;
     }
-
+    //returns an array with the three ways of rotation, directly clockwise,
+    //up to 360 and then to correct angle
+    //or counter clockwise rotation
     public float [] wayOfRotation(float angleOld, float angleRealTime) {
 
         float [] rotations = new float[3];
@@ -268,8 +271,8 @@ public class CameraActivity extends MainActivity {
         return rotations;
 
     }
+    //determines and sets the arrow that instructs the user which way to turn
     public void setImageInstruction(float [] rotations, float angleOld, float realTimeAngle) {
-
 
         if(Math.round(rotations[0]) < 5) {
             right.clearAnimation();
@@ -295,11 +298,10 @@ public class CameraActivity extends MainActivity {
             }
 
     }
-
+    //sets the color of the realTimeParams to green when in the span of +- 5 degrees
     public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle) {
 
         if (orientationAngle.equals("azimuth")) {
-
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
                 realTimeParams_az.setTextColor(Color.GREEN);
             } else {
@@ -309,18 +311,18 @@ public class CameraActivity extends MainActivity {
 
         if (orientationAngle.equals("tilt")) {
 
-        if (Math.abs(angleRealTime - angleOld) < 5.0) {
+            if (Math.abs(angleRealTime - angleOld) < 5.0) {
             realTimeParams_ti.setTextColor(Color.GREEN);
-        } else {
+            } else {
             realTimeParams_ti.setTextColor(Color.WHITE);
             }
         }
 
         if(orientationAngle.equals("roll")) {
 
-        if (Math.abs(angleRealTime - angleOld) < 5.0) {
+            if (Math.abs(angleRealTime - angleOld) < 5.0) {
             realTimeParams_ro.setTextColor(Color.GREEN);
-        } else {
+            } else {
             realTimeParams_ro.setTextColor(Color.WHITE);
             }
         }

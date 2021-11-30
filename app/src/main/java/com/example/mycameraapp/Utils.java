@@ -91,7 +91,6 @@ public class Utils {
         float uncertaintyDiff;
         float uncertaintyAroundZero;
 
-
         //Straight difference Diff, when both angles are negative and when both angles are positive
         uncertaintyDiff = Math.abs(angle_old - angle_new);
         uncertaintyDiff = (float) (uncertaintyDiff /180.0);
