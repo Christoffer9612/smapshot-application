@@ -191,20 +191,23 @@ public class SelectActivity extends AppCompatActivity {
                     currentMarker.setIcon(d);
                     currentMarker.setTitle("Your current location.");
 
-                    txtTestDistance.setText(distance(currentLat, finalLatitudeTest, currentLon, finalLongitudeTest) + "m");
-                    txtDiaDistance.setText(distance(currentLat, finalLatitudeDia, currentLon, finalLongitudeDia) + "m");
+                    int distanceOne = distance(currentLat, finalLatitudeTest, currentLon, finalLongitudeTest);
+                    int distanceTwo = distance(currentLat, finalLatitudeDia, currentLon, finalLongitudeDia);
+
+                    int timeOne = timeToDestination(distanceOne);
+                    int timeTwo = timeToDestination(distanceTwo);
+
+                    txtTestDistance.setText(distanceOne + "m" + "\nWalk: " + timeOne + " min");
+                    txtDiaDistance.setText(distanceTwo + "m" + "\nWalk: " + timeTwo + " min");
                 }
             }
         });
     }
 
+    /*Calculating distance from current location to photos location and returning in meters, absolute distance (straight line on map)*/
     public int distance(double lat1, double lat2, double lon1, double lon2) {
-        lon1 = Math.toRadians(lon1);
-        lon2 = Math.toRadians(lon2);
-        lat1 = Math.toRadians(lat1);
-        lat2 = Math.toRadians(lat2);
-        double dlon = lon2 - lon1;
-        double dlat = lat2 - lat1;
+        double dlon = Math.toRadians(lon2) - Math.toRadians(lon1);
+        double dlat = Math.toRadians(lat2) - Math.toRadians(lat1);
         double a = Math.pow(Math.sin(dlat / 2), 2)
                 + Math.cos(lat1) * Math.cos(lat2)
                 * Math.pow(Math.sin(dlon / 2),2);
@@ -212,8 +215,14 @@ public class SelectActivity extends AppCompatActivity {
         double r = 6371;
         double distMeters = c * r * 1000;
         int result = (int) distMeters;
-        Log.d("DISTANCE", "" + result + " meters");
         return result;
+    }
+
+    /*Calculating distance to photo, based on 1 km = 5 min walk*/
+    public int timeToDestination(double distanceMeters) {
+        double minutes = distanceMeters / 1000 * 5;
+        minutes = Math.ceil(minutes); //Rounding up value
+        return (int) minutes;
     }
 
 
