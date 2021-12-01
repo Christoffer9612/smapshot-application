@@ -1,7 +1,10 @@
 package com.example.mycameraapp;
 
 import android.Manifest;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,17 +18,29 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.Toast;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView thumbnail;
     private Utils utils = new Utils(this);
     private FusedLocationProviderClient client;
+    Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
+
     }
 
 
@@ -156,10 +173,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openChallenge(View view) {
-        //To be implemented...
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="https://smapshot.heig-vd.ch/api/v1/images/185747/attributes/?lang=en"; //Dia photo
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            intro.setText((String) json.get("original_id"));
+                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/thumbnails/185747.jpg").into(thumbnail);
+                        } catch (JSONException e) {}
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                intro.setText("That didn't work!");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     public void openProfile() {
         //To be implemented...
     }
+
 }

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -200,18 +201,24 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
 
-        if(meanUncertainty < 5) {
-            txtScore.setText("Your grade: A 🎉");
+        if(meanUncertainty < 5) { //Change colors
+            txtScore.setText("Your grade: A 🎉"); //Party emoji
+            txtScore.setTextColor(Color.GREEN);
         } else if (meanUncertainty < 15) {
-            txtScore.setText("Your grade: B 🎉");
+            txtScore.setText("Your grade: B \uD83D\uDC4F"); //Clapping emoji
+            txtScore.setTextColor(Color.GREEN);
         } else if (meanUncertainty < 25) {
-            txtScore.setText("Your grade: C 🎉");
+            txtScore.setText("Your grade: C \uD83D\uDC4D"); //Thumbs up emoji
+            txtScore.setTextColor(Color.YELLOW);
         } else if (meanUncertainty < 35) {
-            txtScore.setText("Your grade: D 🎉");
+            txtScore.setText("Your grade: D \uD83D\uDE10"); //Neutral face emoji
+            txtScore.setTextColor(Color.RED);
         } else if (meanUncertainty < 45)  {
-            txtScore.setText("Your grade: E");
+            txtScore.setText("Your grade: E \uD83D\uDC4E"); //Thumbs down
+            txtScore.setTextColor(Color.RED);
         } else {
-            txtScore.setText("Your grade: F");
+            txtScore.setText("Your grade: F \uD83D\uDCA9"); //Poop emoji
+            txtScore.setTextColor(Color.RED);
         }
     }
 

@@ -94,7 +94,8 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="404dp"
-        android:text="Challenge of the day"
+        android:text="Test API"
+        android:onClick="openChallenge"
         android:textSize="18sp" />
 
     <Button
@@ -123,7 +124,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="305dp"
-        android:text="My photos"
+        android:text="Location"
         android:textSize="18sp" />
 
     <ImageView
