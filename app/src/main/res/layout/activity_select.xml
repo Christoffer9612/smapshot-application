@@ -40,13 +40,13 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="50dp"
-        android:onClick="selectTest"
+        android:onClick="selectImageOne"
         android:scaleType="centerCrop"
         android:src="@drawable/st_roch_test"
         app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <TextView
-        android:id="@+id/txtDia"
+        android:id="@+id/txtImageTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selDia303"
@@ -83,7 +83,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="25dp"
-        android:onClick="selectDia"
+        android:onClick="selectImageTwo"
         android:scaleType="centerCrop"
         android:src="@drawable/dia_303_12172"
         app:shapeAppearanceOverlay="@style/RoundedSquare" />

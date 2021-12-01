@@ -36,24 +36,21 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SelectActivity extends AppCompatActivity {
-    private ShapeableImageView testPhoto, diaPhoto;
+    private ShapeableImageView imageOnePhoto, imageTwoPhoto;
     private Button btnPhoto, btnBack;
-    private boolean selectedTest, selectedDia;
+    private boolean selectedImageOne, selectedImageTwo;
     public Bundle bundleSelectedPhoto;
     public static JSONObject jsonObj = null;
-    private GeoPoint testPoint, diaPoint;
-    private Marker testMarker, diaMarker;
+    private GeoPoint imageOnePoint, imageTwoPoint;
+    private Marker imageOneMarker, imageTwoMarker;
     private IMapController mapController;
     private MapView map;
     private JsonFinder jsonFinder = new JsonFinder(this);
     private Utils utils = new Utils(this);
-    private com.google.android.material.imageview.ShapeableImageView selTestPhoto, selDia303;
+    private com.google.android.material.imageview.ShapeableImageView selImageOne, selImageTwo;
     private FusedLocationProviderClient client;
-    private TextView txtDiaDistance, txtTestDistance;
+    private TextView txtImageTwoDistance, txtImageOneDistance;
 
     @SuppressLint("Range")
     @Override
@@ -61,22 +58,22 @@ public class SelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
 
-        //Create bundle, storing info about selected photo (test or dia)
+        //Create bundle, storing info about selected photo (imageOne or imageTwo)
         bundleSelectedPhoto = new Bundle();
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        testPhoto = findViewById(R.id.selTestPhoto);
-        diaPhoto = findViewById(R.id.selDia303);
+        imageOnePhoto = findViewById(R.id.selTestPhoto);
+        imageTwoPhoto = findViewById(R.id.selDia303);
         btnPhoto = findViewById(R.id.btnPhoto);
         btnBack = findViewById(R.id.btnBack);
-        selTestPhoto = findViewById(R.id.selTestPhoto);
-        selDia303 = findViewById(R.id.selDia303);
-        txtDiaDistance = findViewById(R.id.txtDiaDistance);
-        txtTestDistance = findViewById(R.id.txtTestDistance);
+        selImageOne = findViewById(R.id.selTestPhoto);
+        selImageTwo = findViewById(R.id.selDia303);
+        txtImageTwoDistance = findViewById(R.id.txtDiaDistance);
+        txtImageOneDistance = findViewById(R.id.txtTestDistance);
 
-        testPhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
-        diaPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
+        imageOnePhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
+        imageTwoPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
 
         utils.setButton(btnPhoto, montserrat_medium);
         btnPhoto.getBackground().setAlpha(100); //Proceed button transparent
@@ -97,44 +94,44 @@ public class SelectActivity extends AppCompatActivity {
         mapController.setZoom(16);
 
         //Using JsonFinder to get key-values in json-files under /assets/
-        Double latitudeTest = null;
-        Double longitudeTest = null;
-        String jsonTest = jsonFinder.JSONFromAsset(this, "test_photo.json");
+        Double latitudeImageOne = null;
+        Double longitudeImageOne = null;
+        String jsonImageOne = jsonFinder.JSONFromAsset(this, "test_photo.json");
         try {
-            JSONObject jsonObjTest = new JSONObject(jsonTest);
-            jsonObjTest = jsonObjTest.getJSONObject("pose"); //Json object within a json object...
-            latitudeTest = jsonFinder.getValue(jsonObjTest, "latitude");
-            longitudeTest = jsonFinder.getValue(jsonObjTest, "longitude");
+            JSONObject jsonObjImageOne = new JSONObject(jsonImageOne);
+            jsonObjImageOne = jsonObjImageOne.getJSONObject("pose"); //Json object within a json object...
+            latitudeImageOne = jsonFinder.getValue(jsonObjImageOne, "latitude");
+            longitudeImageOne = jsonFinder.getValue(jsonObjImageOne, "longitude");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Double latitudeDia = null;
-        Double longitudeDia = null;
-        String jsonDia = jsonFinder.JSONFromAsset(this, "dia_303_12172.json");
+        Double latitudeImageTwo = null;
+        Double longitudeImageTwo = null;
+        String jsonImageTwo = jsonFinder.JSONFromAsset(this, "dia_303_12172.json");
         try {
-            JSONObject jsonObjDia = new JSONObject(jsonDia);
-            jsonObjDia = jsonObjDia.getJSONObject("pose"); //Json object within a json object...
-            latitudeDia = jsonFinder.getValue(jsonObjDia, "latitude");
-            longitudeDia = jsonFinder.getValue(jsonObjDia, "longitude");
+            JSONObject jsonObjImageTwo = new JSONObject(jsonImageTwo);
+            jsonObjImageTwo = jsonObjImageTwo.getJSONObject("pose"); //Json object within a json object...
+            latitudeImageTwo = jsonFinder.getValue(jsonObjImageTwo, "latitude");
+            longitudeImageTwo = jsonFinder.getValue(jsonObjImageTwo, "longitude");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //Adding geopoints of old photos
-        testPoint = new GeoPoint(latitudeTest, longitudeTest);
-        testMarker = new Marker(map);
-        testMarker.setTitle("Test photo from St Roch building, Yverdon.");
-        addMarker(map, testPoint, testMarker);
+        imageOnePoint = new GeoPoint(latitudeImageOne, longitudeImageOne);
+        imageOneMarker = new Marker(map);
+        imageOneMarker.setTitle("Test photo from St Roch building, Yverdon.");
+        addMarker(map, imageOnePoint, imageOneMarker);
         //Listener to know when user clicks on Marker on map
-        testMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+        imageOneMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker, MapView map) {
                 marker.showInfoWindow();
                 map.getController().animateTo(marker.getPosition());
                 Log.d("CLICKED", "Test clicked");
                 try {
-                    selectTest(selTestPhoto);
+                    selectImageOne(selImageOne);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -142,19 +139,19 @@ public class SelectActivity extends AppCompatActivity {
             }
         });
 
-        diaPoint = new GeoPoint(latitudeDia, longitudeDia);
-        diaMarker = new Marker(map);
-        diaMarker.setTitle("Photo from 1999, Smapshot archives.");
-        addMarker(map, diaPoint, diaMarker);
+        imageTwoPoint = new GeoPoint(latitudeImageTwo, longitudeImageTwo);
+        imageTwoMarker = new Marker(map);
+        imageTwoMarker.setTitle("Photo from 1999, Smapshot archives.");
+        addMarker(map, imageTwoPoint, imageTwoMarker);
         //Listener to know when user clicks on Marker on map
-        diaMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+        imageTwoMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker, MapView map) {
                 marker.showInfoWindow();
                 map.getController().animateTo(marker.getPosition());
                 Log.d("CLICKED", "Dia clicked");
                 try {
-                    selectDia(selDia303);
+                    selectImageTwo(selImageTwo);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -167,10 +164,10 @@ public class SelectActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Double finalLatitudeTest = latitudeTest;
-        Double finalLongitudeTest = longitudeTest;
-        Double finalLatitudeDia = latitudeDia;
-        Double finalLongitudeDia = longitudeDia;
+        Double finalLatitudeImageOne = latitudeImageOne;
+        Double finalLongitudeImageOne = longitudeImageOne;
+        Double finalLatitudeImageTwo = latitudeImageTwo;
+        Double finalLongitudeImageTwo = longitudeImageTwo;
         client.getLastLocation().addOnSuccessListener(SelectActivity.this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
@@ -191,14 +188,14 @@ public class SelectActivity extends AppCompatActivity {
                     currentMarker.setIcon(d);
                     currentMarker.setTitle("Your current location.");
 
-                    int distanceOne = distance(currentLat, finalLatitudeTest, currentLon, finalLongitudeTest);
-                    int distanceTwo = distance(currentLat, finalLatitudeDia, currentLon, finalLongitudeDia);
+                    int distanceOne = distance(currentLat, finalLatitudeImageOne, currentLon, finalLongitudeImageOne);
+                    int distanceTwo = distance(currentLat, finalLatitudeImageTwo, currentLon, finalLongitudeImageTwo);
 
                     int timeOne = timeToDestination(distanceOne);
                     int timeTwo = timeToDestination(distanceTwo);
 
-                    txtTestDistance.setText(distanceOne + "m" + "\nWalk: " + timeOne + " min");
-                    txtDiaDistance.setText(distanceTwo + "m" + "\nWalk: " + timeTwo + " min");
+                    txtImageOneDistance.setText(distanceOne + "m" + "\nWalk: " + timeOne + " min");
+                    txtImageTwoDistance.setText(distanceTwo + "m" + "\nWalk: " + timeTwo + " min");
                 }
             }
         });
@@ -253,7 +250,7 @@ public class SelectActivity extends AppCompatActivity {
 
     public void openCustomCam(View view) {
 
-        if (selectedDia == true) { //Fix so you only can select ONE photo at a time
+        if (selectedImageTwo == true) { //Fix so you only can select ONE photo at a time
             //Add your data to bundle
             bundleSelectedPhoto.putString("oldPhoto", "dia_303_12172");
             Intent intent = new Intent(this, CameraActivity.class);
@@ -262,7 +259,7 @@ public class SelectActivity extends AppCompatActivity {
             intent.putExtras(bundleSelectedPhoto);
             startActivity(intent);
 
-        } else if (selectedTest == true) {
+        } else if (selectedImageOne == true) {
             //Add your data to bundle
             bundleSelectedPhoto.putString("oldPhoto", "st_roch_test");
             Intent intent = new Intent(this, CameraActivity.class);
@@ -281,39 +278,39 @@ public class SelectActivity extends AppCompatActivity {
     }
 
     //Refactor: merge with method below?
-    public void selectTest(View view) throws JSONException {
+    public void selectImageOne(View view) throws JSONException {
         int colorInt = getResources().getColor(R.color.smapshot_blue);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
 
-        if (!selectedTest) {
-            if (!selectedDia) {
-                testPhoto.setStrokeColor(csl);
-                testPhoto.setStrokeWidth(30);
-                selectedTest = true;
+        if (!selectedImageOne) {
+            if (!selectedImageTwo) {
+                imageOnePhoto.setStrokeColor(csl);
+                imageOnePhoto.setStrokeWidth(30);
+                selectedImageOne = true;
                 btnPhoto.setTextColor(Color.parseColor("#444444"));
                 btnPhoto.getBackground().setAlpha(255);
-                testMarker.showInfoWindow();
+                imageOneMarker.showInfoWindow();
             } else {
-                diaPhoto.setStrokeColor(csl);
-                diaPhoto.setStrokeWidth(0);
-                testPhoto.setStrokeColor(csl);
-                testPhoto.setStrokeWidth(30);
-                selectedTest = true;
-                testMarker.showInfoWindow();
-                selectedDia = false;
+                imageTwoPhoto.setStrokeColor(csl);
+                imageTwoPhoto.setStrokeWidth(0);
+                imageOnePhoto.setStrokeColor(csl);
+                imageOnePhoto.setStrokeWidth(30);
+                selectedImageOne = true;
+                imageOneMarker.showInfoWindow();
+                selectedImageTwo = false;
             }
         } else {
-            testPhoto.setStrokeWidth(0);
-            selectedTest = false;
+            imageOnePhoto.setStrokeWidth(0);
+            selectedImageOne = false;
             btnPhoto.setTextColor(Color.rgb(204,204,204));
             btnPhoto.getBackground().setAlpha(100);
-            testMarker.closeInfoWindow();
+            imageOneMarker.closeInfoWindow();
         }
 
         //Fetching json-file from /assets/ folder
-        String testPhoto = jsonFinder.JSONFromAsset(this,"test_photo.json");
+        String imageOnePhoto = jsonFinder.JSONFromAsset(this,"test_photo.json");
         try {
-            jsonObj = new JSONObject(testPhoto);
+            jsonObj = new JSONObject(imageOnePhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -326,45 +323,45 @@ public class SelectActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("tilt_test", tilt);
         bundleSelectedPhoto.putFloat("roll_test", roll);
 
-        mapController.animateTo(testPoint);
+        mapController.animateTo(imageOnePoint);
     }
 
     //Refactor: merge with method above?
-    public void selectDia(View view) throws JSONException {
+    public void selectImageTwo(View view) throws JSONException {
         int colorInt = getResources().getColor(R.color.smapshot_blue);
         ColorStateList csl = ColorStateList.valueOf(colorInt);
 
-        diaMarker.showInfoWindow();
+        imageTwoMarker.showInfoWindow();
 
-        if (!selectedDia) {
-            if (!selectedTest) {
-                diaPhoto.setStrokeColor(csl);
-                diaPhoto.setStrokeWidth(30);
-                selectedDia = true;
+        if (!selectedImageTwo) {
+            if (!selectedImageOne) {
+                imageTwoPhoto.setStrokeColor(csl);
+                imageTwoPhoto.setStrokeWidth(30);
+                selectedImageTwo = true;
                 btnPhoto.setTextColor(Color.parseColor("#444444"));
                 btnPhoto.getBackground().setAlpha(255);
-                diaMarker.showInfoWindow();
+                imageTwoMarker.showInfoWindow();
             } else {
-                testPhoto.setStrokeColor(csl);
-                testPhoto.setStrokeWidth(0);
-                diaPhoto.setStrokeColor(csl);
-                diaPhoto.setStrokeWidth(30);
-                selectedDia = true;
-                diaMarker.showInfoWindow();
-                selectedTest = false;
+                imageOnePhoto.setStrokeColor(csl);
+                imageOnePhoto.setStrokeWidth(0);
+                imageTwoPhoto.setStrokeColor(csl);
+                imageTwoPhoto.setStrokeWidth(30);
+                selectedImageTwo = true;
+                imageTwoMarker.showInfoWindow();
+                selectedImageOne = false;
             }
         } else {
-            diaPhoto.setStrokeWidth(0);
-            selectedDia = false;
+            imageTwoPhoto.setStrokeWidth(0);
+            selectedImageTwo = false;
             btnPhoto.setTextColor(Color.rgb(204,204,204));
             btnPhoto.getBackground().setAlpha(100);
-            diaMarker.closeInfoWindow();
+            imageTwoMarker.closeInfoWindow();
         }
 
         //Fetching json-file from /assets/ folder
-        String diaPhoto = jsonFinder.JSONFromAsset(this,"dia_303_12172.json");
+        String imageTwoPhoto = jsonFinder.JSONFromAsset(this,"dia_303_12172.json");
         try {
-            jsonObj = new JSONObject(diaPhoto);
+            jsonObj = new JSONObject(imageTwoPhoto);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -377,7 +374,7 @@ public class SelectActivity extends AppCompatActivity {
         bundleSelectedPhoto.putFloat("tilt_dia", tilt);
         bundleSelectedPhoto.putFloat("roll_dia", roll);
 
-        mapController.animateTo(diaPoint);
+        mapController.animateTo(imageTwoPoint);
     }
 
     //Converts StringBuilder that you receive from findValue method to a float

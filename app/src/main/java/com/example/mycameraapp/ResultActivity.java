@@ -142,7 +142,8 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         //Get photo filenames
         File storageDir = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
         File[] listFiles = storageDir.listFiles();
-        Comparator c = new Comparator<File>(){ //File-specific Comparator
+        Comparator c = new Comparator<
+                File>(){ //File-specific Comparator
 
             public int compare(File file1, File file2){
                 //this Comparator uses timestamps for orders
