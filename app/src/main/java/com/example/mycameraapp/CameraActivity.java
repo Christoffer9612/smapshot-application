@@ -21,7 +21,16 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -112,7 +121,22 @@ public class CameraActivity extends MainActivity {
         if (bundleSelectedPhoto.getString("oldPhoto").equals("photoOne")) {
             overlayPhoto.setImageResource(R.drawable.st_roch_test);
         } else if (bundleSelectedPhoto.getString("oldPhoto").equals("photoTwo")) {
-            overlayPhoto.setImageResource(R.drawable.dia_303_12172);
+            RequestQueue queue = Volley.newRequestQueue(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(overlayPhoto);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
+                }
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
         }
         overlayPhoto.setAlpha(progress * (int) 2.55);
 

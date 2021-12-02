@@ -17,6 +17,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
 
 import java.io.File;
@@ -70,7 +78,22 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_dia"));
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_dia"));
-            oldPhoto.setImageResource(R.drawable.dia_303_12172);
+            RequestQueue queue = Volley.newRequestQueue(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(oldPhoto);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
+                }
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
         }
 
         utils.setText(success, montserrat_medium);
@@ -83,27 +106,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams.getBackground().setAlpha(100);
         oldPhoto.getBackground().setAlpha(100);
         newParams.getBackground().setAlpha(140);
-
-        String instruction_az = null;
-        String instruction_tilt = null;
-        String instruction_roll = null;
-
-        try {
-            instruction_az = instructUser(azimuthOld, realTimeAzimuth, "azimuth");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            instruction_tilt = instructUser(tiltOld, realTimeTilt, "tilt");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            instruction_roll = instructUser(rollOld, realTimeRoll, "roll");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         percentageUncertainty.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
          + "\n" + "Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
@@ -221,71 +223,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             txtScore.setText("Your grade: F \uD83D\uDCA9"); //Poop emoji
             txtScore.setTextColor(Color.RED);
         }
-    }
-
-
-
-    //not used anymore, remove? also needs to be corrected due to the change in normalisation of angles
-    public String instructUser(float old_angle, float new_angle, String angle_type) throws JSONException {
-        //compute three rotations, diff, clockwise to 360 and then to old angle, counterclockwise to 0 and then to old angle backwards.
-        //return the smallest rotation and in the right direction
-
-        float diff = Math.abs(old_angle - new_angle);
-        float clockwise = (360 - new_angle) + old_angle;
-        float counterclockwise = new_angle + (360 - old_angle);
-
-        if(angle_type.equals("azimuth")) {
-            if(Math.round(diff) == 0.0) {
-                return ", Perfect!";
-            }
-
-            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", turn device " + Math.round(diff) + "° clockwise";
-            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", turn device " + Math.round(diff) + "° counterclockwise";
-            } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", tilt device " + Math.round(clockwise) + "° clockwise";
-            } else {
-                return ", tilt device " + Math.round(counterclockwise) + "° counterclockwise";
-            }
-
-        }
-
-        if(angle_type.equals("tilt")) {
-            if(Math.round(diff) == 0.0) {
-                return ", Perfect!";
-            }
-            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", tilt device " + Math.round(diff) + "° up";
-            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", tilt device " + Math.round(diff) + "° down";
-            } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", tilt device " + Math.round(clockwise) + "° up";
-            } else {
-                return ", tilt device " + Math.round(counterclockwise) + "° down";
-            }
-
-        }
-
-        if(angle_type.equals("roll")) {
-            if(Math.round(diff) == 0.0) {
-                return ", Perfect!";
-            }
-            if(diff < clockwise && diff < counterclockwise && new_angle < old_angle) {
-                return ", roll device " + Math.round(diff) + "° right";
-            } else if (diff < clockwise && diff < counterclockwise && new_angle > old_angle){
-                return ", roll device " + Math.round(diff) + "° left";
-            } else if (clockwise < diff && clockwise < counterclockwise) {
-                return ", roll device " + Math.round(clockwise) + "° right";
-            } else {
-                return ", roll device " + Math.round(counterclockwise) + "° left";
-            }
-
-        }
-        else {
-            return "error";
-        }
-
     }
 
     private void openMainActivity(View view) {

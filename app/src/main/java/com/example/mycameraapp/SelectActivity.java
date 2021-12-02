@@ -21,10 +21,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,8 +79,24 @@ public class SelectActivity extends AppCompatActivity {
         txtImageTwoDistance = findViewById(R.id.txtDiaDistance);
         txtImageOneDistance = findViewById(R.id.txtTestDistance);
 
-        imageOnePhoto.setImageResource(R.drawable.st_roch_test); // Might not need?
-        imageTwoPhoto.setImageResource(R.drawable.dia_303_12172); // Might not need since we set photos in .xml file instead!
+        imageOnePhoto.setImageResource(R.drawable.st_roch_test);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(imageTwoPhoto);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
 
         utils.setButton(btnPhoto, montserrat_medium);
         btnPhoto.getBackground().setAlpha(100); //Proceed button transparent
@@ -93,35 +116,16 @@ public class SelectActivity extends AppCompatActivity {
         mapController = map.getController();
         mapController.setZoom(16);
 
-        //Using JsonFinder to get key-values in json-files under /assets/
-        Double latitudeImageOne = null;
-        Double longitudeImageOne = null;
-        String jsonImageOne = jsonFinder.JSONFromAsset(this, "test_photo.json");
-        try {
-            JSONObject jsonObjImageOne = new JSONObject(jsonImageOne);
-            jsonObjImageOne = jsonObjImageOne.getJSONObject("pose"); //Json object within a json object...
-            latitudeImageOne = jsonFinder.getValue(jsonObjImageOne, "latitude");
-            longitudeImageOne = jsonFinder.getValue(jsonObjImageOne, "longitude");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Double latitudeImageOne = getLongOrLat("test_photo.json", "latitude");
+        Double longitudeImageOne = getLongOrLat("test_photo.json", "longitude");
 
-        Double latitudeImageTwo = null;
-        Double longitudeImageTwo = null;
-        String jsonImageTwo = jsonFinder.JSONFromAsset(this, "dia_303_12172.json");
-        try {
-            JSONObject jsonObjImageTwo = new JSONObject(jsonImageTwo);
-            jsonObjImageTwo = jsonObjImageTwo.getJSONObject("pose"); //Json object within a json object...
-            latitudeImageTwo = jsonFinder.getValue(jsonObjImageTwo, "latitude");
-            longitudeImageTwo = jsonFinder.getValue(jsonObjImageTwo, "longitude");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Double latitudeImageTwo = getLongOrLat("dia_303_12172.json", "latitude");
+        Double longitudeImageTwo = getLongOrLat("dia_303_12172.json", "longitude");
 
         //Adding geopoints of old photos
         imageOnePoint = new GeoPoint(latitudeImageOne, longitudeImageOne);
         imageOneMarker = new Marker(map);
-        imageOneMarker.setTitle("Test photo from St Roch building, Yverdon.");
+        imageOneMarker.setTitle(getTitle("test_photo.json") + ".");
         addMarker(map, imageOnePoint, imageOneMarker);
         //Listener to know when user clicks on Marker on map
         imageOneMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
@@ -129,7 +133,6 @@ public class SelectActivity extends AppCompatActivity {
             public boolean onMarkerClick(Marker marker, MapView map) {
                 marker.showInfoWindow();
                 map.getController().animateTo(marker.getPosition());
-                Log.d("CLICKED", "Test clicked");
                 try {
                     selectImageOne(selImageOne);
                 } catch (JSONException e) {
@@ -141,7 +144,7 @@ public class SelectActivity extends AppCompatActivity {
 
         imageTwoPoint = new GeoPoint(latitudeImageTwo, longitudeImageTwo);
         imageTwoMarker = new Marker(map);
-        imageTwoMarker.setTitle("Photo from 1999, Smapshot archives.");
+        imageTwoMarker.setTitle(getTitle("dia_303_12172.json") + ".");
         addMarker(map, imageTwoPoint, imageTwoMarker);
         //Listener to know when user clicks on Marker on map
         imageTwoMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
@@ -149,7 +152,6 @@ public class SelectActivity extends AppCompatActivity {
             public boolean onMarkerClick(Marker marker, MapView map) {
                 marker.showInfoWindow();
                 map.getController().animateTo(marker.getPosition());
-                Log.d("CLICKED", "Dia clicked");
                 try {
                     selectImageTwo(selImageTwo);
                 } catch (JSONException e) {
@@ -201,6 +203,31 @@ public class SelectActivity extends AppCompatActivity {
         });
     }
 
+    public double getLongOrLat(String filepath, String key) {
+        Double value = null;
+        String jsonFile = jsonFinder.JSONFromAsset(this, filepath);
+        try {
+            JSONObject jsonObj = new JSONObject(jsonFile);
+            jsonObj = jsonObj.getJSONObject("pose"); //Json object within a json object...
+            value = jsonFinder.getValue(jsonObj, key);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public String getTitle(String filepath) {
+        String jsonFile = jsonFinder.JSONFromAsset(this, filepath);
+        String title = "";
+        try {
+            JSONObject jsonObj = new JSONObject(jsonFile);
+            title = jsonObj.getString("title");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return title;
+    }
+
     /*Calculating distance from current location to photos location and returning in meters, absolute distance (straight line on map)*/
     public int distance(double lat1, double lat2, double lon1, double lon2) {
         double dlon = Math.toRadians(lon2) - Math.toRadians(lon1);
@@ -250,7 +277,7 @@ public class SelectActivity extends AppCompatActivity {
 
     public void openCustomCam(View view) {
 
-        if (selectedImageTwo == true) { //Fix so you only can select ONE photo at a time
+        if (selectedImageTwo == true) {
             //Add your data to bundle
             bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
             Intent intent = new Intent(this, CameraActivity.class);
@@ -268,7 +295,6 @@ public class SelectActivity extends AppCompatActivity {
             intent.putExtras(bundleSelectedPhoto);
             startActivity(intent);
         }
-        Log.d("SELECT", "Select one old photo!"); // Display message in UI: "Please select one photo to retake"
     }
 
     public void openMainMenu(View view) {
