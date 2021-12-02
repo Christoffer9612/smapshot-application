@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".FindActivity">
 
+
+    <CheckBox
+        android:id="@+id/checkbox_cities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="157dp"
+        android:textSize="20dp"
+        android:text="City photos" />
+
+    <CheckBox
+        android:id="@+id/checkbox_landscapes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="213dp"
+        android:text="Landscape photos"
+        android:textSize="20dp" />
+
     <Button
         android:id="@+id/btnFind"
         android:layout_width="140dp"
@@ -18,5 +45,18 @@
         android:layout_marginBottom="12dp"
         android:onClick="openSelectPhoto"
         android:text="Find" />
+
+    <Button
+        android:id="@+id/btnMain"
+        android:layout_width="140dp"
+        android:layout_height="73dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="openMain"
+        android:text="Go back" />
 
 </RelativeLayout>

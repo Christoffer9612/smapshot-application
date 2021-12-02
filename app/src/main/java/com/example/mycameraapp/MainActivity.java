@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         //"Configuring" buttons, photos, colors, font, etc. in main screen
         thumbnail.setImageResource(R.drawable.thumbnail);
-        thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
+        //thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
 
         utils.setText(azimuth, montserrat_medium);
         utils.setText(tilt, montserrat_medium);

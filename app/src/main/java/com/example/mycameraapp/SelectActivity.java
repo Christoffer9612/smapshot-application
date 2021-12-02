@@ -297,8 +297,8 @@ public class SelectActivity extends AppCompatActivity {
         }
     }
 
-    public void openMainMenu(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+    public void openFind(View view) {
+        Intent intent = new Intent(this, FindActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }

@@ -25,7 +25,7 @@
         android:layout_marginTop="261dp"
         android:gravity="center"
         android:text="Welcome, \nfind old photos to retake to get started!"
-        android:textSize="24dp" />
+        android:textSize="22dp" />
 
     <TextView
         android:id="@+id/tilt"
@@ -141,10 +141,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="507dp"
+        android:layout_marginBottom="513dp"
         android:src="@drawable/thumbnail" />
 
 </RelativeLayout>
