@@ -18,14 +18,14 @@
 
     <TextView
         android:id="@+id/intro"
-        android:layout_width="394dp"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="261dp"
         android:gravity="center"
-        android:text="Welcome, find old photos to retake in order to get started!"
-        android:textSize="18dp" />
+        android:text="Welcome, \nfind old photos to retake to get started!"
+        android:textSize="24dp" />
 
     <TextView
         android:id="@+id/tilt"
@@ -63,9 +63,38 @@
         android:layout_marginLeft="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginBottom="201dp"
+        android:layout_marginBottom="16dp"
         android:onClick="openSmapshot"
         android:text="What is Smapshot?"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnFindPhoto"
+        android:layout_width="178dp"
+        android:layout_height="90dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="220dp"
+        android:onClick="openFindPhoto"
+        android:text="Find photos"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="178dp"
+        android:layout_height="90dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="120dp"
+        android:text="Location"
         android:textSize="18sp" />
 
     <Button
@@ -78,7 +107,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginBottom="305dp"
+        android:layout_marginBottom="120dp"
         android:onClick="openTutorial"
         android:text="How to use"
         android:textSize="18sp" />
@@ -93,55 +122,29 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginBottom="404dp"
-        android:text="Test API"
+        android:layout_marginBottom="220dp"
         android:onClick="openChallenge"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnFindPhoto"
-        android:layout_width="178dp"
-        android:layout_height="90dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="404dp"
-        android:onClick="openSelectPhoto"
-        android:text="Find photos"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnProfile"
-        android:layout_width="178dp"
-        android:layout_height="90dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="305dp"
-        android:text="Location"
+        android:text="Test API"
         android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
-        android:layout_height="175dp"
+        android:layout_height="217dp"
         android:layout_above="@+id/btnSmapshot"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="9dp" />
+        android:layout_marginBottom="507dp"
+        android:src="@drawable/thumbnail" />
 
 </RelativeLayout>

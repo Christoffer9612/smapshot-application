@@ -27,12 +27,14 @@
         android:roundIcon="@drawable/favicon_196"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmapshotBlue">
-
+        <activity
+            android:name=".FindActivity"
+            android:exported="false" />
         <activity
             android:name=".SmapshotActivity"
             android:exported="true"
             android:label="@string/what_is_smapshot"
-            android:theme="@style/Theme.SmapshotBlue"/>
+            android:theme="@style/Theme.SmapshotBlue" />
         <activity
             android:name=".SelectActivity"
             android:exported="true"

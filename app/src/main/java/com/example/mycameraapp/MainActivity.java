@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         utils.setText(azimuth, montserrat_medium);
         utils.setText(tilt, montserrat_medium);
         utils.setText(roll, montserrat_medium);
+        utils.setText(intro, montserrat_medium);
 
         utils.setButton(btnFindPhoto, montserrat_medium);
         utils.setButton(btnLoadJSON, montserrat_medium);
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Methods for opening new Activities
-    public void openSelectPhoto(View view) {
-        Intent intent = new Intent(this, SelectActivity.class);
+    public void openFindPhoto(View view) {
+        Intent intent = new Intent(this, FindActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
