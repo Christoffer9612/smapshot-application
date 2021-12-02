@@ -252,7 +252,7 @@ public class SelectActivity extends AppCompatActivity {
 
         if (selectedImageTwo == true) { //Fix so you only can select ONE photo at a time
             //Add your data to bundle
-            bundleSelectedPhoto.putString("oldPhoto", "dia_303_12172");
+            bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent
@@ -261,7 +261,7 @@ public class SelectActivity extends AppCompatActivity {
 
         } else if (selectedImageOne == true) {
             //Add your data to bundle
-            bundleSelectedPhoto.putString("oldPhoto", "st_roch_test");
+            bundleSelectedPhoto.putString("oldPhoto", "photoOne");
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent

@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView thumbnail;
     private Utils utils = new Utils(this);
     private FusedLocationProviderClient client;
-    Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /* Requesting access to: camera, storage and folders */
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE}, 1);
     }
@@ -186,13 +185,13 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject json = new JSONObject(response);
                             intro.setText((String) json.get("original_id"));
-                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/thumbnails/185747.jpg").into(thumbnail);
+                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(thumbnail);
                         } catch (JSONException e) {}
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                intro.setText("That didn't work!");
+                intro.setText("No internet connection, or URL is broken");
             }
         });
 

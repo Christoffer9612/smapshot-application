@@ -61,12 +61,12 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         Float rollOld = null;
 
         // Loading in old az, ti, roll from old selected photo (dia vs. test, based on photo name stored in bundle)
-        if (bundleSelectedPhoto.getString("oldPhoto").equals("st_roch_test")) {
+        if (bundleSelectedPhoto.getString("oldPhoto").equals("photoOne")) {
             azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_test"));
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_test"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_test"));
             oldPhoto.setImageResource(R.drawable.st_roch_test);
-        } else if (bundleSelectedPhoto.getString("oldPhoto").equals("dia_303_12172")) {
+        } else if (bundleSelectedPhoto.getString("oldPhoto").equals("photoTwo")) {
             azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_dia"));
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_dia"));
