@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/intro"
-        android:layout_width="368dp"
+        android:layout_width="296dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
