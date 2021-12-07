@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name"><font fgcolor='#444444' size="28"><b>Smapshot</b></font></string>
     <string name="take_photo"><font fgcolor='#444444' size="28"><b>Take photo</b></font></string>
-    <string name="photo_captured"><font fgcolor='#444444' size="28"><b>Photo captured</b></font></string>
+    <string name="result"><font fgcolor='#444444' size="28"><b>Result</b></font></string>
     <string name="tutorial"><font fgcolor='#444444' size="28"><b>Tutorial</b></font></string>
     <string name="select_photo"><font fgcolor='#444444' size="28"><b>Select photo to retake</b></font></string>
     <string name="what_is_smapshot"><font fgcolor='#444444' size="28"><b>What is Smapshot?</b></font></string>

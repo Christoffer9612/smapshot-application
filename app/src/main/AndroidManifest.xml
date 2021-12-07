@@ -56,7 +56,7 @@
         <activity
             android:name=".ResultActivity"
             android:exported="true"
-            android:label="@string/photo_captured" />
+            android:label="@string/result" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
