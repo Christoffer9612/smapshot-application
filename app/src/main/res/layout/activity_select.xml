@@ -152,6 +152,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="286dp">
+
     </org.osmdroid.views.MapView>
 
     <TextView
@@ -160,10 +161,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="276dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="275dp"
         android:gravity="left"
         android:text="© OpenStreetMap contributors"
         android:textColor="#444444"
-        android:textSize="7dp" />
+        android:textSize="8dp" />
 
 </RelativeLayout>
