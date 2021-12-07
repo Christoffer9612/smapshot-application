@@ -79,6 +79,21 @@
         android:onClick="takePhoto"
         android:text="Capture" />
 
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="118dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:max="100"
+        android:progress="100" />
+
     <TextView
         android:id="@+id/txtTrans"
         android:layout_width="wrap_content"
@@ -89,7 +104,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
-        android:layout_marginBottom="146dp"
+        android:layout_marginBottom="119dp"
         android:text="TRANSPARENCY"
         android:textSize="16dp" />
 
@@ -101,24 +116,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="192dp"
-        android:layout_marginLeft="192dp"
-        android:layout_marginBottom="146dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginLeft="182dp"
+        android:layout_marginBottom="119dp"
         android:text="0 %"
         android:textSize="16dp" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="158dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="148dp"
-        android:max="100"
-        android:progress="100" />
 
     <TextView
         android:id="@+id/txtZoom"
@@ -128,12 +130,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="107dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginBottom="152dp"
         android:text="PINCH TO ZOOM"
         android:textSize="16dp" />
-
 
     <ImageView
         android:id="@+id/btnright"

@@ -8,30 +8,20 @@
 
     <TextView
         android:id="@+id/type"
-        android:layout_width="296dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="38dp"
-        android:layout_marginTop="108dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="176dp"
+        android:background="@drawable/grey_rounded_corner"
         android:gravity="left"
-        android:text="TYPE OF PHOTOS TO SEARCH FOR:"
+        android:text=" PHOTOS TO SEARCH FOR"
+        android:textColor="#444444"
         android:textSize="22dp" />
-
-    <CheckBox
-        android:id="@+id/checkboxCities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="164dp"
-        android:text="CITIES"
-        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/checkboxLandscapes"
@@ -41,10 +31,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="54dp"
-        android:layout_marginTop="213dp"
-        android:text="LANDSCAPES"
-        android:textSize="20dp" />
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="278dp"
+        android:buttonTint="@color/smapshot_red"
+        android:text="LANDSCAPES  "
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/checkboxMonuments"
@@ -55,9 +46,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="262dp"
-        android:text="MONUMENTS"
-        android:textSize="20dp" />
+        android:layout_marginTop="327dp"
+        android:buttonTint="@color/smapshot_red"
+        android:text="MONUMENTS  "
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/checkboxRivers"
@@ -68,9 +60,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="311dp"
-        android:text="RIVERS"
-        android:textSize="20dp" />
+        android:layout_marginTop="376dp"
+        android:buttonTint="@color/smapshot_red"
+        android:text="RIVERS  "
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/checkboxViewpoints"
@@ -81,9 +74,24 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="359dp"
-        android:text="VIEWPOINTS"
-        android:textSize="20dp" />
+        android:layout_marginTop="425dp"
+        android:buttonTint="@color/smapshot_red"
+        android:text="VIEWPOINTS  "
+        android:textSize="18dp" />
+
+    <CheckBox
+        android:id="@+id/checkboxCities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="229dp"
+        android:buttonTint="@color/smapshot_red"
+        android:text="CITIES  "
+        android:textSize="18dp" />
 
     <Button
         android:id="@+id/btnFind"
