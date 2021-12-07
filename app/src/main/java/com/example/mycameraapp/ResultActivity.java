@@ -208,22 +208,22 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         if(meanUncertainty < 5) { //Change colors
             txtScore.setText("Your grade: A 🎉"); //Party emoji
-            txtScore.setTextColor(Color.GREEN);
+            txtScore.setTextColor(Color.parseColor("#3CC0C5"));
         } else if (meanUncertainty < 15) {
             txtScore.setText("Your grade: B \uD83D\uDC4F"); //Clapping emoji
-            txtScore.setTextColor(Color.GREEN);
+            txtScore.setTextColor(Color.parseColor("#78E8EC"));
         } else if (meanUncertainty < 25) {
             txtScore.setText("Your grade: C \uD83D\uDC4D"); //Thumbs up emoji
-            txtScore.setTextColor(Color.YELLOW);
+            txtScore.setTextColor(Color.parseColor("#8DDFE2"));
         } else if (meanUncertainty < 35) {
             txtScore.setText("Your grade: D \uD83D\uDE10"); //Neutral face emoji
-            txtScore.setTextColor(Color.RED);
+            txtScore.setTextColor(Color.parseColor("#E09D80"));
         } else if (meanUncertainty < 45)  {
             txtScore.setText("Your grade: E \uD83D\uDC4E"); //Thumbs down
-            txtScore.setTextColor(Color.RED);
+            txtScore.setTextColor(Color.parseColor("#EE8F67"));
         } else {
             txtScore.setText("Your grade: F \uD83D\uDCA9"); //Poop emoji
-            txtScore.setTextColor(Color.RED);
+            txtScore.setTextColor(Color.parseColor("#FF763C"));
         }
     }
 
