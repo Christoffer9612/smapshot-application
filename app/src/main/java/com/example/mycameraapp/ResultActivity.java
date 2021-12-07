@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -35,7 +36,7 @@ import java.util.Comparator;
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentageUncertainty, txtScore;
-    private ImageView newPhoto, oldPhoto;
+    private ShapeableImageView newPhoto, oldPhoto;
 
     private Utils utils = new Utils(this);
 
@@ -171,7 +172,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         File imgFile = new File(imgPath);
         if(imgFile.exists()){
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            newPhoto = (ImageView) findViewById(R.id.newPhoto);
+            newPhoto = findViewById(R.id.newPhoto);
             ObjectAnimator.ofFloat(newPhoto, View.ALPHA, 0.1f, 1.0f).setDuration(500).start(); //Animates (fade)
             newPhoto.setImageBitmap(RotateBitmap(myBitmap, 90)); //Rotate preview of photo 90 degrees
         }

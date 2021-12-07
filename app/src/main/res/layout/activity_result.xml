@@ -103,7 +103,7 @@
         android:text="New photo"
         android:textSize="12dp" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/oldPhoto"
         android:layout_width="185dp"
         android:layout_height="213dp"
@@ -113,9 +113,11 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="75dp"
-        android:background="@drawable/black_rounded_corner" />
+        android:background="@drawable/black_rounded_corner"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/newPhoto"
         android:layout_width="185dp"
         android:layout_height="213dp"
@@ -125,7 +127,9 @@
         android:layout_marginTop="75dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/grey_rounded_corner" />
+        android:background="@drawable/grey_rounded_corner"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <TextView
         android:id="@+id/newParams"
