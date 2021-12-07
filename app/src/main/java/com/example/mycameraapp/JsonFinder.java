@@ -39,4 +39,10 @@ public class JsonFinder {
         return val;
     }
 
+    /*Method for returning double value from String key.*/
+    public String getStringValue(JSONObject jsonObj, String key) throws JSONException {
+        String val = jsonObj.getString(key);
+        return val;
+    }
+
 }

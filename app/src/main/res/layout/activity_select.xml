@@ -24,11 +24,11 @@
         android:layout_height="213dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/grey_rounded_corner"
         android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true" />
+        android:background="@drawable/grey_rounded_corner" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/selTestPhoto"
@@ -50,27 +50,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selDia303"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/backgroundTwo"
+        android:layout_alignLeft="@+id/backgroundTwo"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="21dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:gravity="center"
-        android:text="Photo from Smapshot"
+        android:text="Image Two ID"
         android:textSize="12dp" />
 
     <TextView
-        android:id="@+id/txtTestPhoto"
+        android:id="@+id/txtImageOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selTestPhoto"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
+        android:layout_alignStart="@+id/backgroundOne"
+        android:layout_alignLeft="@+id/backgroundOne"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Test photo from St Roch"
+        android:text="Image One ID"
         android:textSize="12dp" />
 
     <com.google.android.material.imageview.ShapeableImageView

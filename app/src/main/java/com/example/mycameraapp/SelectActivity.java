@@ -57,7 +57,7 @@ public class SelectActivity extends AppCompatActivity {
     private Utils utils = new Utils(this);
     private com.google.android.material.imageview.ShapeableImageView selImageOne, selImageTwo;
     private FusedLocationProviderClient client;
-    private TextView txtImageTwoDistance, txtImageOneDistance;
+    private TextView txtImageOneDistance, txtImageTwoDistance, txtImageOne, txtImageTwo;
 
     @SuppressLint("Range")
     @Override
@@ -78,6 +78,8 @@ public class SelectActivity extends AppCompatActivity {
         selImageTwo = findViewById(R.id.selDia303);
         txtImageTwoDistance = findViewById(R.id.txtDiaDistance);
         txtImageOneDistance = findViewById(R.id.txtTestDistance);
+        txtImageOne = findViewById(R.id.txtImageOne);
+        txtImageTwo = findViewById(R.id.txtImageTwo);
 
         imageOnePhoto.setImageResource(R.drawable.st_roch_test);
 
@@ -102,6 +104,23 @@ public class SelectActivity extends AppCompatActivity {
         btnPhoto.getBackground().setAlpha(100); //Proceed button transparent
         btnPhoto.setTextColor(Color.rgb(204,204,204)); //Proceed button text transparent
         utils.setButton(btnBack, montserrat_medium);
+
+        //Setting text title of photos to its id from json-file
+        String imageOnePhoto = jsonFinder.JSONFromAsset(this,"test_photo.json");
+        try {
+            jsonObj = new JSONObject(imageOnePhoto);
+            txtImageOne.setText(jsonFinder.getStringValue(jsonObj, "original_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String imageTwoPhoto = jsonFinder.JSONFromAsset(this,"dia_303_12172.json");
+        try {
+            jsonObj = new JSONObject(imageTwoPhoto);
+            txtImageTwo.setText(jsonFinder.getStringValue(jsonObj, "original_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         //OpenStreetMap
         Context ctx = getApplicationContext();
