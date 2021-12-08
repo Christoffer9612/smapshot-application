@@ -76,7 +76,7 @@
 
     <TextView
         android:id="@+id/txtScore"
-        android:layout_width="231dp"
+        android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/oldPhoto"
         android:layout_alignParentStart="true"
@@ -84,14 +84,14 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginLeft="89dp"
-        android:layout_marginTop="237dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginRight="90dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
         android:gravity="center"
         android:text="Your grade: X 🎉"
-        android:textSize="28dp" />
+        android:textSize="34dp" />
 
     <TextView
         android:id="@+id/txtNewPhoto"

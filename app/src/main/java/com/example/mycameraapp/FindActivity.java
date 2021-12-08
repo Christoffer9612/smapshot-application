@@ -12,10 +12,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.hanks.htextview.evaporate.EvaporateTextView;
+
 public class FindActivity extends AppCompatActivity {
 
     private Button btnMain, btnFind;
     private CheckBox checkboxCities, checkboxLandscapes, checkboxMonuments, checkboxRivers, checkboxViewpoints, checkboxAll;
+    private EvaporateTextView findHeadline;
     private Utils utils = new Utils(this);
 
     @Override
@@ -30,6 +33,9 @@ public class FindActivity extends AppCompatActivity {
         checkboxRivers = findViewById(R.id.checkboxRivers);
         checkboxViewpoints = findViewById(R.id.checkboxViewpoints);
         checkboxAll = findViewById(R.id.checkboxAll);
+        findHeadline = findViewById(R.id.findHeadline);
+
+        findHeadline.animateText(" PHOTOS TO SEARCH FOR ");
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
 

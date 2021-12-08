@@ -12,9 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hanks.htextview.evaporate.EvaporateTextView;
+
 public class TutorialActivity extends AppCompatActivity {
 
-    public static TextView stepOne, stepTwo, stepThree, stepFour;
+    public EvaporateTextView stepOne, stepTwo, stepThree, stepFour;
     public Button btnGoBack;
     private ImageView contribute;
 
@@ -32,16 +34,12 @@ public class TutorialActivity extends AppCompatActivity {
         btnGoBack = findViewById(R.id.btnGoBack);
         contribute = findViewById(R.id.contribute);
 
-        setText(stepOne, montserrat_medium);
-        setText(stepTwo, montserrat_medium);
-        setText(stepThree, montserrat_medium);
-        setText(stepFour, montserrat_medium);
-        contribute.setImageResource(R.drawable.contribute);
+        stepOne.animateText("1. Find an old photo you wish to retake");
+        stepTwo.animateText("2. Navigate to the location");
+        stepThree.animateText("3. Retake the old photo");
+        stepFour.animateText("4. Compare the past with the present!");
 
-        stepOne.setGravity(Gravity.CENTER);
-        stepTwo.setGravity(Gravity.CENTER);
-        stepThree.setGravity(Gravity.CENTER);
-        stepFour.setGravity(Gravity.CENTER);
+        contribute.setImageResource(R.drawable.contribute);
 
         stepOne.getBackground().setAlpha(230);
         stepTwo.getBackground().setAlpha(204);

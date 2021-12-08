@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".TutorialActivity">
 
-    <TextView
+    <com.hanks.htextview.evaporate.EvaporateTextView
         android:id="@+id/stepOne"
         android:layout_width="370dp"
         android:layout_height="70dp"
@@ -16,12 +16,14 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="463dp"
         android:background="@drawable/red_rounded_corner"
-        android:text="1. Find an old photo you wish to retake"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <com.hanks.htextview.evaporate.EvaporateTextView
         android:id="@+id/stepTwo"
         android:layout_width="370dp"
         android:layout_height="70dp"
@@ -31,12 +33,14 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="368dp"
         android:background="@drawable/red_rounded_corner"
-        android:text="2. Navigate to the location of the old photo"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <com.hanks.htextview.evaporate.EvaporateTextView
         android:id="@+id/stepThree"
         android:layout_width="370dp"
         android:layout_height="70dp"
@@ -46,12 +50,14 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="272dp"
         android:background="@drawable/red_rounded_corner"
-        android:text="3. Retake the old photo by taking a new photo"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <com.hanks.htextview.evaporate.EvaporateTextView
         android:id="@+id/stepFour"
         android:layout_width="370dp"
         android:layout_height="70dp"
@@ -61,7 +67,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="176dp"
         android:background="@drawable/red_rounded_corner"
-        android:text="4. Receive score and compare the past with the present!"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         tools:ignore="HardcodedText" />

@@ -37,7 +37,7 @@ import java.util.Comparator;
 
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
-    private TextView oldParams, newParams, success, percentageUncertainty, txtScore;
+    private TextView oldParams, newParams, success, percentageUncertainty, txtScore, loadingMessage;
     private ShapeableImageView newPhoto, oldPhoto;
     private ToggleButton toggle;
 
@@ -58,6 +58,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldPhoto = findViewById(R.id.oldPhoto);
         percentageUncertainty = findViewById(R.id.percentage_accuracy);
         txtScore = findViewById(R.id.txtScore);
+        loadingMessage = findViewById(R.id.loadingMessage);
 
         //Getting bundles
         Bundle bundle = getIntent().getExtras();
@@ -198,6 +199,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             newPhoto = findViewById(R.id.newPhoto);
             ObjectAnimator.ofFloat(newPhoto, View.ALPHA, 0.1f, 1.0f).setDuration(500).start(); //Animates (fade)
+            loadingMessage.setText("");
             newPhoto.setImageBitmap(RotateBitmap(myBitmap, 90)); //Rotate preview of photo 90 degrees
         }
     }
