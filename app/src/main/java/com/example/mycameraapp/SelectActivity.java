@@ -261,10 +261,10 @@ public class SelectActivity extends AppCompatActivity {
         return result;
     }
 
-    /*Calculating distance to photo, based on 1 km = 5 min walk*/
+    /*Calculating distance to photo, based on 1 km = 10 min walk*/
     public int timeToDestination(double distanceMeters) {
-        double minutes = distanceMeters / 1000 * 5;
-        minutes = Math.ceil(minutes); //Rounding up value
+        double minutes = distanceMeters / 1000 * 10;
+        minutes = Math.ceil(minutes); //Rounding value up
         return (int) minutes;
     }
 
