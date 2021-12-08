@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 public class FindActivity extends AppCompatActivity {
 
     private Button btnMain, btnFind;
-    private CheckBox checkboxCities, checkboxLandscapes, checkboxMonuments, checkboxRivers, checkboxViewpoints;
+    private CheckBox checkboxCities, checkboxLandscapes, checkboxMonuments, checkboxRivers, checkboxViewpoints, checkboxAll;
     private Utils utils = new Utils(this);
 
     @Override
@@ -26,6 +29,7 @@ public class FindActivity extends AppCompatActivity {
         checkboxMonuments = findViewById(R.id.checkboxMonuments);
         checkboxRivers = findViewById(R.id.checkboxRivers);
         checkboxViewpoints = findViewById(R.id.checkboxViewpoints);
+        checkboxAll = findViewById(R.id.checkboxAll);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
 
@@ -36,6 +40,27 @@ public class FindActivity extends AppCompatActivity {
         utils.setText(checkboxMonuments, montserrat_medium);
         utils.setText(checkboxRivers, montserrat_medium);
         utils.setText(checkboxViewpoints, montserrat_medium);
+        utils.setText(checkboxAll, montserrat_medium);
+
+        /*Listener for selectAll, checks and unchecks all checkboxes if clicked*/
+        checkboxAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //Toast.makeText(FindActivity.this, "isChecked - " + checkboxAll.isChecked(), Toast.LENGTH_SHORT).show();
+                    checkboxCities.setChecked(true);
+                    checkboxLandscapes.setChecked(true);
+                    checkboxMonuments.setChecked(true);
+                    checkboxRivers.setChecked(true);
+                    checkboxViewpoints.setChecked(true);
+                } else {
+                    checkboxCities.setChecked(false);
+                    checkboxLandscapes.setChecked(false);
+                    checkboxMonuments.setChecked(false);
+                    checkboxRivers.setChecked(false);
+                    checkboxViewpoints.setChecked(false);
+                }
+            }
+        });
 
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +68,7 @@ public class FindActivity extends AppCompatActivity {
                 openMain(v);
             }
         });
+
     }
 
     public void openSelectPhoto(View view) {
@@ -56,7 +82,5 @@ public class FindActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
-
-
 
 }
