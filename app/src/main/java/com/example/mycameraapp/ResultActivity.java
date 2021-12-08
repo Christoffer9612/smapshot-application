@@ -15,8 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +39,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
     private TextView oldParams, newParams, success, percentageUncertainty, txtScore;
     private ShapeableImageView newPhoto, oldPhoto;
+    private ToggleButton toggle;
 
     private Utils utils = new Utils(this);
 
@@ -141,6 +144,23 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 loadPhoto();
             }
         }, 2000); //Delay so most recent photo can be displayed
+
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    oldParams.setVisibility(View.GONE);
+                    newParams.setVisibility(View.GONE);
+                    percentageUncertainty.setVisibility(View.GONE);
+                } else {
+                    oldParams.setVisibility(View.VISIBLE);
+                    newParams.setVisibility(View.VISIBLE);
+                    percentageUncertainty.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+
     }
 
     public void loadPhoto() {
@@ -236,5 +256,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         Intent intent = new Intent(this, SelectActivity.class);
         startActivity(intent);
     }
+
 
 }
