@@ -145,17 +145,21 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             }
         }, 2000); //Delay so most recent photo can be displayed
 
+        oldParams.setVisibility(View.GONE);
+        newParams.setVisibility(View.GONE);
+        percentageUncertainty.setVisibility(View.GONE);
+
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    oldParams.setVisibility(View.GONE);
-                    newParams.setVisibility(View.GONE);
-                    percentageUncertainty.setVisibility(View.GONE);
-                } else {
                     oldParams.setVisibility(View.VISIBLE);
                     newParams.setVisibility(View.VISIBLE);
                     percentageUncertainty.setVisibility(View.VISIBLE);
+                } else {
+                    oldParams.setVisibility(View.GONE);
+                    newParams.setVisibility(View.GONE);
+                    percentageUncertainty.setVisibility(View.GONE);
 
                 }
             }
