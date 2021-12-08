@@ -121,6 +121,7 @@
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/LessRoundedSquare" />
 
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/newPhoto"
         android:layout_width="185dp"
@@ -134,6 +135,20 @@
         android:background="@drawable/grey_rounded_corner"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/LessRoundedSquare" />
+
+    <TextView
+        android:id="@+id/loadingMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/newPhoto"
+        android:layout_alignRight="@+id/newPhoto"
+        android:layout_alignBottom="@+id/newPhoto"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="97dp"
+        android:gravity="center"
+        android:text="Loading photo..."
+        android:textSize="14dp" />
 
     <TextView
         android:id="@+id/newParams"
