@@ -148,7 +148,7 @@ public class CameraActivity extends MainActivity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             //Updates continuously as the user slides the bar
-            transparency.setText(progress + " %");
+            transparency.setText(progress + "%");
             overlayPhoto.setAlpha(progress * (int) 2.55);
         }
 

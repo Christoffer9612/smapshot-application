@@ -55,8 +55,10 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="21dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
         android:text="Image Two ID"
+        android:textColor="#444444"
         android:textSize="12dp" />
 
     <TextView
@@ -69,8 +71,10 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
         android:text="Image One ID"
+        android:textColor="#444444"
         android:textSize="12dp" />
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -164,6 +168,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="275dp"
         android:gravity="left"
+        android:fontFamily="@font/montserrat_medium"
         android:text="© OpenStreetMap contributors"
         android:textColor="#C4C4C4"
         android:textSize="8dp" />

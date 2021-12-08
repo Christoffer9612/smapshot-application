@@ -35,7 +35,7 @@ public class FindActivity extends AppCompatActivity {
         checkboxAll = findViewById(R.id.checkboxAll);
         findHeadline = findViewById(R.id.findHeadline);
 
-        findHeadline.animateText(" PHOTOS TO SEARCH FOR ");
+        findHeadline.animateText(" SEARCH FOR PHOTOS ");
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(), "fonts/montserrat_medium.ttf");
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".ResultActivity">
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
-        android:layout_marginBottom="237dp"
+        android:layout_marginBottom="243dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="center"
         android:text="azimuth \n tilt \n roll"
@@ -88,12 +89,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="206dp"
         android:layout_marginEnd="13dp"
         android:layout_marginRight="13dp"
         android:gravity="center"
         android:text="Your grade: X 🎉"
-        android:textSize="34dp" />
+        android:textSize="36dp" />
 
     <TextView
         android:id="@+id/txtNewPhoto"
@@ -199,7 +200,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtScore"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="#444444"
         android:textOff="Info"
         android:textOn="Info" />
 
