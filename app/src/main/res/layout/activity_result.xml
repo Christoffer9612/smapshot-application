@@ -8,19 +8,50 @@
     tools:context=".ResultActivity">
 
     <TextView
-        android:id="@+id/percentage_accuracy"
-        android:layout_width="388dp"
-        android:layout_height="71dp"
+        android:id="@+id/percentageAccuracyAzimuth"
+        android:layout_width="400dp"
+        android:layout_height="32dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
-        android:layout_marginBottom="243dp"
-        android:background="@drawable/grey_rounded_corner"
+        android:layout_marginBottom="271dp"
         android:gravity="center"
-        android:text="azimuth \n tilt \n roll"
+        android:text="azimuth"
+        android:textColor="#444444"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/percentageAccuracyTilt"
+        android:layout_width="400dp"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="251dp"
+        android:gravity="center"
+        android:text="tilt"
+        android:textColor="#444444"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/percentageAccuracyRoll"
+        android:layout_width="399dp"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="231dp"
+        android:gravity="center"
+        android:text="roll"
         android:textColor="#444444"
         android:textSize="15dp" />
 
@@ -89,7 +120,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="14dp"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="206dp"
+        android:layout_marginTop="230dp"
         android:layout_marginEnd="13dp"
         android:layout_marginRight="13dp"
         android:gravity="center"

@@ -37,7 +37,7 @@ import java.util.Comparator;
 
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
-    private TextView oldParams, newParams, success, percentageUncertainty, txtScore, loadingMessage;
+    private TextView oldParams, newParams, success, percentageUncertaintyAzimuth, percentageUncertaintyTilt, percentageUncertaintyRoll, txtScore, loadingMessage;
     private ShapeableImageView newPhoto, oldPhoto;
     private ToggleButton toggle;
 
@@ -56,7 +56,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams = findViewById(R.id.oldParams);
         newParams = findViewById(R.id.newParams);
         oldPhoto = findViewById(R.id.oldPhoto);
-        percentageUncertainty = findViewById(R.id.percentage_accuracy);
+        percentageUncertaintyAzimuth = findViewById(R.id.percentageAccuracyAzimuth);
+        percentageUncertaintyTilt = findViewById(R.id.percentageAccuracyTilt);
+        percentageUncertaintyRoll = findViewById(R.id.percentageAccuracyRoll);
         txtScore = findViewById(R.id.txtScore);
         loadingMessage = findViewById(R.id.loadingMessage);
 
@@ -113,12 +115,17 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldPhoto.getBackground().setAlpha(100);
         newParams.getBackground().setAlpha(140);
 
-        percentageUncertainty.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%"
-         + "\n" + "Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%"
-        + "\n" + "Roll uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
+        percentageUncertaintyAzimuth.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%");
+        percentageUncertaintyTilt.setText("Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%");
+        percentageUncertaintyRoll.setText("Roll uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
+        percentageUncertaintyAzimuth.setTypeface(montserrat_medium);
+        //percentageUncertaintyAzimuth.getBackground().setAlpha(204);
 
-        percentageUncertainty.setTypeface(montserrat_medium);
-        percentageUncertainty.getBackground().setAlpha(204);
+        percentageUncertaintyTilt.setTypeface(montserrat_medium);
+        //percentageUncertaintyTilt.getBackground().setAlpha(204);
+
+        percentageUncertaintyRoll.setTypeface(montserrat_medium);
+        //percentageUncertaintyRoll.getBackground().setAlpha(204);
 
         btnGoBack = findViewById(R.id.button);
         btnRetake = findViewById(R.id.btnRetake);
@@ -129,6 +136,10 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         setScore(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"),
                 percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"),
                 percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll"));
+
+        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"), "azimuth");
+        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"), "tilt");
+        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "roll"), "roll");
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +159,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         oldParams.setVisibility(View.GONE);
         newParams.setVisibility(View.GONE);
-        percentageUncertainty.setVisibility(View.GONE);
+        percentageUncertaintyAzimuth.setVisibility(View.GONE);
+        percentageUncertaintyTilt.setVisibility(View.GONE);
+        percentageUncertaintyRoll.setVisibility(View.GONE);
 
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -156,17 +169,23 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 if (isChecked) {
                     oldParams.setVisibility(View.VISIBLE);
                     newParams.setVisibility(View.VISIBLE);
-                    percentageUncertainty.setVisibility(View.VISIBLE);
+                    percentageUncertaintyAzimuth.setVisibility(View.VISIBLE);
+                    percentageUncertaintyTilt.setVisibility(View.VISIBLE);
+                    percentageUncertaintyRoll.setVisibility(View.VISIBLE);
                 } else {
                     oldParams.setVisibility(View.GONE);
                     newParams.setVisibility(View.GONE);
-                    percentageUncertainty.setVisibility(View.GONE);
+                    percentageUncertaintyAzimuth.setVisibility(View.GONE);
+                    percentageUncertaintyTilt.setVisibility(View.GONE);
+                    percentageUncertaintyRoll.setVisibility(View.GONE);
 
                 }
             }
         });
 
     }
+
+
 
     public void loadPhoto() {
         //Get photo filenames
@@ -235,21 +254,84 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         if(meanUncertainty < 5) { //Change colors
             txtScore.setText("Your grade: A 🎉"); //Party emoji
             txtScore.setTextColor(Color.parseColor("#3CC0C5"));
+
         } else if (meanUncertainty < 15) {
             txtScore.setText("Your grade: B \uD83D\uDC4F"); //Clapping emoji
             txtScore.setTextColor(Color.parseColor("#78E8EC"));
+
         } else if (meanUncertainty < 25) {
             txtScore.setText("Your grade: C \uD83D\uDC4D"); //Thumbs up emoji
             txtScore.setTextColor(Color.parseColor("#8DDFE2"));
+
         } else if (meanUncertainty < 35) {
             txtScore.setText("Your grade: D \uD83D\uDE10"); //Neutral face emoji
             txtScore.setTextColor(Color.parseColor("#E09D80"));
+
         } else if (meanUncertainty < 45)  {
             txtScore.setText("Your grade: E \uD83D\uDC4E"); //Thumbs down
             txtScore.setTextColor(Color.parseColor("#EE8F67"));
+
         } else {
             txtScore.setText("Your grade: F \uD83D\uDCA9"); //Poop emoji
             txtScore.setTextColor(Color.parseColor("#FF763C"));
+
+            }
+
+    }
+    //sets the color of uncertainty estimation text based on the uncertainty for each angle
+    public void setColorUncertaintyText(int uncertainty, String orientationAngle) {
+        if(orientationAngle.equals("azimuth")) {
+
+            if(uncertainty < 5) { //Change colors
+               percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#3CC0C5"));
+            } else if (uncertainty < 15) {
+                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#78E8EC"));
+            } else if (uncertainty < 25) {
+                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#8DDFE2"));
+            } else if (uncertainty < 35) {
+                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#E09D80"));
+            } else if (uncertainty < 45)  {
+                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#EE8F67"));
+            } else {
+                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#FF763C"));
+
+            }
+
+        }
+        if(orientationAngle.equals("tilt")) {
+
+            if(uncertainty < 5) { //Change colors
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#3CC0C5"));
+            } else if (uncertainty < 15) {
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#78E8EC"));
+            } else if (uncertainty < 25) {
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#8DDFE2"));
+            } else if (uncertainty < 35) {
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#EE8F67"));
+            } else if (uncertainty < 45)  {
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#FF763C"));
+            } else {
+                percentageUncertaintyTilt.setTextColor(Color.parseColor("#FF763C"));
+
+
+            }
+
+        }
+        if(orientationAngle.equals("roll")) {
+            if(uncertainty < 5) { //Change colors
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#3CC0C5"));
+            } else if (uncertainty < 15) {
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#78E8EC"));
+            } else if (uncertainty < 25) {
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#8DDFE2"));
+            } else if (uncertainty < 35) {
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#EE8F67"));
+            } else if (uncertainty < 45)  {
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#FF763C"));
+            } else {
+                percentageUncertaintyRoll.setTextColor(Color.parseColor("#FF763C"));
+
+            }
         }
     }
 
