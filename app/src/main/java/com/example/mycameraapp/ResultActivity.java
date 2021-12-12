@@ -252,44 +252,27 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
 
         if(meanUncertainty < 5) { //Change colors
-            toggleButton.setText("Your grade: A 🎉"); //Party emoji
-            toggleButton.setTextOn("Your grade: A 🎉");
-            toggleButton.setTextOff("Your grade: A 🎉");
-            toggleButton.setTextColor(Color.parseColor("#3CC0C5"));
-
+            setTxtAndColor(toggleButton, "Your grade: A 🎉", "#3CC0C5");
         } else if (meanUncertainty < 15) {
-            toggleButton.setText("Your grade: B \uD83D\uDC4F"); //Clapping emoji
-            toggleButton.setTextOn("Your grade: B \uD83D\uDC4F");
-            toggleButton.setTextOff("Your grade: B \uD83D\uDC4F");
-            toggleButton.setTextColor(Color.parseColor("#78E8EC"));
-
+            setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F", "#78E8EC");
         } else if (meanUncertainty < 25) {
-            toggleButton.setText("Your grade: C \uD83D\uDC4D"); //Thumbs up emoji
-            toggleButton.setTextOn("Your grade: C \uD83D\uDC4D");
-            toggleButton.setTextOff("Your grade: C \uD83D\uDC4D");
-            toggleButton.setTextColor(Color.parseColor("#8DDFE2"));
-
+            setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D", "#8DDFE2");
         } else if (meanUncertainty < 35) {
-            toggleButton.setText("Your grade: D \uD83D\uDE10"); //Neutral face emoji
-            toggleButton.setTextOn("Your grade: D \uD83D\uDE10");
-            toggleButton.setTextOff("Your grade: D \uD83D\uDE10");
-            toggleButton.setTextColor(Color.parseColor("#E09D80"));
-
+            setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10", "#E09D80");
         } else if (meanUncertainty < 45)  {
-            toggleButton.setText("Your grade: E \uD83D\uDC4E"); //Thumbs down
-            toggleButton.setTextOn("Your grade: E \uD83D\uDC4E");
-            toggleButton.setTextOff("Your grade: E \uD83D\uDC4E");
-            toggleButton.setTextColor(Color.parseColor("#EE8F67"));
-
+            setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E", "#EE8F67");
         } else {
-            toggleButton.setText("Your grade: F \uD83D\uDCA9"); //Poop emoji
-            toggleButton.setTextOn("Your grade: F \uD83D\uDCA9");
-            toggleButton.setTextOff("Your grade: F \uD83D\uDCA9");
-            toggleButton.setTextColor(Color.parseColor("#FF763C"));
-
+            setTxtAndColor(toggleButton, "\"Your grade: F \\uD83D\\uDCA9\"", "#FF763C");
             }
-
     }
+
+    private void setTxtAndColor(ToggleButton btn, String grade, String color) {
+        btn.setText(grade);
+        btn.setTextOn(grade);
+        btn.setTextOff(grade);
+        btn.setTextColor(Color.parseColor(color));
+    }
+
     //sets the color of uncertainty estimation text based on the uncertainty for each angle
     public void setColorUncertaintyText(int uncertainty, String orientationAngle) {
         if(orientationAngle.equals("azimuth")) {
