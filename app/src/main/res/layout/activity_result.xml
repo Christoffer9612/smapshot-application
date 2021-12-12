@@ -74,6 +74,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
         android:layout_marginBottom="12dp"
         android:onClick="openMainActivity"
         android:text="Go back"
@@ -107,25 +109,6 @@
         android:text="Old photo"
         android:textColor="#444444"
         android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/txtScore"
-        android:layout_width="384dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/oldPhoto"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginRight="13dp"
-        android:gravity="center"
-        android:text="Your grade: X 🎉"
-        android:textSize="36dp" />
 
     <TextView
         android:id="@+id/txtNewPhoto"
@@ -171,7 +154,6 @@
         android:background="@drawable/grey_rounded_corner"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/LessRoundedSquare" />
-
 
 
     <TextView
@@ -227,15 +209,25 @@
 
     <ToggleButton
         android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtScore"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_medium"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="130dp"
+        android:fontFamily="@font/montserrat_bold"
         android:textColor="#444444"
-        android:textOff="Info"
-        android:textOn="Info" />
+        android:textOff="Your grade: X 🎉"
+        android:textOn="Your grade: X 🎉"
+        android:textSize="32dp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
