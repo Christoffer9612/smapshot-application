@@ -94,7 +94,7 @@
         app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <TextView
-        android:id="@+id/txtDiaDistance"
+        android:id="@+id/txtTestDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/selTestPhoto"
@@ -109,7 +109,7 @@
         android:textSize="12dp" />
 
     <TextView
-        android:id="@+id/txtTestDistance"
+        android:id="@+id/txtDiaDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/selDia303"
