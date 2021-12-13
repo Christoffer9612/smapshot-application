@@ -51,8 +51,6 @@ public class CameraActivity extends MainActivity {
     private Utils utils = new Utils(this);
     private ImageView right, left;
 
-
-
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
     Bundle bundleSelectedPhoto = new Bundle(); //Bundle from: SelectPhotoActivity
@@ -83,9 +81,8 @@ public class CameraActivity extends MainActivity {
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        right = (ImageView) findViewById(R.id.btnright);
-        left = (ImageView) findViewById(R.id.btnleft);
-
+        right = findViewById(R.id.btnright);
+        left = findViewById(R.id.btnleft);
         btnGoBack = findViewById(R.id.btnGoBack);
         btnCapture = findViewById(R.id.btnCapture);
         frameLayout = findViewById(R.id.frameLayout);

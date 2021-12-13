@@ -44,6 +44,7 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 ## Known bugs
 
 * When adding custom markers in OSMdroid, they move with the map. Solution [here](https://stackoverflow.com/questions/54811451/osmdroid-default-marker-moving-when-zooming-out-on-android-api-28#_=), added into current codebase.
+* Xiaomi Mi 9T does NOT update location on OSM. Solution: open Google Maps and update current location.
 
 ## Current functionality
 - [X] Adapted for being used in: **portrait mode**

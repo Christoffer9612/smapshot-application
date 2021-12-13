@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/info"
         android:layout_width="389dp"
@@ -15,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="67dp"
         android:layout_marginRight="11dp"
-        android:text="Smapshot is a web-based platform with the goal of creating a virtual globe of history by georeferencing photos on a 3D rendered globe. \n \nThe ability to retake historical photos in this mobile application provides a simple way of visually comparing the past state of a landscape with the present of the same landscape today."
+        android:text="Smapshot is a web-based platform with the goal of creating a virtual globe of history by georeferencing photos on a 3D globe. \n \nThe ability to retake historical photos in this mobile application provides a simple way of visually comparing the past state of a landscape with the present of the same landscape today."
         android:textColor="#444444"
         android:textSize="18dp" />
 
@@ -61,6 +60,6 @@
         android:layout_marginLeft="11dp"
         android:layout_marginEnd="13dp"
         android:layout_marginRight="13dp"
-        android:layout_marginBottom="102dp" />
+        android:layout_marginBottom="100dp" />
 
 </RelativeLayout>

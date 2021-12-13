@@ -32,7 +32,7 @@ public class SmapshotActivity extends AppCompatActivity {
         info = findViewById(R.id.info);
         info.setTypeface(montserrat_medium);
 
-        smapshotModel.setImageResource(R.drawable.smapshot_web);
+        smapshotModel.setImageResource(R.drawable.thumbnail);
         utils.setButton(goBack, montserrat_medium);
         utils.setButton(visitWebsite, montserrat_medium);
 

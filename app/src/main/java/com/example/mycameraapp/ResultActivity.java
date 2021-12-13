@@ -114,6 +114,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams.getBackground().setAlpha(100);
         oldPhoto.getBackground().setAlpha(100);
         newParams.getBackground().setAlpha(140);
+        percentageUncertaintyAzimuth.getBackground().setAlpha(140);
+        percentageUncertaintyTilt.getBackground().setAlpha(140);
+        percentageUncertaintyRoll.getBackground().setAlpha(140);
 
         percentageUncertaintyAzimuth.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%");
         percentageUncertaintyTilt.setText("Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%");
