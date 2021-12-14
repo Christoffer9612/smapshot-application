@@ -40,6 +40,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     private TextView oldParams, newParams, success, loadingMessage;
     private ShapeableImageView newPhoto, oldPhoto;
     private ToggleButton toggleButton;
+    public Bundle bundleRetake;
 
     private Utils utils = new Utils(this);
 
@@ -58,6 +59,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldPhoto = findViewById(R.id.oldPhoto);
         toggleButton = findViewById(R.id.toggleButton);
         loadingMessage = findViewById(R.id.loadingMessage);
+
+        //Create bundle, storing info about selected photo (imageOne or imageTwo)
+        bundleRetake = new Bundle();
 
         //Getting bundles
         Bundle bundle = getIntent().getExtras();
@@ -79,10 +83,12 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_test"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_test"));
             oldPhoto.setImageResource(R.drawable.st_roch_test);
+            bundleRetake.putString("oldPhoto", "photoOne");
         } else if (bundleSelectedPhoto.getString("oldPhoto").equals("photoTwo")) {
             azimuthOld = utils.normaliseAngles(bundleSelectedPhoto.getFloat("azimuth_dia"));
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_dia"));
+            bundleRetake.putString("oldPhoto", "photoTwo");
             RequestQueue queue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
                     new Response.Listener<String>() {
@@ -252,8 +258,10 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         startActivity(intent);
     }
 
-    public void openSelectPhoto(View view) {
-        Intent intent = new Intent(this, SelectActivity.class);
+    public void retake(View view) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        //Add the bundle to the intent
+        intent.putExtras(bundleRetake);
         startActivity(intent);
     }
 

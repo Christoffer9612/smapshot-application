@@ -43,7 +43,7 @@
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginBottom="12dp"
-        android:onClick="openSelectPhoto"
+        android:onClick="retake"
         android:text="Retake" />
 
     <TextView
@@ -116,7 +116,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="center"
         android:text="New params \n test \n test"
@@ -146,7 +146,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="center"
         android:text="Old params \n test \n test"
@@ -166,7 +166,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="22dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="160dp"
         android:background="#E2E2E2"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="#444444"
