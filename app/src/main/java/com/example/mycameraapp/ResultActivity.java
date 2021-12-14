@@ -265,7 +265,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         } else if (meanUncertainty < 45)  {
             setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E", "#EE8F67");
         } else {
-            setTxtAndColor(toggleButton, "\"Your grade: F \uD83D\uDCA9", "#FF763C");
+            setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9", "#FF763C");
             }
     }
 
