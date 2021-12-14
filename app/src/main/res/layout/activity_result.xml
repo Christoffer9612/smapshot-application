@@ -8,57 +8,6 @@
     tools:context=".ResultActivity">
 
     <TextView
-        android:id="@+id/percentageAccuracyRoll"
-        android:layout_width="399dp"
-        android:layout_height="32dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="13dp"
-        android:gravity="center"
-        android:background="@drawable/grey_rounded_corner"
-        android:text="Roll uncertainty estimation: zz%"
-        android:textColor="#444444"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/percentageAccuracyAzimuth"
-        android:layout_width="400dp"
-        android:layout_height="32dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="77dp"
-        android:background="@drawable/grey_rounded_corner"
-        android:gravity="center"
-        android:text="Azimuth uncertainty estimation: xx%"
-        android:textColor="#444444"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/percentageAccuracyTilt"
-        android:layout_width="400dp"
-        android:layout_height="32dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="45dp"
-        android:gravity="center"
-        android:background="@drawable/grey_rounded_corner"
-        android:text="Tilt uncertainty estimation: yy%"
-        android:textColor="#444444"
-        android:textSize="15dp" />
-
-    <TextView
         android:id="@+id/success"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -37,7 +37,7 @@ import java.util.Comparator;
 
 public class ResultActivity extends MainActivity { //AppCompatActivity
     private Button btnGoBack, btnRetake;
-    private TextView oldParams, newParams, success, percentageUncertaintyAzimuth, percentageUncertaintyTilt, percentageUncertaintyRoll, loadingMessage;
+    private TextView oldParams, newParams, success, loadingMessage;
     private ShapeableImageView newPhoto, oldPhoto;
     private ToggleButton toggleButton;
 
@@ -56,9 +56,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams = findViewById(R.id.oldParams);
         newParams = findViewById(R.id.newParams);
         oldPhoto = findViewById(R.id.oldPhoto);
-        percentageUncertaintyAzimuth = findViewById(R.id.percentageAccuracyAzimuth);
-        percentageUncertaintyTilt = findViewById(R.id.percentageAccuracyTilt);
-        percentageUncertaintyRoll = findViewById(R.id.percentageAccuracyRoll);
         toggleButton = findViewById(R.id.toggleButton);
         loadingMessage = findViewById(R.id.loadingMessage);
 
@@ -114,21 +111,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         oldParams.getBackground().setAlpha(100);
         oldPhoto.getBackground().setAlpha(100);
         newParams.getBackground().setAlpha(140);
-        percentageUncertaintyAzimuth.getBackground().setAlpha(140);
-        percentageUncertaintyTilt.getBackground().setAlpha(140);
-        percentageUncertaintyRoll.getBackground().setAlpha(140);
-
-        percentageUncertaintyAzimuth.setText("Azimuth uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth") + "%");
-        percentageUncertaintyTilt.setText("Tilt uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt") + "%");
-        percentageUncertaintyRoll.setText("Roll uncertainty estimation: " + percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll") + "%" );
-        percentageUncertaintyAzimuth.setTypeface(montserrat_medium);
-        //percentageUncertaintyAzimuth.getBackground().setAlpha(204);
-
-        percentageUncertaintyTilt.setTypeface(montserrat_medium);
-        //percentageUncertaintyTilt.getBackground().setAlpha(204);
-
-        percentageUncertaintyRoll.setTypeface(montserrat_medium);
-        //percentageUncertaintyRoll.getBackground().setAlpha(204);
 
         btnGoBack = findViewById(R.id.button);
         btnRetake = findViewById(R.id.btnRetake);
@@ -139,10 +121,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         setScore(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"),
                 percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"),
                 percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll"));
-
-        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"), "azimuth");
-        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"), "tilt");
-        setColorUncertaintyText(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "roll"), "roll");
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,9 +140,6 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
         oldParams.setVisibility(View.GONE);
         newParams.setVisibility(View.GONE);
-        percentageUncertaintyAzimuth.setVisibility(View.GONE);
-        percentageUncertaintyTilt.setVisibility(View.GONE);
-        percentageUncertaintyRoll.setVisibility(View.GONE);
 
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -172,15 +147,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 if (isChecked) {
                     oldParams.setVisibility(View.VISIBLE);
                     newParams.setVisibility(View.VISIBLE);
-                    percentageUncertaintyAzimuth.setVisibility(View.VISIBLE);
-                    percentageUncertaintyTilt.setVisibility(View.VISIBLE);
-                    percentageUncertaintyRoll.setVisibility(View.VISIBLE);
                 } else {
                     oldParams.setVisibility(View.GONE);
                     newParams.setVisibility(View.GONE);
-                    percentageUncertaintyAzimuth.setVisibility(View.GONE);
-                    percentageUncertaintyTilt.setVisibility(View.GONE);
-                    percentageUncertaintyRoll.setVisibility(View.GONE);
 
                 }
             }
@@ -276,62 +245,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         btn.setTextColor(Color.parseColor(color));
     }
 
-    //sets the color of uncertainty estimation text based on the uncertainty for each angle
-    public void setColorUncertaintyText(int uncertainty, String orientationAngle) {
-        if(orientationAngle.equals("azimuth")) {
 
-            if(uncertainty < 5) { //Change colors
-               percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#3CC0C5"));
-            } else if (uncertainty < 15) {
-                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#78E8EC"));
-            } else if (uncertainty < 25) {
-                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#8DDFE2"));
-            } else if (uncertainty < 35) {
-                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#E09D80"));
-            } else if (uncertainty < 45)  {
-                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#EE8F67"));
-            } else {
-                percentageUncertaintyAzimuth.setTextColor(Color.parseColor("#FF763C"));
-
-            }
-
-        }
-        if(orientationAngle.equals("tilt")) {
-
-            if(uncertainty < 5) { //Change colors
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#3CC0C5"));
-            } else if (uncertainty < 15) {
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#78E8EC"));
-            } else if (uncertainty < 25) {
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#8DDFE2"));
-            } else if (uncertainty < 35) {
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#EE8F67"));
-            } else if (uncertainty < 45)  {
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#FF763C"));
-            } else {
-                percentageUncertaintyTilt.setTextColor(Color.parseColor("#FF763C"));
-
-
-            }
-
-        }
-        if(orientationAngle.equals("roll")) {
-            if(uncertainty < 5) { //Change colors
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#3CC0C5"));
-            } else if (uncertainty < 15) {
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#78E8EC"));
-            } else if (uncertainty < 25) {
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#8DDFE2"));
-            } else if (uncertainty < 35) {
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#EE8F67"));
-            } else if (uncertainty < 45)  {
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#FF763C"));
-            } else {
-                percentageUncertaintyRoll.setTextColor(Color.parseColor("#FF763C"));
-
-            }
-        }
-    }
 
     private void openMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
