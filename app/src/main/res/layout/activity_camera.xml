@@ -34,19 +34,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
-        android:text="Placeholder params"
-        android:textSize="18dp"
-        android:layout_marginLeft="9dp" />
+        android:layout_marginLeft="9dp"
+        android:text="azimuth = 300"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/realTimeParams_ti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
         android:layout_marginStart="9dp"
-        android:text="Placeholder params"
-        android:textSize="18dp"
-        android:layout_marginLeft="9dp" />
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="22dp"
+        android:text="tilt = -90"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/realTimeParams_ro"
@@ -55,7 +55,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="44dp"
-        android:text="Placeholder params"
+        android:text="roll = -21"
         android:textSize="18dp" />
 
     <TextView
@@ -65,7 +65,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="9dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/red_rounded_corner"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center"
@@ -168,16 +168,16 @@
         android:textSize="16dp" />
 
     <ImageView
-        android:id="@+id/btnright"
+        android:id="@+id/arrowRight"
         android:layout_width="18dp"
         android:layout_height="20dp"
-        android:layout_marginLeft = "140dp"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="2dp"
-        android:visibility="gone"
-        android:src="@drawable/rightarrow" />
+        android:src="@drawable/rightarrow"
+        android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/btnleft"
+        android:id="@+id/arrowLeft"
         android:layout_width="18dp"
         android:layout_height="20dp"
         android:layout_marginLeft = "140dp"

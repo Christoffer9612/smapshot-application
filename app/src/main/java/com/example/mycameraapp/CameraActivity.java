@@ -33,7 +33,6 @@ import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,7 +51,7 @@ public class CameraActivity extends MainActivity {
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
     private Utils utils = new Utils(this);
-    private ImageView right, left;
+    private ImageView arrowRight, arrowLeft;
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -89,8 +88,8 @@ public class CameraActivity extends MainActivity {
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
-        right = findViewById(R.id.btnright);
-        left = findViewById(R.id.btnleft);
+        arrowRight = findViewById(R.id.arrowRight);
+        arrowLeft = findViewById(R.id.arrowLeft);
         btnGoBack = findViewById(R.id.btnGoBack);
         btnCapture = findViewById(R.id.btnCapture);
         frameLayout = findViewById(R.id.frameLayout);
@@ -104,7 +103,7 @@ public class CameraActivity extends MainActivity {
 
         if (distance > 20) { //Photos from more than 20 meters distance are considered too far away
             popUp.setText(" You are too far away from the old photo... ");
-            popUp.getBackground().setAlpha(179);
+            popUp.getBackground().setAlpha(160);
 
             final Animation in = new AlphaAnimation(0.0f, 1.0f);
             in.setDuration(1500);
@@ -321,26 +320,26 @@ public class CameraActivity extends MainActivity {
     public void setImageInstruction(float [] rotations, float angleOld, float realTimeAngle) {
 
         if(Math.round(rotations[0]) < 5) {
-            right.clearAnimation();
-            left.clearAnimation();
-            right.setVisibility(View.GONE);
-            left.setVisibility(View.GONE);
+            arrowRight.clearAnimation();
+            arrowLeft.clearAnimation();
+            arrowRight.setVisibility(View.GONE);
+            arrowLeft.setVisibility(View.GONE);
             return;
         }
 
             if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle < angleOld) {
-                right.setVisibility(View.VISIBLE);
-                left.setVisibility(View.GONE);
+                arrowRight.setVisibility(View.VISIBLE);
+                arrowLeft.setVisibility(View.GONE);
                 return;
             } else if (rotations[0] < rotations[1] && rotations[0] < rotations[2] && realTimeAngle > angleOld) {
-                left.setVisibility(View.VISIBLE);
-                right.setVisibility(View.GONE);
+                arrowLeft.setVisibility(View.VISIBLE);
+                arrowRight.setVisibility(View.GONE);
             } else if (rotations[1] < rotations[0] && rotations[1] < rotations[2]) {
-                right.setVisibility(View.VISIBLE);
-                left.setVisibility(View.GONE);
+                arrowRight.setVisibility(View.VISIBLE);
+                arrowLeft.setVisibility(View.GONE);
             } else {
-                left.setVisibility(View.VISIBLE);
-                right.setVisibility(View.GONE);
+                arrowLeft.setVisibility(View.VISIBLE);
+                arrowRight.setVisibility(View.GONE);
             }
 
     }

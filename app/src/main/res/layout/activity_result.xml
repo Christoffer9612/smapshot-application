@@ -120,7 +120,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="left"
-        android:text="New params \n test \n test"
+        android:text="New azimuth \nNew tilt \nNew roll \n \nLongitude \nLatitude"
         android:textColor="#444444"
         android:textSize="15dp" />
 
@@ -150,7 +150,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/grey_rounded_corner"
         android:gravity="left"
-        android:text="Old params \n test \n test"
+        android:text="Old azimuth \nOld tilt \nOld roll \n \nLongitude \nLatitude"
         android:textColor="#444444"
         android:textSize="15dp" />
 
