@@ -42,6 +42,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     private ToggleButton toggleButton;
     public Bundle bundleRetake;
 
+
     private Utils utils = new Utils(this);
 
     @SuppressLint("SetTextI18n")
@@ -66,6 +67,8 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         //Getting bundles
         Bundle bundle = getIntent().getExtras();
         Bundle bundleSelectedPhoto =  getIntent().getExtras();
+        Bundle bundleCoords = getIntent().getExtras();
+        Bundle bundleCoordsOld = getIntent().getExtras();
 
         //Extracting data from bundle, values for real time params
         Float realTimeAzimuth = bundle.getFloat("azimuth");
@@ -105,14 +108,20 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
 
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
+
+
         }
+
+
 
         utils.setText(success, montserrat_medium);
         oldParams.setTypeface(montserrat_medium);
         utils.setText(newParams, montserrat_medium);
 
-        oldParams.setText("Old azimuth: " + Math.round(azimuthOld) + "°" + "\n" + "Old tilt: " + Math.round(tiltOld) + "°" + "\n" + "Old roll: " + Math.round(rollOld) + "°");
-        newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°");
+        oldParams.setText("Old azimuth: " + Math.round(azimuthOld) + "°" + "\n" + "Old tilt: " + Math.round(tiltOld) + "°" + "\n" + "Old roll: " + Math.round(rollOld) + "°" +
+                        "\n" + "longitude: " + bundleCoordsOld.getDouble("longitudeOld") + "\n" + "latitude: " + bundleCoordsOld.getDouble("latitudeOld"));
+        newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°" +
+                "\n" + "longitude: " + bundleCoords.getDouble("longitude") + "\n" + "latitude: " + bundleCoords.getDouble("latitude"));
 
         oldParams.getBackground().setAlpha(100);
         oldPhoto.getBackground().setAlpha(100);

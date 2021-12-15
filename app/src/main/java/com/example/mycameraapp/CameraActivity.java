@@ -54,6 +54,8 @@ public class CameraActivity extends MainActivity {
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
     Bundle bundleSelectedPhoto = new Bundle(); //Bundle from: SelectPhotoActivity
+    Bundle bundleCoords = new Bundle();
+    Bundle bundleCoordsOld = new Bundle();
 
     private float[] acc, mags, values = new float[3];
 
@@ -113,6 +115,8 @@ public class CameraActivity extends MainActivity {
 
         //Get the bundle, refactor: create as method?
         bundleSelectedPhoto = getIntent().getExtras();
+        bundleCoords = getIntent().getExtras();
+        bundleCoordsOld = getIntent().getExtras();
 
         //Extract name of old photo selected (test vs. dia) to display on top of camera as transparent
         if (bundleSelectedPhoto.getString("oldPhoto").equals("photoOne")) {
@@ -423,7 +427,8 @@ public class CameraActivity extends MainActivity {
         //Passing bundles to next intent (result screen to display json values)
         intent.putExtras(bundle);
         intent.putExtras(bundleSelectedPhoto);
-
+        intent.putExtras(bundleCoords);
+        intent.putExtras(bundleCoordsOld);
         startActivity(intent);
     }
 

@@ -47,7 +47,7 @@ public class SelectActivity extends AppCompatActivity {
     private ShapeableImageView imageOnePhoto, imageTwoPhoto;
     private Button btnPhoto, btnBack;
     private boolean selectedImageOne, selectedImageTwo;
-    public Bundle bundleSelectedPhoto;
+    public Bundle bundleSelectedPhoto, bundleCoords, bundleCoordsOld;
     public static JSONObject jsonObj = null;
     private GeoPoint imageOnePoint, imageTwoPoint;
     private Marker imageOneMarker, imageTwoMarker;
@@ -67,6 +67,9 @@ public class SelectActivity extends AppCompatActivity {
 
         //Create bundle, storing info about selected photo (imageOne or imageTwo)
         bundleSelectedPhoto = new Bundle();
+        bundleCoords = new Bundle();
+        bundleCoordsOld = new Bundle();
+
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 
@@ -195,6 +198,8 @@ public class SelectActivity extends AppCompatActivity {
                 if (location != null) {
                     double currentLat = location.getLatitude();
                     double currentLon = location.getLongitude();
+                    bundleCoords.putDouble("latitude", currentLat);
+                    bundleCoords.putDouble("longitude", currentLon);
                     Log.d("COORD", "Lat: " + location.getLatitude() + ", Long: " + location.getLongitude());
                     GeoPoint currentPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
                     Marker currentMarker = new Marker(map);
@@ -294,26 +299,41 @@ public class SelectActivity extends AppCompatActivity {
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 
-    public void openCustomCam(View view) {
+    public void openCustomCam(View view){
+
+        Double latitudeImageOne = getLongOrLat("test_photo.json", "latitude");
+        Double longitudeImageOne = getLongOrLat("test_photo.json", "longitude");
+
+        Double latitudeImageTwo = getLongOrLat("dia_303_12172.json", "latitude");
+        Double longitudeImageTwo = getLongOrLat("dia_303_12172.json", "longitude");
 
         if (selectedImageTwo == true) {
             //Add your data to bundle
             bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
+            bundleCoordsOld.putDouble("latitudeOld", latitudeImageTwo);
+            bundleCoordsOld.putDouble("longitudeOld", longitudeImageTwo);
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent
             intent.putExtras(bundleSelectedPhoto);
+            intent.putExtras(bundleCoords);
+            intent.putExtras(bundleCoordsOld);
             startActivity(intent);
 
         } else if (selectedImageOne == true) {
             //Add your data to bundle
             bundleSelectedPhoto.putString("oldPhoto", "photoOne");
+            bundleCoordsOld.putDouble("latitudeOld", latitudeImageOne);
+            bundleCoordsOld.putDouble("longitudeOld", longitudeImageOne);
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent
             intent.putExtras(bundleSelectedPhoto);
+            intent.putExtras(bundleCoords);
+            intent.putExtras(bundleCoordsOld);
             startActivity(intent);
         }
+
     }
 
     public void openFind(View view) {
