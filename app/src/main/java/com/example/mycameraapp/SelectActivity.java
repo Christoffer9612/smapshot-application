@@ -47,7 +47,7 @@ public class SelectActivity extends AppCompatActivity {
     private ShapeableImageView imageOnePhoto, imageTwoPhoto;
     private Button btnPhoto, btnBack;
     private boolean selectedImageOne, selectedImageTwo;
-    public Bundle bundleSelectedPhoto, bundleCoords, bundleCoordsOld;
+    public Bundle bundleSelectedPhoto, bundleCoords, bundleCoordsOld, bundleDistance;
     public static JSONObject jsonObj = null;
     private GeoPoint imageOnePoint, imageTwoPoint;
     private Marker imageOneMarker, imageTwoMarker;
@@ -58,6 +58,7 @@ public class SelectActivity extends AppCompatActivity {
     private com.google.android.material.imageview.ShapeableImageView selImageOne, selImageTwo;
     private FusedLocationProviderClient client;
     private TextView txtImageOneDistance, txtImageTwoDistance, txtImageOne, txtImageTwo;
+    public int distanceOne, distanceTwo;
 
     @SuppressLint("Range")
     @Override
@@ -69,6 +70,7 @@ public class SelectActivity extends AppCompatActivity {
         bundleSelectedPhoto = new Bundle();
         bundleCoords = new Bundle();
         bundleCoordsOld = new Bundle();
+        bundleDistance = new Bundle();
 
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
@@ -214,8 +216,8 @@ public class SelectActivity extends AppCompatActivity {
                     currentMarker.setIcon(d);
                     currentMarker.setTitle("Your current location.");
 
-                    int distanceOne = distance(currentLat, finalLatitudeImageOne, currentLon, finalLongitudeImageOne);
-                    int distanceTwo = distance(currentLat, finalLatitudeImageTwo, currentLon, finalLongitudeImageTwo);
+                    distanceOne = distance(currentLat, finalLatitudeImageOne, currentLon, finalLongitudeImageOne);
+                    distanceTwo = distance(currentLat, finalLatitudeImageTwo, currentLon, finalLongitudeImageTwo);
 
                     int timeOne = timeToDestination(distanceOne);
                     int timeTwo = timeToDestination(distanceTwo);
@@ -312,12 +314,15 @@ public class SelectActivity extends AppCompatActivity {
             bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
             bundleCoordsOld.putDouble("latitudeOld", latitudeImageTwo);
             bundleCoordsOld.putDouble("longitudeOld", longitudeImageTwo);
+            bundleDistance.putInt("Distance", distanceTwo);
+
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent
             intent.putExtras(bundleSelectedPhoto);
             intent.putExtras(bundleCoords);
             intent.putExtras(bundleCoordsOld);
+            intent.putExtras(bundleDistance);
             startActivity(intent);
 
         } else if (selectedImageOne == true) {
@@ -325,12 +330,15 @@ public class SelectActivity extends AppCompatActivity {
             bundleSelectedPhoto.putString("oldPhoto", "photoOne");
             bundleCoordsOld.putDouble("latitudeOld", latitudeImageOne);
             bundleCoordsOld.putDouble("longitudeOld", longitudeImageOne);
+            bundleDistance.putInt("Distance", distanceOne);
+
             Intent intent = new Intent(this, CameraActivity.class);
 
             //Add the bundle to the intent
             intent.putExtras(bundleSelectedPhoto);
             intent.putExtras(bundleCoords);
             intent.putExtras(bundleCoordsOld);
+            intent.putExtras(bundleDistance);
             startActivity(intent);
         }
 

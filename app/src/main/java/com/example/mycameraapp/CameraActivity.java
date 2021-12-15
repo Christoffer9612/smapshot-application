@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -44,7 +47,7 @@ public class CameraActivity extends MainActivity {
     private ShowCamera showCamera;
     private Button btnGoBack, btnCapture;
     private String currentPhotoPath;
-    private TextView realTimeParams_az, realTimeParams_ti, realTimeParams_ro, transparency;
+    private TextView realTimeParams_az, realTimeParams_ti, realTimeParams_ro, transparency, popUp;
     private SensorManager sManager;
     public static float azimuthValue, tiltValue, rollValue;
     private ImageView overlayPhoto;
@@ -69,6 +72,9 @@ public class CameraActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        //Getting bundles
+        Bundle bundleDistance = getIntent().getExtras();
+
         //Setting a change listener to the SeekBar (slider)
         SeekBar seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
@@ -92,6 +98,21 @@ public class CameraActivity extends MainActivity {
         realTimeParams_ti = findViewById(R.id.realTimeParams_ti);
         realTimeParams_ro = findViewById(R.id.realTimeParams_ro);
         sManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        popUp = findViewById(R.id.popUp);
+
+        int distance = bundleDistance.getInt("Distance");
+
+        if (distance > 20) { //Photos from more than 20 meters distance are considered too far away
+            popUp.setText(" You are too far away from the old photo... ");
+            popUp.getBackground().setAlpha(179);
+
+            final Animation in = new AlphaAnimation(0.0f, 1.0f);
+            in.setDuration(1500);
+            AnimationSet as = new AnimationSet(true);
+            in.setStartOffset(500);
+            as.addAnimation(in);
+            popUp.startAnimation(in);
+        }
 
         realTimeParams_az.setTextColor(Color.parseColor("#FFFFFF"));
         realTimeParams_az.setTypeface(montserrat_medium);
