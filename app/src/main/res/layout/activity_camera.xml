@@ -70,6 +70,7 @@
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center"
         android:text=""
+        android:onClick="fadeOut"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
 

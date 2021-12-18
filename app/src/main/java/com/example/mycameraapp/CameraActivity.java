@@ -101,17 +101,7 @@ public class CameraActivity extends MainActivity {
 
         int distance = bundleDistance.getInt("Distance");
 
-        if (distance > 20) { //Photos from more than 20 meters distance are considered too far away
-            popUp.setText(" You are too far away from the old photo... ");
-            popUp.getBackground().setAlpha(160);
-
-            final Animation in = new AlphaAnimation(0.0f, 1.0f);
-            in.setDuration(1500);
-            AnimationSet as = new AnimationSet(true);
-            in.setStartOffset(500);
-            as.addAnimation(in);
-            popUp.startAnimation(in);
-        }
+        fadeIn(distance);
 
         realTimeParams_az.setTextColor(Color.parseColor("#FFFFFF"));
         realTimeParams_az.setTypeface(montserrat_medium);
@@ -450,6 +440,30 @@ public class CameraActivity extends MainActivity {
         intent.putExtras(bundleCoords);
         intent.putExtras(bundleCoordsOld);
         startActivity(intent);
+    }
+
+    public void fadeIn(int distance) {
+        if (distance > 20) { //Photos from more than 20 meters distance are considered too far away
+            popUp.setText(" You are too far away from the old photo... ");
+            popUp.getBackground().setAlpha(160);
+
+            final Animation in = new AlphaAnimation(0.0f, 1.0f);
+            in.setDuration(1000);
+            AnimationSet as = new AnimationSet(true);
+            in.setStartOffset(500);
+            as.addAnimation(in);
+            popUp.startAnimation(in);
+        }
+
+    }
+
+    public void fadeOut(View view) {
+        final Animation out = new AlphaAnimation(1.0f, 0.0f);
+        out.setDuration(1000);
+        AnimationSet as = new AnimationSet(true);
+        as.addAnimation(out);
+        popUp.startAnimation(out);
+        popUp.setVisibility(View.INVISIBLE);
     }
 
 
