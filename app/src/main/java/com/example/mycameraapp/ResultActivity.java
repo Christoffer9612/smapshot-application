@@ -237,25 +237,24 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
 
         if(meanUncertainty < 5) { //Change colors
-            setTxtAndColor(toggleButton, "Your grade: A 🎉", "#3CC0C5");
+            setTxtAndColor(toggleButton, "Your grade: A 🎉");
         } else if (meanUncertainty < 15) {
-            setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F", "#78E8EC");
+            setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F");
         } else if (meanUncertainty < 25) {
-            setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D", "#8DDFE2");
+            setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D");
         } else if (meanUncertainty < 35) {
-            setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10", "#E09D80");
+            setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10");
         } else if (meanUncertainty < 45)  {
-            setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E", "#EE8F67");
+            setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E");
         } else {
-            setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9", "#FF763C");
+            setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9");
             }
     }
 
-    private void setTxtAndColor(ToggleButton btn, String grade, String color) {
+    private void setTxtAndColor(ToggleButton btn, String grade) {
         btn.setText(grade);
         btn.setTextOn(grade);
         btn.setTextOff(grade);
-        btn.setTextColor(Color.parseColor(color));
     }
 
 
