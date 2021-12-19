@@ -80,8 +80,8 @@
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="18dp"
         android:onClick="openChallenge"
-        android:text="Test API"
-        android:textSize="18sp" />
+        android:text="Scoreboard"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnFindPhoto"
@@ -96,7 +96,7 @@
         android:layout_marginBottom="119dp"
         android:onClick="openSmapshot"
         android:text="Smapshot"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnProfile"
@@ -109,8 +109,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="18dp"
-        android:text="Location"
-        android:textSize="18sp" />
+        android:text="Your profile"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnTutorial"
@@ -125,7 +125,7 @@
         android:layout_marginBottom="119dp"
         android:onClick="openTutorial"
         android:text="How to use"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/thumbnail"

@@ -43,6 +43,8 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
+import java.text.DecimalFormat;
+
 public class SelectActivity extends AppCompatActivity {
     private ShapeableImageView imageOnePhoto, imageTwoPhoto;
     private Button btnPhoto, btnBack;
@@ -239,6 +241,9 @@ public class SelectActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        DecimalFormat df = new DecimalFormat("#.#######"); //Trimming longitude & latitude to 7 decimals
+        value = Double.parseDouble(df.format(value));
         return value;
     }
 

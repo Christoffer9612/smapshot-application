@@ -42,6 +42,8 @@ public class JsonFinder {
     /*Method for returning double value from String key.*/
     public String getStringValue(JSONObject jsonObj, String key) throws JSONException {
         String val = jsonObj.getString(key);
+        val = val.replaceAll("_", " "); //Removing underscores in title
+        val = val.replaceAll("-", " "); //Removing dashes in title
         return val;
     }
 

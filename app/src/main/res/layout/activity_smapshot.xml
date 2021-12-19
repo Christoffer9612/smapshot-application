@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="67dp"
+        android:layout_marginTop="62dp"
         android:layout_marginRight="11dp"
         android:text="Smapshot is a web-based platform with the goal of creating a virtual globe of history by georeferencing photos on a 3D globe. \n \nThe ability to retake historical photos in this mobile application provides a simple way of visually comparing the past state of a landscape with the present of the same landscape today."
         android:textColor="#444444"
