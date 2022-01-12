@@ -265,6 +265,8 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     }
 
     public void retake(View view) {
+
+
         Intent intent = new Intent(this, SelectActivity.class);
         //Add the bundle to the intent
         intent.putExtras(bundleRetake);

@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openChallenge(View view) {
-
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="https://smapshot.heig-vd.ch/api/v1/images/185747/attributes/?lang=en"; //Dia photo

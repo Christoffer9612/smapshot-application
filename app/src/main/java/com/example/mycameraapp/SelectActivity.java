@@ -224,8 +224,8 @@ public class SelectActivity extends AppCompatActivity {
                     int timeOne = timeToDestination(distanceOne);
                     int timeTwo = timeToDestination(distanceTwo);
 
-                    txtImageOneDistance.setText(distanceOne + "m" + "\nWalk: " + timeOne + " min");
-                    txtImageTwoDistance.setText(distanceTwo + "m" + "\nWalk: " + timeTwo + " min");
+                    txtImageOneDistance.setText(distanceOne + " meters" + "\nWalk: " + timeOne + " min");
+                    txtImageTwoDistance.setText(distanceTwo + " meters" + "\nWalk: " + timeTwo + " min");
                 }
             }
         });

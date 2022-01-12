@@ -34,9 +34,9 @@ public class TutorialActivity extends AppCompatActivity {
         btnGoBack = findViewById(R.id.btnGoBack);
         contribute = findViewById(R.id.contribute);
 
-        stepOne.animateText("1. Find an old photo you wish to retake");
-        stepTwo.animateText("2. Navigate to the location");
-        stepThree.animateText("3. Retake the old photo");
+        stepOne.animateText("1. Find a photo you wish to retake");
+        stepTwo.animateText("2. Navigate to its location");
+        stepThree.animateText("3. Retake the photo");
         stepFour.animateText("4. Compare the past with the present!");
 
         contribute.setImageResource(R.drawable.contribute);
