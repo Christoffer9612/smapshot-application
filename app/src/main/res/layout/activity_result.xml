@@ -117,23 +117,6 @@
         app:shapeAppearanceOverlay="@style/LessRoundedSquare" />
 
     <TextView
-        android:id="@+id/newParams"
-        android:layout_width="185dp"
-        android:layout_height="164dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/grey_rounded_corner"
-        android:gravity="left"
-        android:text="New azimuth \nNew tilt \nNew roll \n \nLongitude \nLatitude"
-        android:textColor="#444444"
-        android:textSize="15dp" />
-
-    <TextView
         android:id="@+id/loadingMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,22 +130,6 @@
         android:text="Loading photo..."
         android:textSize="14dp" />
 
-    <TextView
-        android:id="@+id/oldParams"
-        android:layout_width="185dp"
-        android:layout_height="164dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/grey_rounded_corner"
-        android:gravity="left"
-        android:text="Old azimuth \nOld tilt \nOld roll \n \nLongitude \nLatitude"
-        android:textColor="#444444"
-        android:textSize="15dp" />
-
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="389dp"
@@ -172,18 +139,52 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginEnd="11dp"
-        android:layout_marginRight="22dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="185dp"
         android:background="#E2E2E2"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="#444444"
-        android:textOff="Your grade: X 🎉"
-        android:textOn="Your grade: X 🎉"
+        android:textOff="Your grade: X \n🎉"
+        android:textOn="Your grade: X \n🎉"
         android:textSize="32dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/oldParams"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/toggleButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:gravity="left"
+        android:text="Old azimuth \nOld tilt \nOld roll \n \nLongitude \nLatitude"
+        android:textColor="#444444"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/newParams"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/toggleButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:gravity="left"
+        android:text="New azimuth \nNew tilt \nNew roll \n \nLongitude \nLatitude"
+        android:textColor="#444444"
+        android:textSize="15dp" />
 
 
 </RelativeLayout>

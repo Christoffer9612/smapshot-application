@@ -52,6 +52,7 @@ public class CameraActivity extends MainActivity {
     private ImageView overlayPhoto;
     private Utils utils = new Utils(this);
     private ImageView arrowRight, arrowLeft;
+    private RequestAPI requestAPI = new RequestAPI(this);
 
     //Storing data to pass from one Activity to another
     Bundle bundle = new Bundle();
@@ -133,19 +134,7 @@ public class CameraActivity extends MainActivity {
             overlayPhoto.setImageResource(R.drawable.st_roch_test);
         } else if (bundleSelectedPhoto.getString("oldPhoto").equals("photoTwo")) {
             RequestQueue queue = Volley.newRequestQueue(this);
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(overlayPhoto);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
-                }
-            });
-
+            StringRequest stringRequest = requestAPI.requestPhoto(overlayPhoto);
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
         }

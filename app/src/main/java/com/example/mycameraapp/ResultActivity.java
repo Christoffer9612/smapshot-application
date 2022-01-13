@@ -41,6 +41,7 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     private ShapeableImageView newPhoto, oldPhoto;
     private ToggleButton toggleButton;
     public Bundle bundleRetake;
+    private RequestAPI requestAPI = new RequestAPI(this);
 
 
     private Utils utils = new Utils(this);
@@ -92,20 +93,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             tiltOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("tilt_dia"));
             rollOld = utils.normaliseAngles180(bundleSelectedPhoto.getFloat("roll_dia"));
             bundleRetake.putString("oldPhoto", "photoTwo");
-            RequestQueue queue = Volley.newRequestQueue(this);
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(oldPhoto);
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
-                }
-            });
 
+            RequestQueue queue = Volley.newRequestQueue(this);
+            StringRequest stringRequest = requestAPI.requestPhoto(oldPhoto);
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
 
@@ -237,17 +227,17 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
 
         if(meanUncertainty < 5) { //Change colors
-            setTxtAndColor(toggleButton, "Your grade: A 🎉");
+            setTxtAndColor(toggleButton, "Your grade: A " + "\n" + "🎉");
         } else if (meanUncertainty < 15) {
-            setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F");
+            setTxtAndColor(toggleButton, "Your grade: B " + "\n" + "\uD83D\uDC4F");
         } else if (meanUncertainty < 25) {
-            setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D");
+            setTxtAndColor(toggleButton, "Your grade: C" + "\n" + "\uD83D\uDC4D");
         } else if (meanUncertainty < 35) {
-            setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10");
+            setTxtAndColor(toggleButton, "Your grade: D" + "\n" + "\uD83D\uDE10");
         } else if (meanUncertainty < 45)  {
-            setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E");
+            setTxtAndColor(toggleButton, "Your grade: E " + "\n" + "\uD83D\uDC4E");
         } else {
-            setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9");
+            setTxtAndColor(toggleButton, "Your grade: F " + "\n" + "\uD83D\uDCA9");
             }
     }
 

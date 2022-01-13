@@ -16,6 +16,10 @@ import com.hanks.htextview.evaporate.EvaporateTextView;
 
 public class FindActivity extends AppCompatActivity {
 
+    /* This class does not have any functionality, attached to the tickboxes
+     * Currently, the class is only a mockup, for design purposes
+     */
+
     private Button btnMain, btnFind;
     private CheckBox checkboxCities, checkboxLandscapes, checkboxMonuments, checkboxRivers, checkboxViewpoints, checkboxAll;
     private EvaporateTextView findHeadline;
@@ -48,11 +52,10 @@ public class FindActivity extends AppCompatActivity {
         utils.setText(checkboxViewpoints, montserrat_medium);
         utils.setText(checkboxAll, montserrat_medium);
 
-        /*Listener for selectAll, checks and unchecks all checkboxes if clicked*/
+        /* Listener for selectAll, checks and unchecks all checkboxes if clicked */
         checkboxAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //Toast.makeText(FindActivity.this, "isChecked - " + checkboxAll.isChecked(), Toast.LENGTH_SHORT).show();
                     checkboxCities.setChecked(true);
                     checkboxLandscapes.setChecked(true);
                     checkboxMonuments.setChecked(true);
@@ -76,6 +79,8 @@ public class FindActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     public void openSelectPhoto(View view) {
         Intent intent = new Intent(this, SelectActivity.class);

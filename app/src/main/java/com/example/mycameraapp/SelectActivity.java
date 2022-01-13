@@ -61,6 +61,7 @@ public class SelectActivity extends AppCompatActivity {
     private FusedLocationProviderClient client;
     private TextView txtImageOneDistance, txtImageTwoDistance, txtImageOne, txtImageTwo;
     public int distanceOne, distanceTwo;
+    private RequestAPI requestAPI = new RequestAPI(this);
 
     @SuppressLint("Range")
     @Override
@@ -91,19 +92,7 @@ public class SelectActivity extends AppCompatActivity {
         imageOnePhoto.setImageResource(R.drawable.st_roch_test);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg", //Dia photo
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(imageTwoPhoto);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("URL ERROR", "URL link is broken or you don't have internet connection...");
-            }
-        });
-
+        StringRequest stringRequest = requestAPI.requestPhoto(imageTwoPhoto);
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
@@ -231,12 +220,14 @@ public class SelectActivity extends AppCompatActivity {
         });
     }
 
+
+
     public double getLongOrLat(String filepath, String key) {
         Double value = null;
         String jsonFile = jsonFinder.JSONFromAsset(this, filepath);
         try {
             JSONObject jsonObj = new JSONObject(jsonFile);
-            jsonObj = jsonObj.getJSONObject("pose"); //Json object within a json object...
+            jsonObj = jsonObj.getJSONObject("pose"); //JSON object within a JSON object...
             value = jsonFinder.getValue(jsonObj, key);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -259,7 +250,7 @@ public class SelectActivity extends AppCompatActivity {
         return title;
     }
 
-    /*Calculating distance from current location to photos location and returning in meters, absolute distance (straight line on map)*/
+    /* Calculating distance from current location to photos location and returning in meters, absolute distance (straight line on map) */
     public int distance(double lat1, double lat2, double lon1, double lon2) {
         double dlon = Math.toRadians(lon2) - Math.toRadians(lon1);
         double dlat = Math.toRadians(lat2) - Math.toRadians(lat1);
@@ -273,7 +264,7 @@ public class SelectActivity extends AppCompatActivity {
         return result;
     }
 
-    /*Calculating distance to photo, based on 1 km = 10 min walk*/
+    /* Calculating distance to photo, based on 1 km = 10 min walk */
     public int timeToDestination(double distanceMeters) {
         double minutes = distanceMeters / 1000 * 10;
         minutes = Math.ceil(minutes); //Rounding value up
@@ -285,75 +276,15 @@ public class SelectActivity extends AppCompatActivity {
         marker.setPosition(point);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         map.getOverlays().add(marker);
-
-        // Read your drawable from somewhere
-        //Drawable dr = getResources().getDrawable(R.drawable.favicon_196);
-        //Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
-        // Scale it to 50 x 50
-        //Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 20, 20, true));
-        // Set your new, scaled drawable "d"
-        //marker.setIcon(d);
-
     }
 
-    //OpenStreetMap method
+    /* OpenStreetMap method */
     public void onResume(){
         super.onResume();
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().save(this, prefs);
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
     }
 
-    public void openCustomCam(View view){
 
-        Double latitudeImageOne = getLongOrLat("test_photo.json", "latitude");
-        Double longitudeImageOne = getLongOrLat("test_photo.json", "longitude");
-
-        Double latitudeImageTwo = getLongOrLat("dia_303_12172.json", "latitude");
-        Double longitudeImageTwo = getLongOrLat("dia_303_12172.json", "longitude");
-
-        if (selectedImageTwo == true) {
-            //Add your data to bundle
-            bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
-            bundleCoordsOld.putDouble("latitudeOld", latitudeImageTwo);
-            bundleCoordsOld.putDouble("longitudeOld", longitudeImageTwo);
-            bundleDistance.putInt("Distance", distanceTwo);
-
-            Intent intent = new Intent(this, CameraActivity.class);
-
-            //Add the bundle to the intent
-            intent.putExtras(bundleSelectedPhoto);
-            intent.putExtras(bundleCoords);
-            intent.putExtras(bundleCoordsOld);
-            intent.putExtras(bundleDistance);
-            startActivity(intent);
-
-        } else if (selectedImageOne == true) {
-            //Add your data to bundle
-            bundleSelectedPhoto.putString("oldPhoto", "photoOne");
-            bundleCoordsOld.putDouble("latitudeOld", latitudeImageOne);
-            bundleCoordsOld.putDouble("longitudeOld", longitudeImageOne);
-            bundleDistance.putInt("Distance", distanceOne);
-
-            Intent intent = new Intent(this, CameraActivity.class);
-
-            //Add the bundle to the intent
-            intent.putExtras(bundleSelectedPhoto);
-            intent.putExtras(bundleCoords);
-            intent.putExtras(bundleCoordsOld);
-            intent.putExtras(bundleDistance);
-            startActivity(intent);
-        }
-
-    }
-
-    public void openFind(View view) {
-        Intent intent = new Intent(this, FindActivity.class);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
 
     //Refactor: merge with method below?
     public void selectImageOne(View view) throws JSONException {
@@ -483,6 +414,57 @@ public class SelectActivity extends AppCompatActivity {
             value.append("No json key found!");
         }
         return value;
+    }
+
+
+
+    /* Methods for opening new Activities */
+    public void openCustomCam(View view){
+        Double latitudeImageOne = getLongOrLat("test_photo.json", "latitude");
+        Double longitudeImageOne = getLongOrLat("test_photo.json", "longitude");
+
+        Double latitudeImageTwo = getLongOrLat("dia_303_12172.json", "latitude");
+        Double longitudeImageTwo = getLongOrLat("dia_303_12172.json", "longitude");
+
+        if (selectedImageTwo == true) {
+            //Add your data to bundle
+            bundleSelectedPhoto.putString("oldPhoto", "photoTwo");
+            bundleCoordsOld.putDouble("latitudeOld", latitudeImageTwo);
+            bundleCoordsOld.putDouble("longitudeOld", longitudeImageTwo);
+            bundleDistance.putInt("Distance", distanceTwo);
+
+            Intent intent = new Intent(this, CameraActivity.class);
+
+            //Add the bundle to the intent
+            intent.putExtras(bundleSelectedPhoto);
+            intent.putExtras(bundleCoords);
+            intent.putExtras(bundleCoordsOld);
+            intent.putExtras(bundleDistance);
+            startActivity(intent);
+
+        } else if (selectedImageOne == true) {
+            //Add your data to bundle
+            bundleSelectedPhoto.putString("oldPhoto", "photoOne");
+            bundleCoordsOld.putDouble("latitudeOld", latitudeImageOne);
+            bundleCoordsOld.putDouble("longitudeOld", longitudeImageOne);
+            bundleDistance.putInt("Distance", distanceOne);
+
+            Intent intent = new Intent(this, CameraActivity.class);
+
+            //Add the bundle to the intent
+            intent.putExtras(bundleSelectedPhoto);
+            intent.putExtras(bundleCoords);
+            intent.putExtras(bundleCoordsOld);
+            intent.putExtras(bundleDistance);
+            startActivity(intent);
+        }
+
+    }
+
+    public void openFind(View view) {
+        Intent intent = new Intent(this, FindActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }

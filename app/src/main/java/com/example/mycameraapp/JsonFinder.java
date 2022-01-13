@@ -39,7 +39,7 @@ public class JsonFinder {
         return val;
     }
 
-    /*Method for returning double value from String key.*/
+    /*Method for returning String value from String key and removing all dashes. E.g: get original_id */
     public String getStringValue(JSONObject jsonObj, String key) throws JSONException {
         String val = jsonObj.getString(key);
         val = val.replaceAll("_", " "); //Removing underscores in title

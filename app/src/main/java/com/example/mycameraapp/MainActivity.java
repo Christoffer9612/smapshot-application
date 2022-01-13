@@ -28,6 +28,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -48,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public static JSONObject jsonObj;
     public Button btnFindPhoto, btnLoadJSON, btnTutorial, btnProfile, btnSmapshot;
     private ImageView thumbnail;
-    private Utils utils = new Utils(this);
     private FusedLocationProviderClient client;
+
+    private Utils utils = new Utils(this);
+    private RequestAPI requestAPI = new RequestAPI(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,28 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermission();
 
-        //Displaying last known location coordinates, can remove in future:
-        client = LocationServices.getFusedLocationProviderClient(this);
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if(location != null) {
-                            intro.setText("Latitude: " + location.getLatitude() + "\n Longitude: " + location.getLongitude());
-                        }
-                    }
-                });
-            }
-        });
-
-        //"Configuring" buttons, photos, colors, font, etc. in main screen
-        thumbnail.setImageResource(R.drawable.thumbnail);
-        //thumbnail.setAlpha(191); //0 is fully transparent, 255 is fully opaque (currently: 75 % opacity)
+        //"Configuring" buttons, photos, colors, font, etc.
+        thumbnail.setImageResource(R.drawable.thumbnail_nofade);
+        thumbnail.setAlpha(200); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
 
         utils.setText(azimuth, montserrat_medium);
         utils.setText(tilt, montserrat_medium);
@@ -118,14 +102,22 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build() );
 
+        JSONObject diaJSON = new JSONObject();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = requestAPI.requestJsonFile();
+        // Add the request to the RequestQueue.
+        queue.add(jsonObjectRequest);
+
     }
 
-    /* Requesting access to: camera, storage and folders */
+
+
+    /* Requesting access to: camera, storage and external memory */
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE}, 1);
     }
 
-    //Used when finding the coordinates from json-file
+    /* Used when finding the coordinates from json-file */
     public StringBuilder findCoordinates(JSONObject obj, String key)
             throws JSONException {
         StringBuilder value = new StringBuilder();
@@ -141,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         return value;
     }
 
-    //Converts StringBuilder that you get from findCoordinates method to float
+    /* Converts StringBuilder that you get from findCoordinates() to float */
     public float sbToFloatCoord(JSONObject obj, String key) throws JSONException {
         StringBuilder sb = findCoordinates(obj, key);
         String s = sb.toString();
@@ -153,7 +145,9 @@ public class MainActivity extends AppCompatActivity {
         return float_key;
     }
 
-    //Methods for opening new Activities
+
+
+    /* Methods for opening new Activities */
     public void openFindPhoto(View view) {
         Intent intent = new Intent(this, FindActivity.class);
         startActivity(intent);
@@ -172,31 +166,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }
 
-    public void openChallenge(View view) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="https://smapshot.heig-vd.ch/api/v1/images/185747/attributes/?lang=en"; //Dia photo
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            intro.setText((String) json.get("original_id"));
-                            Picasso.get().load("https://smapshot.heig-vd.ch/api/v1/data/collections/31/images/500/185747.jpg").into(thumbnail);
-                        } catch (JSONException e) {}
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                intro.setText("No internet connection, or URL is broken");
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-    }
+    /* Currently, there are no methods for the two bottom buttons: "Scoreboard" and "Your profile" */
     
 }
