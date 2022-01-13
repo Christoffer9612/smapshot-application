@@ -233,8 +233,8 @@ public class SelectActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        DecimalFormat df = new DecimalFormat("#.#######"); //Trimming longitude & latitude to 7 decimals
-        value = Double.parseDouble(df.format(value));
+        //DecimalFormat df = new DecimalFormat("#.#######"); //Trimming longitude & latitude to 7 decimals, CRASHING CODE
+        //value = Double.parseDouble(df.format(value));
         return value;
     }
 
