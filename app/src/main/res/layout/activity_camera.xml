@@ -23,7 +23,7 @@
     <com.example.mycameraapp.TouchImageView
         android:id="@+id/overlayPhoto"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="568dp"
         android:layout_marginEnd="0dp"
         android:layout_marginRight="10dp"
         android:clickable="true"

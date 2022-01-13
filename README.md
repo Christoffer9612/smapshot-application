@@ -24,6 +24,13 @@ The mobile app requires three permissions:
 * Alfred Hirschfeld - master thesis student
 
 ## Developer notes
+The app is not modified for dark mode on Android phones. 
+
+The app is tested on:
+* Xiaomi Mi9T
+* Motorola G8
+This means that the app does not have a UI that supports all screen sizes and devices.
+
 If you want to improve, contribute to the project or download this repository and set up, check [developer_notes.md](https://github.com/Christoffer9612/smapshot-application/blob/master/developer_notes.md) for more detailed information.
 
 ## APK

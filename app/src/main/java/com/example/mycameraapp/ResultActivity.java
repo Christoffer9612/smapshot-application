@@ -107,9 +107,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         utils.setText(newParams, montserrat_medium);
 
         oldParams.setText("Old azimuth: " + Math.round(azimuthOld) + "°" + "\n" + "Old tilt: " + Math.round(tiltOld) + "°" + "\n" + "Old roll: " + Math.round(rollOld) + "°" +
-                        "\n" + "\n" + "Longitude: " + bundleCoordsOld.getDouble("longitudeOld") + "\n" + "Latitude: " + bundleCoordsOld.getDouble("latitudeOld"));
+                        "\n" + "\n" + "Lon: " + bundleCoordsOld.getDouble("longitudeOld") + "\n" + "Lat: " + bundleCoordsOld.getDouble("latitudeOld"));
         newParams.setText("New azimuth: " + Math.round(realTimeAzimuth)+ "°" + "\n" + "New tilt: " + Math.round(realTimeTilt) + "°" + "\n" + "New roll: " + Math.round(realTimeRoll) + "°" +
-                "\n" + "\n" + "Longitude: " + bundleCoords.getDouble("longitude") + "\n" + "Latitude: " + bundleCoords.getDouble("latitude"));
+                "\n" + "\n" + "Lon: " + bundleCoords.getDouble("longitude") + "\n" + "Lat: " + bundleCoords.getDouble("latitude"));
 
         oldParams.getBackground().setAlpha(100);
         oldPhoto.getBackground().setAlpha(100);
