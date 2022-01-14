@@ -141,18 +141,18 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
             }
         }, 2000); //Delay so most recent photo can be displayed
 
-        oldParams.setVisibility(View.GONE);
-        newParams.setVisibility(View.GONE);
+        //oldParams.setVisibility(View.GONE);
+        //newParams.setVisibility(View.GONE);
 
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    oldParams.setVisibility(View.VISIBLE);
-                    newParams.setVisibility(View.VISIBLE);
+                    //oldParams.setVisibility(View.VISIBLE);
+                    //newParams.setVisibility(View.VISIBLE);
                 } else {
-                    oldParams.setVisibility(View.GONE);
-                    newParams.setVisibility(View.GONE);
+                    //oldParams.setVisibility(View.GONE);
+                    //newParams.setVisibility(View.GONE);
 
                 }
             }
@@ -227,17 +227,17 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
 
         if(meanUncertainty < 5) { //Change colors
-            setTxtAndColor(toggleButton, "Your grade: A " + "\n" + "🎉");
+            setTxtAndColor(toggleButton, "Your grade: A 🎉");
         } else if (meanUncertainty < 15) {
-            setTxtAndColor(toggleButton, "Your grade: B " + "\n" + "\uD83D\uDC4F");
+            setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F");
         } else if (meanUncertainty < 25) {
-            setTxtAndColor(toggleButton, "Your grade: C" + "\n" + "\uD83D\uDC4D");
+            setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D");
         } else if (meanUncertainty < 35) {
-            setTxtAndColor(toggleButton, "Your grade: D" + "\n" + "\uD83D\uDE10");
+            setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10");
         } else if (meanUncertainty < 45)  {
-            setTxtAndColor(toggleButton, "Your grade: E " + "\n" + "\uD83D\uDC4E");
+            setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E");
         } else {
-            setTxtAndColor(toggleButton, "Your grade: F " + "\n" + "\uD83D\uDCA9");
+            setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9");
             }
     }
 

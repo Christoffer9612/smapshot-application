@@ -30,7 +30,7 @@ The app is tested on:
 * Xiaomi Mi9T
 * Motorola G8
 
-This means that the app **does not have a UI that supports all screen sizes and devices.** If you want to improve, contribute to the project or download this repository, check [developer_notes.md](https://github.com/Christoffer9612/smapshot-application/blob/master/developer_notes.md) for more detailed information.
+This means that the app **does not have a UI that supports all screen sizes and devices.** If you want to improve, contribute to the project or download this repository, check [developer notes](https://github.com/Christoffer9612/smapshot-application/blob/master/developer_notes.md) for more detailed information.
 
 ## APK
 APK stands for Android Package Kit, a file format that Android uses to distribute and install apps.

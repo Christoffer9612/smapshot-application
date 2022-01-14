@@ -36,7 +36,7 @@
             android:name=".SmapshotActivity"
             android:exported="true"
             android:label="@string/what_is_smapshot"
-            android:theme="@style/Theme.SmapshotRed" />
+            android:theme="@style/Theme.SmapshotBlue" />
         <activity
             android:name=".SelectActivity"
             android:exported="true"
