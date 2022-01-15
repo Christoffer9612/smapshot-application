@@ -150,10 +150,10 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
                 if (isChecked) {
                     //oldParams.setVisibility(View.VISIBLE);
                     //newParams.setVisibility(View.VISIBLE);
+
                 } else {
                     //oldParams.setVisibility(View.GONE);
                     //newParams.setVisibility(View.GONE);
-
                 }
             }
         });

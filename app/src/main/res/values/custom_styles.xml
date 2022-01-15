@@ -6,4 +6,7 @@
     <style name="LessRoundedSquare">
         <item name="cornerSize">2%</item>
     </style>
+    <style name="MoreRoundedSquare">
+        <item name="cornerSize">12%</item>
+    </style>
 </resources>
