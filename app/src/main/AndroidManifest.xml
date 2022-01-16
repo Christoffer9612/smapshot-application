@@ -44,7 +44,7 @@
             android:label="@string/select_photo"
             android:theme="@style/Theme.SmapshotBlue" />
         <activity
-            android:name=".TutorialActivity"
+            android:name=".HowToUseActivity"
             android:exported="true"
             android:label="@string/tutorial"
             android:theme="@style/Theme.SmapshotRed" />
@@ -52,7 +52,7 @@
             android:name=".CameraActivity"
             android:exported="true"
             android:label="@string/take_photo"
-            android:theme="@style/Theme.SmapshotRed" />
+            android:theme="@style/Theme.SmapshotBlue" />
         <activity
             android:name=".ResultActivity"
             android:exported="true"

@@ -66,7 +66,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="240dp"
-        android:background="@drawable/red_rounded_corner"
+        android:background="@drawable/blue_rounded_corner"
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center"
         android:onClick="fadeOut"

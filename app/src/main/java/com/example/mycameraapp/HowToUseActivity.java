@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 import com.hanks.htextview.evaporate.EvaporateTextView;
 
-public class TutorialActivity extends AppCompatActivity {
+public class HowToUseActivity extends AppCompatActivity {
 
     public EvaporateTextView stepOne, stepTwo, stepThree, stepFour;
     public Button btnGoBack;
@@ -23,7 +22,7 @@ public class TutorialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutorial);
+        setContentView(R.layout.activity_howtouse);
 
         Typeface montserrat_medium = Typeface.createFromAsset(getAssets(),"fonts/montserrat_medium.ttf");
 

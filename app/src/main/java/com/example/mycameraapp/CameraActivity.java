@@ -116,8 +116,8 @@ public class CameraActivity extends MainActivity {
         utils.setButton(btnGoBack, montserrat_medium);
         utils.setButton(btnCapture, montserrat_medium);
 
-        seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
-        seekBar.getThumb().setColorFilter(Color.parseColor("#FF763C"), PorterDuff.Mode.SRC_IN);
+        seekBar.getProgressDrawable().setColorFilter(Color.parseColor("#3CC0C5"), PorterDuff.Mode.SRC_IN);
+        seekBar.getThumb().setColorFilter(Color.parseColor("#3CC0C5"), PorterDuff.Mode.SRC_IN);
 
         //Open camera
         camera = Camera.open();
@@ -327,7 +327,7 @@ public class CameraActivity extends MainActivity {
 
         if (orientationAngle.equals("azimuth")) {
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
-                realTimeParams_az.setTextColor(Color.GREEN);
+                realTimeParams_az.setTextColor(Color.parseColor("#3CC0C5"));
             } else {
                 realTimeParams_az.setTextColor(Color.WHITE);
             }
@@ -336,7 +336,7 @@ public class CameraActivity extends MainActivity {
         if (orientationAngle.equals("tilt")) {
 
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
-            realTimeParams_ti.setTextColor(Color.GREEN);
+            realTimeParams_ti.setTextColor(Color.parseColor("#3CC0C5"));
             } else {
             realTimeParams_ti.setTextColor(Color.WHITE);
             }
@@ -345,7 +345,7 @@ public class CameraActivity extends MainActivity {
         if(orientationAngle.equals("roll")) {
 
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
-            realTimeParams_ro.setTextColor(Color.GREEN);
+            realTimeParams_ro.setTextColor(Color.parseColor("#3CC0C5"));
             } else {
             realTimeParams_ro.setTextColor(Color.WHITE);
             }

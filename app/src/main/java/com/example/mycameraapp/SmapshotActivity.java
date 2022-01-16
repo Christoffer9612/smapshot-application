@@ -2,6 +2,7 @@ package com.example.mycameraapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -36,6 +37,8 @@ public class SmapshotActivity extends AppCompatActivity {
         utils.setButton(goBack, montserrat_medium);
         utils.setButton(visitWebsite, montserrat_medium);
 
+        ObjectAnimator.ofFloat(smapshotModel, View.ALPHA, 0.0f, 1.0f).setDuration(1500).start();
+
     }
 
     //Methods for opening new Activities
@@ -46,7 +49,7 @@ public class SmapshotActivity extends AppCompatActivity {
     }
 
     public void visitWebsite(View view) {
-        Uri uri = Uri.parse("https://smapshot.heig-vd.ch/"); // missing 'http://' will cause crashed
+        Uri uri = Uri.parse("https://smapshot.heig-vd.ch/"); // missing 'http://' will cause crash
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
