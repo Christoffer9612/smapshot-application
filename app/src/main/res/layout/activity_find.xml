@@ -34,7 +34,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="278dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="LANDSCAPES  "
         android:textSize="18dp" />
 
@@ -48,7 +48,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="327dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="MONUMENTS  "
         android:textSize="18dp" />
 
@@ -62,7 +62,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="376dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="RIVERS  "
         android:textSize="18dp" />
 
@@ -76,7 +76,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="425dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="VIEWPOINTS  "
         android:textSize="18dp" />
 
@@ -90,7 +90,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="473dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="ALL  "
         android:textSize="18dp" />
 
@@ -104,7 +104,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="229dp"
-        android:buttonTint="@color/smapshot_red"
+        android:buttonTint="@color/smapshot_blue"
         android:text="CITIES  "
         android:textSize="18dp" />
 

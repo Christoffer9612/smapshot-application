@@ -1,6 +1,3 @@
-## Class diagram
-*To be created...* 
-
 ## Configuration
 
 * Java 15
@@ -9,7 +6,7 @@
 * Phone: Xiaomi Mi 9T, Motorola G8. Currently, layout of app is designed towards Xiaomi Mi 9T. There are aspect ratio issues with Motorola G8 (4:3).
   * Android version: 10
 
-### Known issues
+### Solved issues
 * Specify JDK version error, solution [here](https://www.py4u.net/discuss/604849).
 * How to set JDK path in Android Studio, solution [here](https://stackoverflow.com/questions/68120382/how-to-set-java-jdk-path-in-android-studio-arctic-fox).
 * Osmdroid (OpenStreetMap) doesn't load in codefiles. Solution: open ```build.gradle``` (Module), do a minor change and change back to its original state in order for gradle to display a "Sync Now" button in the upper right corner. Press "Sync Now".
@@ -25,25 +22,25 @@ To debug the code and follow printouts, use the Logcat terminal which can be fou
 ## Current functionality
 
 #### Camera
-- [X] Photos being used in: **portrait mode**
-- [X] Custom Camera API
-- [X] Capture & store photos on external memory
-- [X] Transparency mode in camera: displaying old photo on top of camera
-- [X] Zoom in/out selected photo on top of the camera view
+- [X] Photos being used and stored in: **portrait mode**
+- [X] Custom Camera API implemented
+- [X] Capture & store photos on external memory of mobile device
+- [X] Transparency mode in camera: displaying photo on top of camera view
+- [X] Zoom in/out selected photo on top of the camera view by dragging
 - [X] Aspect ratio of camera preview set to 4:3 (= 1.33) for all devices
 - [X] Instructions on how to position the device to achieve greater accuracy when retaking a photo
 
 #### Geographic information
 - [X] Display sensor values when opening camera: azimuth, tilt and roll
-- [X] Display sensor values from the test photos (azimuth, tilt and roll)
+- [X] Display sensor values from the test photos
 - [X] Normalizing angles (0-360 degrees)
-- [X] Calculating results of parameters and mean accuracy in percentage (%)?
+- [X] Calculating results of parameters and mean accuracy in percentage (%)
 - [X] Able to store azimuth, tilt and roll when capturing new photo and compare with selected test photo
 
 #### OpenStreetMap
-- [X] OpenStreetMap to view map of photos. The app requires **internet** to load map
+- [X] OpenStreetMap to show map of photos. The app requires **internet** to load map
 - [X] Displaying your current location in OpenStreetMap
 
 #### Other
 - [X] Select between two photos to retake, one test photo and another photo fetched from [Smapshot's API](https://smapshot.heig-vd.ch/api/v1/docs/)
-- [X] Instructions on how to use
+- [X] Instructions on how to use and information about Smapshot

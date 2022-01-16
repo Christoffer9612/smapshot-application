@@ -31,7 +31,7 @@
             android:name=".FindActivity"
             android:exported="true"
             android:label="@string/find_photos"
-            android:theme="@style/Theme.SmapshotRed"/>
+            android:theme="@style/Theme.SmapshotBlue"/>
         <activity
             android:name=".SmapshotActivity"
             android:exported="true"
