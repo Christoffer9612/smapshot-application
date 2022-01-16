@@ -138,7 +138,7 @@
         android:layout_marginEnd="200dp"
         android:layout_marginRight="200dp"
         android:layout_marginBottom="119dp"
-        android:onClick="openTutorial"
+        android:onClick="openHowToUse"
         android:text="How to use"
         android:textSize="16sp" />
 

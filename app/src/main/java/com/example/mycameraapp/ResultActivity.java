@@ -247,20 +247,16 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         btn.setTextOff(grade);
     }
 
-
-
     private void openMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void retake(View view) {
-
-
         Intent intent = new Intent(this, SelectActivity.class);
-        //Add the bundle to the intent
-        intent.putExtras(bundleRetake);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }

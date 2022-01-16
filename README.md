@@ -6,7 +6,7 @@ Smapshot is a web-based platform with the goal of creating a virtual 3D globe by
 ### What is Smapshot mobile application?
 This codebase is the work of two master thesis students, developing a mobile application prototype for Smapshot. This proof of concept demonstrates what such a mobile app could look like. The focus of the app is to be able to retake historical photographs from Smapshot. Rephotography allows us to compare and analyze the past with the present, which has great environmental value.
 
-* This prototype has been usability tested twice, by eight test-users in total.
+* This prototype has been usability tested by eight test-users in total.
 * This prototype is only available for Android smartphones and has only been tested on *Xiaomi Mi 9T* and *Motorola G8*. 
 * The mobile app includes two photographs to retake in Yverdon-les-Bains, Switzerland:
     * One test photo from the office of St Roch building in Yverdon

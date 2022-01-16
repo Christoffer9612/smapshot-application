@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
-    public void openTutorial(View view) {
+    public void openHowToUse(View view) {
         Intent intent = new Intent(this, HowToUseActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
@@ -148,6 +148,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); //Animation fade in, fade out
     }
 
-    /* Currently, there are no methods for the two bottom buttons: "Scoreboard" and "Your profile" */
+    /* Currently, there are no methods for the two buttons: "Scoreboard" and "Your profile" */
     
 }
