@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,23 +12,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
 
 import java.io.File;
 import java.util.Arrays;
@@ -121,9 +112,9 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
         utils.setButton(btnRetake, montserrat_medium);
 
         ///setScore, using the three percentageUncertainties of the the three orientation angles
-        setScore(percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"),
-                percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"),
-                percentageUncertainty(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll"));
+        setScore(angleDiff(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "azimuth"),
+                angleDiff(realTimeAzimuth, realTimeTilt, realTimeRoll, azimuthOld, tiltOld, rollOld, "tilt"),
+                angleDiff(realTimeAzimuth, realTimeTilt, realTimeRoll,azimuthOld, tiltOld, rollOld, "roll"));
 
         btnGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,36 +196,36 @@ public class ResultActivity extends MainActivity { //AppCompatActivity
     }
 
     //Calculates accuracy for each orientation angle (azimuth, tilt, roll)
-    public int percentageUncertainty(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
+    public int angleDiff(float az, float ti, float ro, float azimuthOld, float tiltOld, float rollOld, String orientationAngle) {
 
-        float azimuthUncertainty = 0, tiltUncertainty = 0, rollUncertainty = 0;
+        float azimuthDiff = 0, tiltDiff = 0, rollDiff = 0;
 
         if(orientationAngle.equals("azimuth")) {
-            azimuthUncertainty = utils.uncertaintyCalc(azimuthOld, az) * 100;
-            return Math.round(azimuthUncertainty);
+            azimuthDiff = utils.diff360(azimuthOld, az);
+            return Math.round(azimuthDiff);
         } else if (orientationAngle.equals("tilt")) {
-            tiltUncertainty = utils.uncertaintyCalc180(tiltOld, ti) * 100;
-            return Math.round(tiltUncertainty);
+            tiltDiff = utils.diff180(tiltOld, ti);
+            return Math.round(tiltDiff);
         } else if (orientationAngle.equals("roll")) {
-            rollUncertainty = utils.uncertaintyCalc180(rollOld, ro) * 100;
-            return Math.round(rollUncertainty);
+            rollDiff = utils.diff180(rollOld, ro);
+            return Math.round(rollDiff);
         }
         return 0;
     }
     //sets grade from meanUncertainty of the three orientation angles
-    public void setScore(float azimuthUncertainty, float tiltUncertainty, float rollUncertainty) {
+    public void setScore(float azimuthDiff, float tiltDiff, float rollDiff) {
 
-        float meanUncertainty = (azimuthUncertainty + tiltUncertainty + rollUncertainty)/3;
-
-        if(meanUncertainty < 5) { //Change colors
+        float meanDiff = (azimuthDiff + tiltDiff + rollDiff)/3;
+        Log.d("test", String.valueOf(meanDiff));
+        if(meanDiff < 5) { //Change colors
             setTxtAndColor(toggleButton, "Your grade: A 🎉");
-        } else if (meanUncertainty < 15) {
+        } else if (meanDiff < 15) {
             setTxtAndColor(toggleButton, "Your grade: B \uD83D\uDC4F");
-        } else if (meanUncertainty < 25) {
+        } else if (meanDiff < 25) {
             setTxtAndColor(toggleButton, "Your grade: C \uD83D\uDC4D");
-        } else if (meanUncertainty < 35) {
+        } else if (meanDiff < 35) {
             setTxtAndColor(toggleButton, "Your grade: D \uD83D\uDE10");
-        } else if (meanUncertainty < 45)  {
+        } else if (meanDiff < 45)  {
             setTxtAndColor(toggleButton, "Your grade: E \uD83D\uDC4E");
         } else {
             setTxtAndColor(toggleButton, "Your grade: F \uD83D\uDCA9");

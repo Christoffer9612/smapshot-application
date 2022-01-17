@@ -45,70 +45,70 @@ public class Utils {
     }
 
     //calculate uncertainty for azimuth 0 to 360 degrees
-    public float uncertaintyCalc(float angle_old, float angle_new) {
+    public float diff360(float angle_old, float angle_new) {
         //compute three accuracies, going difference, clockwise and counterclockwise
         //return lowest uncertainty
 
 
-        float uncertainty_diff;
-        float uncertainty_clockwise;
-        float uncertainty_counterclockwise;
+        float diff;
+        float diffClockwise;
+        float diffCounterclockwise;
 
         //Straight difference Diff
-        uncertainty_diff = Math.abs(angle_old - angle_new);
-        uncertainty_diff = (float) (uncertainty_diff /360.0);
+        diff = Math.abs(angle_old - angle_new);
+
 
         //clockwise up to 360 + old_angle
         float x = 360 - angle_new;
-        uncertainty_clockwise = x + angle_old;
-        uncertainty_clockwise = (float) (uncertainty_clockwise/360.0);
+        diffClockwise = x + angle_old;
+
 
 
         //counterclockwise down to 0 degrees + (360-old_angle)
         float y = 360 - angle_old;
-        uncertainty_counterclockwise = angle_new + y;
-        uncertainty_counterclockwise = (float) (uncertainty_counterclockwise/360.0);
+        diffCounterclockwise = angle_new + y;
+
 
 
         //return the highest accuracy
-        if(uncertainty_diff < uncertainty_clockwise && uncertainty_diff < uncertainty_counterclockwise) {
-            return uncertainty_diff;
-        } else if (uncertainty_clockwise < uncertainty_diff && uncertainty_clockwise < uncertainty_counterclockwise) {
-            return uncertainty_clockwise;
+        if(diff < diffClockwise && diff < diffCounterclockwise) {
+            return diff;
+        } else if (diffClockwise < diff && diffClockwise < diffCounterclockwise) {
+            return diffClockwise;
         } else {
-            return uncertainty_counterclockwise;
+            return diffCounterclockwise;
 
         }
 
     }
 
     //used for calculating uncertainty in tilt and roll -180 to 180 degrees
-    public float uncertaintyCalc180(float angle_old, float angle_new) {
+    public float diff180(float angle_old, float angle_new) {
         //compute two uncertainties, going difference, and for angles when one is positive, and the other is negative
         //return lowest uncertainty
         //corner cases for angles close to 180 or -180 are not covered, but those angles are very unlikely to encounter
 
-        float uncertaintyDiff;
-        float uncertaintyAroundZero;
+        float diff;
+        float diffAroundZero;
 
         //Straight difference Diff, when both angles are negative and when both angles are positive
-        uncertaintyDiff = Math.abs(angle_old - angle_new);
-        uncertaintyDiff = (float) (uncertaintyDiff /180.0);
+        diff = Math.abs(angle_old - angle_new);
+
 
         //up or down to 0 + old_angle, when one angle is negative, and the other is positive
-        uncertaintyAroundZero = Math.abs(angle_new) + Math.abs(angle_old);
-        uncertaintyAroundZero = (float) (uncertaintyAroundZero/180.0);
+        diffAroundZero = Math.abs(angle_new) + Math.abs(angle_old);
+
 
 
         //when one angle is positive, and the other is negative
         if(angle_old < 0 && angle_new > 0 || angle_old > 0 && angle_new < 0) {
-            return uncertaintyAroundZero;
+            return diffAroundZero;
         }
 
-        if(uncertaintyDiff < uncertaintyAroundZero) {
-            return uncertaintyDiff;
+        if(diff < diffAroundZero) {
+            return diff;
         } else {
-            return uncertaintyAroundZero;
+            return diffAroundZero;
         }
 
     }
