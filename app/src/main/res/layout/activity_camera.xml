@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="568dp"
+        android:layout_height="523dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -23,7 +23,7 @@
     <com.example.mycameraapp.TouchImageView
         android:id="@+id/overlayPhoto"
         android:layout_width="match_parent"
-        android:layout_height="568dp"
+        android:layout_height="523dp"
         android:layout_marginEnd="0dp"
         android:layout_marginRight="10dp"
         android:clickable="true"
@@ -111,7 +111,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginEnd="9dp"
         android:layout_marginRight="9dp"
-        android:layout_marginBottom="117dp"
+        android:layout_marginBottom="154dp"
         android:layout_toStartOf="@+id/seekBar"
         android:layout_toLeftOf="@+id/seekBar"
         android:layout_toEndOf="@+id/txtTrans"
@@ -122,20 +122,6 @@
         android:textColor="#444444"
         android:textSize="16dp" />
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="117dp"
-        android:background="@drawable/grey_rounded_corner"
-        android:max="100"
-        android:progress="100" />
-
     <TextView
         android:id="@+id/txtTrans"
         android:layout_width="wrap_content"
@@ -144,13 +130,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="117dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginBottom="153dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="TRANSPARENCY"
         android:textColor="#444444"
         android:textSize="16dp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="154dp"
+        android:background="@drawable/grey_rounded_corner"
+        android:max="100"
+        android:progress="100" />
 
     <TextView
         android:id="@+id/txtZoom"
@@ -160,9 +160,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginBottom="87dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="107dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="PINCH TO ZOOM"
         android:textColor="#444444"
