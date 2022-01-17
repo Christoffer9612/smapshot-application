@@ -228,9 +228,9 @@ public class CameraActivity extends MainActivity {
                 }
 
                 //setting the colors of real time parameters, green if within range of 5.0
-                setRealTimeParamsColor(azimuthOld, azimuth, "azimuth");
-                setRealTimeParamsColor(tiltOld, pitch, "tilt");
-                setRealTimeParamsColor(rollOld, roll, "roll");
+                setRealTimeParamsColor(azimuthOld, azimuth, "azimuth", "azimuth", realTimeParams_az);
+                setRealTimeParamsColor(tiltOld, pitch, "tilt", "tilt", realTimeParams_ti);
+                setRealTimeParamsColor(rollOld, roll, "roll", "roll", realTimeParams_ro);
 
                 //determine which picture to illustrate direction instruction to user.
                 float [] azRotation = wayOfRotation(azimuthOld, azimuth);
@@ -322,38 +322,17 @@ public class CameraActivity extends MainActivity {
             }
 
     }
-    //sets the color of the realTimeParams to green when in the span of +- 5 degrees
-    public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle) {
 
-        if (orientationAngle.equals("azimuth")) {
+    /* Sets the color of the realTimeParams to green when in the span of +- 5 degrees */
+    public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle, String angle, TextView txtAngle) {
+        if (orientationAngle.equals(angle)) {
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
-                realTimeParams_az.setTextColor(Color.parseColor("#3CC0C5"));
+                txtAngle.setTextColor(Color.parseColor("#0CD79A"));
             } else {
-                realTimeParams_az.setTextColor(Color.WHITE);
+                txtAngle.setTextColor(Color.WHITE);
             }
         }
-
-        if (orientationAngle.equals("tilt")) {
-
-            if (Math.abs(angleRealTime - angleOld) < 5.0) {
-            realTimeParams_ti.setTextColor(Color.parseColor("#3CC0C5"));
-            } else {
-            realTimeParams_ti.setTextColor(Color.WHITE);
-            }
-        }
-
-        if(orientationAngle.equals("roll")) {
-
-            if (Math.abs(angleRealTime - angleOld) < 5.0) {
-            realTimeParams_ro.setTextColor(Color.parseColor("#3CC0C5"));
-            } else {
-            realTimeParams_ro.setTextColor(Color.WHITE);
-            }
-        }
-
     }
-
-
 
     Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
         @Override
