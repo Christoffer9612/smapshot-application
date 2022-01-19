@@ -411,8 +411,8 @@ public class CameraActivity extends MainActivity {
     }
 
     public void fadeIn(int distance) {
-        if (distance > 10) { //Photos from more than 10 meters distance are considered too far away from the photo's location
-            popUp.setText(" You are too far away from the selected photo, click to dismiss... ");
+        if (distance > 20) { //Photos from more than 10 meters distance are considered too far away from the photo's location
+            popUp.setText(" You are more than 20 meters away from the selected photo, click to dismiss... ");
             popUp.getBackground().setAlpha(160);
 
             final Animation in = new AlphaAnimation(0.0f, 1.0f);
