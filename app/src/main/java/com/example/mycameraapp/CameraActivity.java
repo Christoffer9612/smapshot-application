@@ -327,7 +327,7 @@ public class CameraActivity extends MainActivity {
     public void setRealTimeParamsColor(float angleOld, float angleRealTime, String orientationAngle, String angle, TextView txtAngle) {
         if (orientationAngle.equals(angle)) {
             if (Math.abs(angleRealTime - angleOld) < 5.0) {
-                txtAngle.setTextColor(Color.parseColor("#0CD79A"));
+                txtAngle.setTextColor(Color.GREEN);
             } else {
                 txtAngle.setTextColor(Color.WHITE);
             }
